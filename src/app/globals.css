@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-maroon-dark: #500014;
+    --color-maroon-primary: #800020;
+    --color-maroon-light: #9e1b32;
+    --color-gold-primary: #d4af37;
+    --color-gold-light: #f3e5ab;
+    --color-gold-hover: #b89628;
+    --color-bg-warm: #faf8f5;
+    --color-charcoal-dark: #121416;
+    --color-charcoal-body: #1e2022;
+  }
+
+  body {
+    background-color: var(--color-bg-warm);
+    color: var(--color-charcoal-body);
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Utilities & Animations */
+.glass-header {
+  background: rgba(18, 20, 22, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa820a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #d4af37 0%, #b89628 100%);
+}
+
+.maroon-gradient-bg {
+  background: linear-gradient(135deg, #800020 0%, #500014 100%);
+}
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -10px rgba(128, 0, 32, 0.15);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #121416;
+}
+::-webkit-scrollbar-thumb {
+  background: #800020;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
