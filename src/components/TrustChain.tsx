@@ -43,11 +43,11 @@ export const TrustChain: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-zinc-900 text-white relative overflow-hidden">
+    <section className="py-16 bg-zinc-900 text-white relative overflow-hidden w-full">
       {/* Background Subtle Pattern */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
             {language === 'en' ? 'Institutional Credibility' : 'அமைப்பின் அங்கீகாரம்'}

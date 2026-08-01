@@ -34,15 +34,15 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
   const secretary = committee.find(c => c.order === 2) || committee[1];
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-0 w-full">
       
       {/* 1. Hero Banner */}
       <Hero setCurrentView={setCurrentView} />
 
       {/* 2. Featured Event Banner */}
       {featuredEvent && (
-        <section className="bg-gradient-to-r from-red-950 via-amber-950 to-red-950 border-y border-amber-500/30 py-4 px-4 text-white">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <section className="bg-gradient-to-r from-red-950 via-amber-950 to-red-950 border-y border-amber-500/30 py-4 px-4 sm:px-8 lg:px-12 text-white w-full">
+          <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center space-x-3 text-center md:text-left">
               <span className="bg-amber-500 text-red-950 font-black text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-md shrink-0">
                 {t.noticeTitle}
@@ -73,9 +73,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       {/* 3. Trust Lineage Trail */}
       <TrustChain />
 
-      {/* 4. Executive Leadership Teaser Section (New: Addressing Review Item 11) */}
-      <section className="py-16 bg-zinc-900 text-white border-b border-amber-900/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      {/* 4. Executive Leadership Teaser Section */}
+      <section className="py-16 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
           <div className="text-center max-w-3xl mx-auto">
             <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
               {t.aboutLeadership}
@@ -140,8 +140,8 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 5. About Kudo Section */}
-      <section className="py-20 bg-zinc-950 text-white border-b border-amber-900/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-zinc-950 text-white border-b border-amber-900/20 w-full">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-6 space-y-6">
@@ -200,8 +200,8 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 6. Achievement Highlights */}
-      <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
             <div>
@@ -249,8 +249,8 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 7. Latest News & Announcements */}
-      <section className="py-20 bg-zinc-950 text-white border-b border-amber-900/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="py-20 bg-zinc-950 text-white border-b border-amber-900/20 w-full">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
             <div>
@@ -294,9 +294,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 8. Sponsors & Partners Section (New: Addressing Review Section 3/High Item 6) */}
-      <section className="py-16 bg-zinc-900 text-white border-b border-amber-900/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      {/* 8. Sponsors & Partners Section */}
+      <section className="py-16 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-8">
           <div className="text-center max-w-3xl mx-auto">
             <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
               {language === 'en' ? 'Official Partners & Sponsors' : 'அதிகாரப்பூர்வ பங்காளிகள்'}
@@ -350,8 +350,8 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 9. Gallery Preview */}
-      <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
             <div>
@@ -396,7 +396,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 10. Call to Action Band */}
-      <section className="py-16 maroon-gradient-bg border-t border-amber-500/30 text-white text-center">
+      <section className="py-16 maroon-gradient-bg border-t border-amber-500/30 text-white text-center w-full">
         <div className="max-w-4xl mx-auto px-4 space-y-6">
           <h2 className="text-2xl sm:text-4xl font-black text-amber-100">
             {language === 'en' ? 'Join the Official Kudo Movement in Tamil Nadu' : 'தமிழ்நாடு குடோ இயக்கத்தில் இணையுங்கள்'}
