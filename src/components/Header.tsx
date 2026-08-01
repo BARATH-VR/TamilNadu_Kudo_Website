@@ -28,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Ultra-balanced bilingual navigation labels to guarantee zero overlap across all monitor widths
+  // Ultra-balanced bilingual navigation labels with 0% clipping across all screen sizes
   const navLabels = {
     en: {
       brandTitle: "Tamil Nadu State Kudo Association",
@@ -45,8 +45,8 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
       brandShort: "தமிழ்நாடு குடோ சங்கம்",
       about: "எங்களைப் பற்றி",
       districts: "மாவட்டங்கள்",
-      events: "நிகழ்வுகள் & முடிவுகள்",
-      resources: "ஊடகம் & வளங்கள்",
+      events: "நிகழ்வுகள்",
+      resources: "வளங்கள்",
       contact: "தொடர்பு",
       cta: "பயிற்றுவிப்பகம்"
     }
@@ -58,7 +58,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
     <header className="sticky top-0 z-50 glass-header text-white border-b border-amber-900/30 shadow-xl w-full">
       
       {/* 1. Top Utility Bar */}
-      <div className="min-h-[36px] py-1 bg-gradient-to-r from-red-950 via-red-900 to-amber-950 px-4 sm:px-8 lg:px-12 text-[11px] border-b border-amber-500/20 flex items-center w-full">
+      <div className="min-h-[36px] py-1 bg-gradient-to-r from-red-950 via-red-900 to-amber-950 px-3 sm:px-6 lg:px-10 text-[11px] border-b border-amber-500/20 flex items-center w-full">
         <div className="w-full flex justify-between items-center gap-2">
           
           {/* Trust Badges Bar */}
@@ -94,14 +94,14 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
         </div>
       </div>
 
-      {/* 2. Main Navigation Header (Strict 3-Column Grid Isolation to Prevent Text Overlap) */}
-      <div className="w-full px-4 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-[auto_1fr_auto] items-center h-[76px] gap-4 xl:gap-8 w-full">
+      {/* 2. Main Navigation Header Bar (Flex layout with Zero Clipping on Tamil Text) */}
+      <div className="w-full px-3 sm:px-6 lg:px-10">
+        <div className="flex items-center justify-between h-[76px] gap-2 lg:gap-4 xl:gap-8 w-full">
           
-          {/* Column 1: Brand Lockup (Cell 1 - Bounded & Isolated) */}
+          {/* Column 1: Brand Lockup (Compact Bounded Size to Guarantee Full Room for Nav) */}
           <div 
             onClick={() => handleNavClick('home')}
-            className="flex items-center space-x-3 cursor-pointer group shrink-0 min-w-0 max-w-[280px] xl:max-w-[360px]"
+            className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer group shrink-0 max-w-[200px] sm:max-w-[240px] xl:max-w-[320px]"
           >
             <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-amber-400 via-amber-600 to-red-900 p-0.5 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
               <div className="w-full h-full bg-red-950 rounded-full flex items-center justify-center text-amber-400 font-extrabold text-xs sm:text-base border border-amber-400/40">
@@ -109,8 +109,8 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               </div>
             </div>
             
-            <div className="min-w-0 overflow-hidden">
-              <h1 className="text-xs sm:text-sm lg:text-base font-bold text-amber-100 leading-tight group-hover:text-amber-400 transition-colors truncate">
+            <div className="min-w-0">
+              <h1 className="text-xs sm:text-sm xl:text-base font-bold text-amber-100 leading-tight group-hover:text-amber-400 transition-colors truncate">
                 {currentLabels.brandTitle}
               </h1>
               <p className="text-[10px] text-amber-200/70 truncate hidden 2xl:block">
@@ -119,8 +119,8 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             </div>
           </div>
 
-          {/* Column 2: Center Navigation (Cell 2 - Strictly Bounded Flex Row, No Overlap Into Brand or Action Cells) */}
-          <nav className="hidden lg:flex items-center justify-center space-x-1 xl:space-x-3 min-w-0 overflow-hidden px-2">
+          {/* Column 2: Center Navigation (NO overflow-hidden, 100% fully visible labels) */}
+          <nav className="hidden lg:flex items-center justify-center space-x-1 xl:space-x-3 shrink-0">
             
             {/* Nav 1: About Dropdown */}
             <div 
@@ -130,8 +130,8 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             >
               <button
                 onClick={() => handleNavClick('about')}
-                className={`flex items-center space-x-1 px-2.5 xl:px-3 py-2 rounded-md ${
-                  language === 'ta' ? 'text-xs xl:text-sm font-medium' : 'text-xs xl:text-sm font-semibold'
+                className={`flex items-center space-x-1 px-2 xl:px-3 py-2 rounded-md ${
+                  language === 'ta' ? 'text-xs xl:text-sm font-semibold' : 'text-xs xl:text-sm font-semibold'
                 } whitespace-nowrap transition-colors ${
                   currentView === 'about' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
                 }`}
@@ -173,8 +173,8 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             {/* Nav 2: Districts & Academies */}
             <button
               onClick={() => handleNavClick('districts')}
-              className={`px-2.5 xl:px-3 py-2 rounded-md ${
-                language === 'ta' ? 'text-xs xl:text-sm font-medium' : 'text-xs xl:text-sm font-semibold'
+              className={`px-2 xl:px-3 py-2 rounded-md ${
+                language === 'ta' ? 'text-xs xl:text-sm font-semibold' : 'text-xs xl:text-sm font-semibold'
               } whitespace-nowrap transition-colors shrink-0 ${
                 currentView === 'districts' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
               }`}
@@ -190,8 +190,8 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             >
               <button
                 onClick={() => handleNavClick('events')}
-                className={`flex items-center space-x-1 px-2.5 xl:px-3 py-2 rounded-md ${
-                  language === 'ta' ? 'text-xs xl:text-sm font-medium' : 'text-xs xl:text-sm font-semibold'
+                className={`flex items-center space-x-1 px-2 xl:px-3 py-2 rounded-md ${
+                  language === 'ta' ? 'text-xs xl:text-sm font-semibold' : 'text-xs xl:text-sm font-semibold'
                 } whitespace-nowrap transition-colors ${
                   currentView === 'events' || currentView === 'achievements' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
                 }`}
@@ -226,8 +226,8 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             >
               <button
                 onClick={() => handleNavClick('resources')}
-                className={`flex items-center space-x-1 px-2.5 xl:px-3 py-2 rounded-md ${
-                  language === 'ta' ? 'text-xs xl:text-sm font-medium' : 'text-xs xl:text-sm font-semibold'
+                className={`flex items-center space-x-1 px-2 xl:px-3 py-2 rounded-md ${
+                  language === 'ta' ? 'text-xs xl:text-sm font-semibold' : 'text-xs xl:text-sm font-semibold'
                 } whitespace-nowrap transition-colors ${
                   currentView === 'resources' || currentView === 'media' || currentView === 'faqs' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
                 }`}
@@ -263,8 +263,8 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             {/* Nav 5: Contact Link */}
             <button
               onClick={() => handleNavClick('contact')}
-              className={`px-2.5 xl:px-3 py-2 rounded-md ${
-                language === 'ta' ? 'text-xs xl:text-sm font-medium' : 'text-xs xl:text-sm font-semibold'
+              className={`px-2 xl:px-3 py-2 rounded-md ${
+                language === 'ta' ? 'text-xs xl:text-sm font-semibold' : 'text-xs xl:text-sm font-semibold'
               } whitespace-nowrap transition-colors shrink-0 ${
                 currentView === 'contact' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
               }`}
@@ -273,12 +273,12 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             </button>
           </nav>
 
-          {/* Column 3: Right Action Cluster (Cell 3 - Bounded & Isolated, Never Overlapped By Center Nav) */}
+          {/* Column 3: Right Action Cluster (Search, CTA Button, Mobile Hamburger) */}
           <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
             {/* Search Trigger */}
             <button
               onClick={onOpenSearch}
-              className="p-2.5 rounded-full text-amber-200/90 hover:text-amber-300 hover:bg-amber-500/10 transition-colors"
+              className="p-2 rounded-full text-amber-200/90 hover:text-amber-300 hover:bg-amber-500/10 transition-colors"
               aria-label="Search"
               title="Search website"
             >
@@ -288,7 +288,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             {/* Primary CTA Button */}
             <button
               onClick={() => handleNavClick('districts')}
-              className="hidden sm:flex gold-gradient-bg text-red-950 font-extrabold px-3.5 py-2 rounded-lg text-xs uppercase tracking-wider shadow-lg hover:brightness-110 transition-all whitespace-nowrap items-center space-x-1.5 h-9"
+              className="hidden sm:flex gold-gradient-bg text-red-950 font-extrabold px-3 py-2 sm:px-4 rounded-lg text-xs uppercase tracking-wider shadow-lg hover:brightness-110 transition-all whitespace-nowrap items-center space-x-1.5 h-9"
             >
               <MapPin className="w-3.5 h-3.5 shrink-0" />
               <span>{currentLabels.cta}</span>
