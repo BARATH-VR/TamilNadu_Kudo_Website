@@ -4,7 +4,7 @@ export const dictionary = {
   en: {
     // Header & Navigation
     associationName: "Tamil Nadu State Kudo Association",
-    associationSub: "Official Governing Body of Kudo in Tamil Nadu",
+    associationSub: "Affiliated with KIFI India & KIF Japan",
     navHome: "Home",
     navAbout: "About",
     navDistricts: "Districts & Academies",
@@ -26,8 +26,8 @@ export const dictionary = {
 
     // Hero Section
     heroBadge: "SGFI & KIFI Recognized Martial Art Federation",
-    heroTitle: "Empowering Tamil Nadu Through Discipline, Safety & Excellence in Kudo",
-    heroSubtitle: "Official State Governing Body affiliated with Kudo International Federation India (KIFI) and Kudo International Federation (KIF Japan).",
+    heroTitle: "Building Champions, Fostering Discipline & Excellence in Kudo",
+    heroSubtitle: "Official State Governing Body regulating, promoting, and advancing Kudo martial sports across Tamil Nadu under KIFI India and KIF Japan.",
     heroCtaPrimary: "Find an Academy Near You",
     heroCtaSecondary: "Learn About Kudo",
 
@@ -136,7 +136,7 @@ export const dictionary = {
   ta: {
     // Header & Navigation
     associationName: "தமிழ்நாடு மாநில குடோ சங்கம்",
-    associationSub: "தமிழ்நாட்டில் குடோ விளையாட்டுக்கான அதிகாரப்பூர்வ அமைப்பு",
+    associationSub: "KIFI இந்தியா மற்றும் KIF ஜப்பான் அங்கீகாரம் பெற்றது",
     navHome: "முகப்பு",
     navAbout: "எங்களைப் பற்றி",
     navDistricts: "மாவட்டங்கள் & பயிற்றுவிப்பகங்கள்",
@@ -158,7 +158,7 @@ export const dictionary = {
 
     // Hero Section
     heroBadge: "SGFI மற்றும் KIFI அங்கீகாரம் பெற்ற தற்காப்புக் கலை அமைப்பு",
-    heroTitle: "ஒழுக்கம், பாதுகாப்பு மற்றும் குடோ சிறப்பால் தமிழ்நாட்டை மேம்படுத்துதல்",
+    heroTitle: "தமிழ்நாட்டில் ஒழுக்கம், பாதுகாப்பு மற்றும் குடோ விளையாட்டுச் சிறப்பை உருவாக்குதல்",
     heroSubtitle: "இந்திய குடோ சர்வதேச கூட்டமைப்பு (KIFI) மற்றும் ஜப்பான் சர்வதேச குடோ கூட்டமைப்புடன் (KIF Japan) இணைக்கப்பட்ட அதிகாரப்பூர்வ மாநில அமைப்பு.",
     heroCtaPrimary: "அருகிலுள்ள பயிற்றுவிப்பகத்தைக் கண்டறியவும்",
     heroCtaSecondary: "குடோ பற்றி அறியவும்",

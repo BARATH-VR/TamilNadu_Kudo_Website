@@ -30,15 +30,15 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView }) => {
               <span>{t.heroBadge}</span>
             </div>
 
-            {/* Main Headline */}
+            {/* Meaningful Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-amber-100 leading-tight tracking-tight">
               {language === 'en' ? (
                 <>
-                  Official Governing Body of <span className="gold-gradient-text">Kudo</span> in Tamil Nadu
+                  Building Champions, Fostering Discipline & <span className="gold-gradient-text">Excellence in Kudo</span>
                 </>
               ) : (
                 <>
-                  தமிழ்நாட்டில் <span className="gold-gradient-text">குடோ</span> விளையாட்டுக்கான அதிகாரப்பூர்வ அமைப்பு
+                  தமிழ்நாட்டில் ஒழுக்கம், பாதுகாப்பு மற்றும் <span className="gold-gradient-text">குடோ விளையாட்டுச் சிறப்பை</span> உருவாக்குதல்
                 </>
               )}
             </h1>
@@ -106,7 +106,7 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView }) => {
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80"></div>
                   
                   {/* Floating Overlay Badge */}
-                  <div className="absolute bottom-4 left-4 right-4 bg-zinc-900/90 backdrop-blur-md rounded-xl p-3.5 border border-amber-500/30 flex items-center space-x-3">
+                  <div className="absolute bottom-4 left-4 right-4 bg-zinc-950/90 backdrop-blur-md rounded-xl p-3.5 border border-amber-500/30 flex items-center space-x-3">
                     <div className="w-10 h-10 rounded-lg maroon-gradient-bg flex items-center justify-center text-amber-400 shrink-0">
                       <Award className="w-5 h-5" />
                     </div>
