@@ -27,8 +27,39 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // SportsOrganization Schema for SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Tamil Nadu State Kudo Association",
+    "alternateName": ["TNSKA", "Tamil Nadu Kudo", "தமிழ்நாடு மாநில குடோ சங்கம்"],
+    "url": "https://tnska-website.onrender.com",
+    "logo": "https://tnska-website.onrender.com/favicon.ico",
+    "sport": "Kudo Martial Arts",
+    "description": "Official State Governing Body of Kudo in Tamil Nadu affiliated with Kudo International Federation India (KIFI) and KIF Japan.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Jawaharlal Nehru Stadium Complex, Periamet",
+      "addressLocality": "Chennai",
+      "addressRegion": "Tamil Nadu",
+      "postalCode": "600003",
+      "addressCountry": "IN"
+    },
+    "telephone": "+91 98400 12345",
+    "email": "contact@tnkudo.org",
+    "sameAs": [
+      "https://github.com/BARATH-VR/TamilNadu_Kudo_Website"
+    ]
+  };
+
   return (
     <html lang="en" className={`${inter.variable} ${notoSansTamil.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="antialiased bg-zinc-950 text-gray-100 min-h-screen flex flex-col">
         <LanguageProvider>
           <AdminProvider>

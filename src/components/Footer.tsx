@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { Shield, MapPin, Phone, Mail, Award, Lock, ExternalLink } from 'lucide-react';
+import { Shield, MapPin, Phone, Mail, Award } from 'lucide-react';
 
 interface FooterProps {
   setCurrentView: (view: string) => void;
@@ -71,6 +71,11 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentView }) => {
               <li>
                 <button onClick={() => handleNavClick('achievements')} className="hover:text-amber-300 transition-colors">
                   {t.navAchievements}
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleNavClick('contact')} className="hover:text-amber-300 transition-colors">
+                  {t.navContact}
                 </button>
               </li>
             </ul>
@@ -143,18 +148,10 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentView }) => {
           </div>
         </div>
 
-        {/* Bottom Copyright & Admin Trigger */}
+        {/* Bottom Copyright */}
         <div className="border-t border-zinc-900 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
           <p>© {new Date().getFullYear()} Tamil Nadu State Kudo Association. All rights reserved.</p>
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={() => handleNavClick('admin')}
-              className="flex items-center space-x-1 hover:text-amber-400 transition-colors text-gray-400"
-            >
-              <Lock className="w-3.5 h-3.5" />
-              <span>{t.navAdmin}</span>
-            </button>
-          </div>
+          <p className="text-[11px] text-gray-600">Official State Sports Governing Body</p>
         </div>
       </div>
     </footer>

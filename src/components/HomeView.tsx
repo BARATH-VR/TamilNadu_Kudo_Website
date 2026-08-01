@@ -12,10 +12,10 @@ import {
   MapPin,
   ArrowRight,
   FileText,
-  CheckCircle2,
-  Users,
-  ChevronRight,
-  Sparkles
+  User,
+  Quote,
+  Building2,
+  Send
 } from 'lucide-react';
 
 interface HomeViewProps {
@@ -25,11 +25,13 @@ interface HomeViewProps {
 
 export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightbox }) => {
   const { language, t } = useLanguage();
-  const { achievements, events, news } = useAdmin();
+  const { achievements, events, news, committee } = useAdmin();
 
   const featuredEvent = events.find(e => e.isUpcoming) || events[0];
   const highlightAchievements = achievements.slice(0, 3);
   const latestNews = news.slice(0, 3);
+  const president = committee.find(c => c.order === 1) || committee[0];
+  const secretary = committee.find(c => c.order === 2) || committee[1];
 
   return (
     <div className="space-y-0">
@@ -71,7 +73,73 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       {/* 3. Trust Lineage Trail */}
       <TrustChain />
 
-      {/* 4. About Kudo Section */}
+      {/* 4. Executive Leadership Teaser Section (New: Addressing Review Item 11) */}
+      <section className="py-16 bg-zinc-900 text-white border-b border-amber-900/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+              {t.aboutLeadership}
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-black text-amber-100 mt-3">
+              {language === 'en' ? 'State Association Leadership Message' : 'மாநில சங்கத் தலைவர்களின் உரை'}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* President Card */}
+            {president && (
+              <div className="bg-zinc-950 border border-amber-500/20 rounded-3xl p-6 sm:p-8 space-y-4 relative card-hover">
+                <Quote className="w-8 h-8 text-amber-500/20 absolute top-6 right-6" />
+                <div className="flex items-center space-x-4">
+                  <img
+                    src={president.image}
+                    alt={president.nameEn}
+                    className="w-16 h-16 rounded-full object-cover border-2 border-amber-400 shrink-0"
+                  />
+                  <div>
+                    <h3 className="text-base font-bold text-amber-200">
+                      {language === 'en' ? president.nameEn : president.nameTa}
+                    </h3>
+                    <p className="text-xs text-amber-400 font-semibold">
+                      {language === 'en' ? president.roleEn : president.roleTa}
+                    </p>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-300 leading-relaxed italic">
+                  "{language === 'en' ? president.bioEn : president.bioTa}"
+                </p>
+              </div>
+            )}
+
+            {/* General Secretary Card */}
+            {secretary && (
+              <div className="bg-zinc-950 border border-amber-500/20 rounded-3xl p-6 sm:p-8 space-y-4 relative card-hover">
+                <Quote className="w-8 h-8 text-amber-500/20 absolute top-6 right-6" />
+                <div className="flex items-center space-x-4">
+                  <img
+                    src={secretary.image}
+                    alt={secretary.nameEn}
+                    className="w-16 h-16 rounded-full object-cover border-2 border-amber-400 shrink-0"
+                  />
+                  <div>
+                    <h3 className="text-base font-bold text-amber-200">
+                      {language === 'en' ? secretary.nameEn : secretary.nameTa}
+                    </h3>
+                    <p className="text-xs text-amber-400 font-semibold">
+                      {language === 'en' ? secretary.roleEn : secretary.roleTa}
+                    </p>
+                  </div>
+                </div>
+                <p className="text-xs text-gray-300 leading-relaxed italic">
+                  "{language === 'en' ? secretary.bioEn : secretary.bioTa}"
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. About Kudo Section */}
       <section className="py-20 bg-zinc-950 text-white border-b border-amber-900/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -131,7 +199,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 5. Achievement Highlights */}
+      {/* 6. Achievement Highlights */}
       <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
@@ -180,7 +248,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 6. Latest News & Announcements */}
+      {/* 7. Latest News & Announcements */}
       <section className="py-20 bg-zinc-950 text-white border-b border-amber-900/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
@@ -226,7 +294,62 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 7. Gallery Preview */}
+      {/* 8. Sponsors & Partners Section (New: Addressing Review Section 3/High Item 6) */}
+      <section className="py-16 bg-zinc-900 text-white border-b border-amber-900/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+              {language === 'en' ? 'Official Partners & Sponsors' : 'அதிகாரப்பூர்வ பங்காளிகள்'}
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-100 mt-3">
+              {language === 'en' ? 'Partner With Tamil Nadu Kudo' : 'தமிழ்நாடு குடோவுடன் இணையுங்கள்'}
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-400 mt-2">
+              {language === 'en' 
+                ? 'Empowering Tamil Nadu state athletes and supporting recognized martial sports excellence.'
+                : 'மாநில விளையாட்டு வீரர்களுக்கு ஆதரவளித்து தற்காப்பு விளையாட்டை மேம்படுத்துங்கள்.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-center opacity-80 hover:opacity-100 transition-opacity">
+            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 text-center space-y-1">
+              <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
+              <span className="text-xs font-bold text-gray-300 block">KIFI India</span>
+              <span className="text-[10px] text-amber-500 uppercase tracking-widest font-semibold">National Governing Body</span>
+            </div>
+            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 text-center space-y-1">
+              <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
+              <span className="text-xs font-bold text-gray-300 block">SDAT Tamil Nadu</span>
+              <span className="text-[10px] text-amber-500 uppercase tracking-widest font-semibold">Sports Infrastructure</span>
+            </div>
+            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 text-center space-y-1">
+              <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
+              <span className="text-xs font-bold text-gray-300 block">Neo Protective Equipment</span>
+              <span className="text-[10px] text-amber-500 uppercase tracking-widest font-semibold">Official Safety Gear</span>
+            </div>
+            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 text-center space-y-1">
+              <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
+              <span className="text-xs font-bold text-gray-300 block">KIF Japan</span>
+              <span className="text-[10px] text-amber-500 uppercase tracking-widest font-semibold">Global Federation</span>
+            </div>
+          </div>
+
+          <div className="text-center pt-2">
+            <button
+              onClick={() => {
+                setCurrentView('contact');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="inline-flex items-center space-x-2 bg-zinc-950 border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider transition-all"
+            >
+              <Send className="w-4 h-4" />
+              <span>{language === 'en' ? 'Sponsor / Partner Inquiry' : 'பங்காளர் விருப்பப் படிவம்'}</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Gallery Preview */}
       <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
@@ -272,7 +395,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 8. Call to Action Band */}
+      {/* 10. Call to Action Band */}
       <section className="py-16 maroon-gradient-bg border-t border-amber-500/30 text-white text-center">
         <div className="max-w-4xl mx-auto px-4 space-y-6">
           <h2 className="text-2xl sm:text-4xl font-black text-amber-100">

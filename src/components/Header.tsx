@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdmin } from '@/context/AdminContext';
-import { Search, Globe, Menu, X, Shield, ChevronDown, Award, Calendar, BookOpen, Users, PhoneCall, Lock } from 'lucide-react';
+import { Search, Globe, Menu, X, Shield, ChevronDown, Lock } from 'lucide-react';
 
 interface HeaderProps {
   currentView: string;
@@ -55,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               <span>{language === 'en' ? 'தமிழ்' : 'English'}</span>
             </button>
 
-            {/* Quick Admin Indicator */}
+            {/* Quick Admin Indicator if logged in */}
             {isAdminLoggedIn && (
               <button
                 onClick={() => handleNavClick('admin')}
@@ -203,6 +203,16 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             >
               {t.navFaqs}
             </button>
+
+            {/* Added Standalone Contact Link per Senior Review */}
+            <button
+              onClick={() => handleNavClick('contact')}
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                currentView === 'contact' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
+              }`}
+            >
+              {t.navContact}
+            </button>
           </nav>
 
           {/* Action Buttons: Search & Primary CTA */}
@@ -298,12 +308,6 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-amber-200 hover:bg-amber-900/30"
           >
             {t.navContact}
-          </button>
-          <button
-            onClick={() => handleNavClick('admin')}
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-emerald-400 hover:bg-emerald-950/40"
-          >
-            {t.navAdmin}
           </button>
 
           <div className="pt-2">
