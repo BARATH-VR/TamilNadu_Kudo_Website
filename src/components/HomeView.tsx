@@ -39,12 +39,12 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       {/* 1. Hero Banner */}
       <Hero setCurrentView={setCurrentView} />
 
-      {/* 2. Featured Event Announcement Ticker */}
+      {/* 2. Featured Event Announcement Ticker (Sleek Obsidian & Pure Gold Theme - Replaces Red Background) */}
       {featuredEvent && (
-        <section className="bg-gradient-to-r from-red-950 via-amber-950 to-red-950 border-y border-amber-500/30 py-3.5 px-4 sm:px-8 lg:px-12 text-white w-full shadow-inner">
+        <section className="bg-zinc-900/90 border-y border-amber-500/30 py-3.5 px-4 sm:px-8 lg:px-12 text-white w-full backdrop-blur-md shadow-xl">
           <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-3 text-center md:text-left">
-              <span className="bg-amber-500 text-red-950 font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded-md shrink-0 shadow-md">
+            <div className="flex items-center space-x-3.5 text-center md:text-left">
+              <span className="gold-gradient-bg text-zinc-950 font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded-md shrink-0 shadow-md">
                 {t.noticeTitle}
               </span>
               <div>
@@ -62,7 +62,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('events');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="gold-gradient-bg text-red-950 font-black px-4 py-2 rounded-lg text-xs uppercase tracking-wider shadow-md hover:brightness-110 shrink-0 transition-all"
+              className="bg-zinc-950 hover:bg-amber-500/10 text-amber-300 border border-amber-500/40 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider shadow-md shrink-0 transition-all"
             >
               {t.viewDetails}
             </button>
@@ -73,8 +73,8 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       {/* 3. Trust Lineage Trail */}
       <TrustChain />
 
-      {/* 4. Executive Leadership Messages Section (Varied Header Style 1) */}
-      <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
+      {/* 4. Executive Leadership Messages Section */}
+      <section className="py-20 bg-zinc-900 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -84,7 +84,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
             <h2 className="text-2xl sm:text-4xl font-black text-amber-100">
               {language === 'en' ? 'State Association Leadership Message' : 'மாநில சங்கத் தலைவர்களின் உரை'}
             </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
+            <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -141,8 +141,8 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 5. What is Kudo Section (Varied Header Style 2 - Left Accent Bar) */}
-      <section className="py-20 bg-zinc-950 text-white border-b border-amber-900/20 w-full">
+      {/* 5. What is Kudo Section */}
+      <section className="py-20 bg-zinc-950 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
@@ -162,7 +162,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
 
               <div className="space-y-4 pt-2">
                 <div className="flex items-start space-x-3.5 bg-zinc-900/90 p-4 rounded-2xl border border-amber-500/20 shadow-lg">
-                  <div className="w-10 h-10 rounded-xl maroon-gradient-bg flex items-center justify-center text-amber-400 shrink-0 shadow-md">
+                  <div className="w-10 h-10 rounded-xl gold-gradient-bg flex items-center justify-center text-zinc-950 font-bold shrink-0 shadow-md">
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div>
@@ -172,7 +172,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 </div>
 
                 <div className="flex items-start space-x-3.5 bg-zinc-900/90 p-4 rounded-2xl border border-amber-500/20 shadow-lg">
-                  <div className="w-10 h-10 rounded-xl gold-gradient-bg flex items-center justify-center text-red-950 shrink-0 shadow-md">
+                  <div className="w-10 h-10 rounded-xl gold-gradient-bg flex items-center justify-center text-zinc-950 font-bold shrink-0 shadow-md">
                     <Award className="w-5 h-5" />
                   </div>
                   <div>
@@ -184,7 +184,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
             </div>
 
             <div className="lg:col-span-6">
-              <div className="bg-gradient-to-br from-red-950 to-zinc-900 p-6 rounded-3xl border border-amber-500/30 shadow-2xl relative">
+              <div className="bg-zinc-900 p-6 rounded-3xl border border-amber-500/30 shadow-2xl relative">
                 <img
                   src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80"
                   alt="Kudo Training"
@@ -203,7 +203,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 6. Achievement Highlights */}
-      <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
+      <section className="py-20 bg-zinc-900 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-amber-900/30 pb-4">
@@ -252,7 +252,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 7. Latest News & Official Announcements */}
-      <section className="py-20 bg-zinc-950 text-white border-b border-amber-900/20 w-full">
+      <section className="py-20 bg-zinc-950 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-amber-900/30 pb-4">
@@ -300,7 +300,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 8. Official Sponsors & Institutional Partners */}
-      <section className="py-16 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
+      <section className="py-16 bg-zinc-900 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-8">
           <div className="text-center max-w-3xl mx-auto space-y-2">
             <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
@@ -355,7 +355,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 9. Tournament Photo Gallery Preview */}
-      <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
+      <section className="py-20 bg-zinc-900 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-amber-900/30 pb-4">
@@ -401,7 +401,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 10. Call to Action Banner Band */}
-      <section className="py-16 maroon-gradient-bg border-t border-amber-500/30 text-white text-center w-full shadow-2xl">
+      <section className="py-16 bg-gradient-to-r from-zinc-950 via-zinc-900 to-zinc-950 border-t border-amber-500/30 text-white text-center w-full shadow-2xl">
         <div className="max-w-4xl mx-auto px-4 space-y-6">
           <h2 className="text-2xl sm:text-4xl font-black text-amber-100">
             {language === 'en' ? 'Join the Official Kudo Movement in Tamil Nadu' : 'தமிழ்நாடு குடோ இயக்கத்தில் இணையுங்கள்'}
@@ -418,7 +418,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('districts');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="w-full sm:w-auto gold-gradient-bg text-red-950 font-black px-8 py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-xl hover:brightness-110 transition-all"
+              className="w-full sm:w-auto gold-gradient-bg text-zinc-950 font-black px-8 py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-xl hover:brightness-110 transition-all"
             >
               {t.heroCtaPrimary}
             </button>
@@ -428,7 +428,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('contact');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="w-full sm:w-auto bg-zinc-900/90 border border-amber-500/40 text-amber-200 hover:bg-amber-500/10 font-bold px-8 py-3.5 rounded-xl text-xs uppercase tracking-wider transition-all"
+              className="w-full sm:w-auto bg-zinc-900 border border-amber-500/40 text-amber-200 hover:bg-amber-500/10 font-bold px-8 py-3.5 rounded-xl text-xs uppercase tracking-wider transition-all"
             >
               {t.navContact}
             </button>
