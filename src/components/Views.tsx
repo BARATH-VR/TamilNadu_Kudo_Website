@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 
 // ==============================================
-// ABOUT VIEW
+// ABOUT VIEW (Hand-Crafted Senior UI/UX Polish)
 // ==============================================
 export const AboutView: React.FC = () => {
   const { language, t } = useLanguage();
@@ -62,46 +62,47 @@ export const AboutView: React.FC = () => {
   ];
 
   return (
-    <div className="py-12 bg-zinc-950 text-white min-h-[80vh] space-y-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-16 bg-zinc-950 text-white min-h-[80vh] space-y-16">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12">
         
         {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+        <div className="text-center max-w-3xl mx-auto space-y-3 mb-14">
+          <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
             {t.navAbout}
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-amber-100 mt-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-amber-100">
             {language === 'en' ? 'About Tamil Nadu State Kudo Association' : 'தமிழ்நாடு மாநில குடோ சங்கம் பற்றி'}
           </h2>
-          <p className="text-sm sm:text-base text-gray-400 mt-3 leading-relaxed">
+          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
             {t.associationSub}
           </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Who We Are & Mission Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-zinc-900 border border-amber-500/20 rounded-3xl p-8 space-y-4 shadow-xl">
-            <div className="w-12 h-12 rounded-xl maroon-gradient-bg border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold">
+          <div className="bg-zinc-900 border border-amber-500/30 hover:border-amber-400/60 rounded-3xl p-8 space-y-4 shadow-xl transition-all">
+            <div className="w-12 h-12 rounded-xl maroon-gradient-bg border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold shadow-md">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <h3 className="text-xl font-bold text-amber-200">
               {t.aboutWhoWeAre}
             </h3>
-            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
               {language === 'en'
                 ? "The Tamil Nadu State Kudo Association (TNSKA) is the sole official governing organization authorized by Kudo International Federation India (KIFI) and KIF Japan to oversee the practice, promotion, and competition of Kudo across Tamil Nadu."
                 : "தமிழ்நாடு மாநில குடோ சங்கம் (TNSKA) என்பது இந்தியாவில் KIFI மற்றும் ஜப்பானின் KIF அமைப்புகளால் தமிழ்நாட்டில் குடோ விளையாட்டை கட்டுப்படுத்த அனுமதி பெற்ற ஒரே அதிகாரப்பூர்வ அமைப்பாகும்."}
             </p>
           </div>
 
-          <div className="bg-zinc-900 border border-amber-500/20 rounded-3xl p-8 space-y-4 shadow-xl">
-            <div className="w-12 h-12 rounded-xl gold-gradient-bg flex items-center justify-center text-red-950 font-bold">
+          <div className="bg-zinc-900 border border-amber-500/30 hover:border-amber-400/60 rounded-3xl p-8 space-y-4 shadow-xl transition-all">
+            <div className="w-12 h-12 rounded-xl gold-gradient-bg flex items-center justify-center text-red-950 font-bold shadow-md">
               <Award className="w-6 h-6" />
             </div>
             <h3 className="text-xl font-bold text-amber-200">
               {t.aboutMission}
             </h3>
-            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
               {language === 'en'
                 ? "Our mission is to foster physical fitness, mental discipline, and world-class martial sports excellence among youth across all 38 districts, ensuring complete athlete safety with certified protective gear."
                 : "எங்கள் நோக்கம் அனைத்து மாவட்டங்களிலும் உள்ள இளைஞர்களிடையே உடற்தகுதி, மன ஒழுக்கம் மற்றும் உலகத்தரம் வாய்ந்த விளையாட்டு சிறப்பை பாதுகாப்பான முறையில் வளர்ப்பதாகும்."}
@@ -111,23 +112,23 @@ export const AboutView: React.FC = () => {
 
         {/* Visual History Timeline */}
         <div className="space-y-8 mb-16">
-          <div className="text-center">
+          <div className="text-center space-y-1">
             <h3 className="text-2xl font-extrabold text-amber-200">
               {t.aboutHistory}
             </h3>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-zinc-300">
               {language === 'en' ? 'Milestones of Kudo growth in Tamil Nadu' : 'தமிழ்நாட்டில் குடோ வளர்ச்சியின் முக்கிய மைல்கற்கள்'}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {historyTimeline.map((item, idx) => (
-              <div key={idx} className="bg-zinc-900/80 border border-amber-500/20 rounded-2xl p-6 relative">
-                <span className="text-xl font-black text-amber-400 block mb-2">{item.year}</span>
-                <h4 className="text-sm font-bold text-gray-200 mb-2">
+              <div key={idx} className="bg-zinc-900/90 border border-amber-500/20 hover:border-amber-400/50 rounded-2xl p-6 relative shadow-lg transition-all">
+                <span className="text-2xl font-black text-amber-400 block mb-2">{item.year}</span>
+                <h4 className="text-sm font-bold text-zinc-100 mb-2">
                   {language === 'en' ? item.titleEn : item.titleTa}
                 </h4>
-                <p className="text-xs text-gray-400 leading-relaxed">
+                <p className="text-xs text-zinc-300 leading-relaxed">
                   {language === 'en' ? item.descEn : item.descTa}
                 </p>
               </div>
@@ -137,11 +138,11 @@ export const AboutView: React.FC = () => {
 
         {/* Executive Committee Grid */}
         <div className="space-y-8">
-          <div className="text-center">
+          <div className="text-center space-y-1">
             <h3 className="text-2xl font-extrabold text-amber-200">
               {t.aboutLeadership}
             </h3>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-zinc-300">
               {language === 'en' ? 'Experienced leaders and certified Dan grandmasters steering TNSKA' : 'TNSKA அமைப்பை வழிநடத்தும் அனுபவமிக்க தலைவர்கள்'}
             </p>
           </div>
@@ -151,25 +152,25 @@ export const AboutView: React.FC = () => {
               <div
                 key={member.id}
                 onClick={() => setSelectedMember(member)}
-                className="bg-zinc-900 border border-amber-500/20 rounded-2xl overflow-hidden hover:border-amber-400/50 transition-all cursor-pointer card-hover text-center p-5 space-y-3"
+                className="bg-zinc-900 border border-amber-500/20 rounded-2xl overflow-hidden hover:border-amber-400/60 transition-all cursor-pointer card-hover text-center p-5 space-y-3 shadow-lg"
               >
                 <img
                   src={member.image}
                   alt={member.nameEn}
-                  className="w-24 h-24 rounded-full object-cover mx-auto border-2 border-amber-400/40 shadow-lg"
+                  className="w-24 h-24 rounded-full object-cover mx-auto border-2 border-amber-400 shadow-md"
                 />
                 <div>
                   <h4 className="text-sm font-bold text-amber-100">
                     {language === 'en' ? member.nameEn : member.nameTa}
                   </h4>
-                  <p className="text-[11px] text-amber-400 font-semibold mt-0.5">
+                  <p className="text-[11px] text-amber-400 font-bold mt-0.5">
                     {language === 'en' ? member.roleEn : member.roleTa}
                   </p>
                 </div>
-                <p className="text-xs text-gray-400 line-clamp-2 leading-relaxed">
+                <p className="text-xs text-zinc-300 line-clamp-2 leading-relaxed">
                   {language === 'en' ? member.bioEn : member.bioTa}
                 </p>
-                <span className="inline-block text-[11px] text-amber-300 underline font-medium">
+                <span className="inline-block text-[11px] text-amber-300 underline font-semibold">
                   {language === 'en' ? 'View Bio' : 'விவரங்களைப் பார்க்க'}
                 </span>
               </div>
@@ -180,10 +181,10 @@ export const AboutView: React.FC = () => {
         {/* Committee Member Bio Modal */}
         {selectedMember && (
           <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="bg-zinc-900 border border-amber-500/30 rounded-3xl p-6 max-w-lg w-full space-y-4 relative">
+            <div className="bg-zinc-900 border border-amber-500/30 rounded-3xl p-6 max-w-lg w-full space-y-4 relative shadow-2xl">
               <button
                 onClick={() => setSelectedMember(null)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white"
+                className="absolute top-4 right-4 text-gray-400 hover:text-white p-2 rounded-full hover:bg-zinc-800"
               >
                 ✕
               </button>
@@ -191,18 +192,18 @@ export const AboutView: React.FC = () => {
                 <img
                   src={selectedMember.image}
                   alt={selectedMember.nameEn}
-                  className="w-20 h-20 rounded-full object-cover border-2 border-amber-400"
+                  className="w-20 h-20 rounded-full object-cover border-2 border-amber-400 shadow-md"
                 />
                 <div>
                   <h4 className="text-lg font-bold text-amber-200">
                     {language === 'en' ? selectedMember.nameEn : selectedMember.nameTa}
                   </h4>
-                  <p className="text-xs text-amber-400 font-semibold">
+                  <p className="text-xs text-amber-400 font-bold">
                     {language === 'en' ? selectedMember.roleEn : selectedMember.roleTa}
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-gray-300 leading-relaxed border-t border-zinc-800 pt-4">
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed border-t border-zinc-800 pt-4">
                 {language === 'en' ? selectedMember.bioEn : selectedMember.bioTa}
               </p>
             </div>
@@ -235,34 +236,35 @@ export const DistrictsView: React.FC = () => {
   });
 
   return (
-    <div className="py-12 bg-zinc-950 text-white min-h-[80vh]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div className="py-16 bg-zinc-950 text-white min-h-[80vh]">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
             {t.navDistricts}
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-amber-100 mt-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-amber-100">
             {t.academiesTitle}
           </h2>
-          <p className="text-sm text-gray-400 mt-2">
+          <p className="text-sm text-zinc-300">
             {t.academiesSubtitle}
           </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-zinc-900 p-4 rounded-2xl border border-amber-500/20">
+        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-zinc-900 p-4 rounded-2xl border border-amber-500/20 shadow-xl">
           {/* District Buttons */}
           <div className="flex flex-wrap gap-2 w-full sm:w-auto">
             {districtList.map(dist => (
               <button
                 key={dist}
                 onClick={() => setSelectedDistrict(dist)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
                   selectedDistrict === dist
-                    ? 'gold-gradient-bg text-red-950 font-bold shadow-md'
-                    : 'bg-zinc-950 text-gray-300 hover:bg-zinc-800'
+                    ? 'gold-gradient-bg text-red-950 shadow-md'
+                    : 'bg-zinc-950 text-zinc-300 hover:bg-zinc-800'
                 }`}
               >
                 {dist === 'All' ? t.allDistricts : dist}
@@ -276,7 +278,7 @@ export const DistrictsView: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t.searchDistrictPlaceholder}
-            className="w-full sm:w-64 bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-gray-100 focus:outline-none focus:border-amber-400"
+            className="w-full sm:w-72 bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-zinc-100 focus:outline-none focus:border-amber-400"
           />
         </div>
 
@@ -285,7 +287,7 @@ export const DistrictsView: React.FC = () => {
           {filteredAcademies.map(ac => (
             <div
               key={ac.id}
-              className="bg-zinc-900 border border-amber-500/20 rounded-2xl p-6 space-y-4 hover:border-amber-400/50 transition-all card-hover"
+              className="bg-zinc-900 border border-amber-500/20 rounded-2xl p-6 space-y-4 hover:border-amber-400/50 transition-all card-hover shadow-lg"
             >
               <div className="flex justify-between items-start">
                 <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">
@@ -301,12 +303,12 @@ export const DistrictsView: React.FC = () => {
                 <h3 className="text-base font-bold text-amber-100">
                   {language === 'en' ? ac.nameEn : ac.nameTa}
                 </h3>
-                <p className="text-xs text-amber-300/80 font-medium mt-1">
+                <p className="text-xs text-amber-300/90 font-semibold mt-1">
                   {t.headInstructor}: {language === 'en' ? ac.instructorEn : ac.instructorTa}
                 </p>
               </div>
 
-              <div className="space-y-2 text-xs text-gray-300 border-t border-zinc-800 pt-3">
+              <div className="space-y-2 text-xs text-zinc-300 border-t border-zinc-800 pt-3">
                 <p className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                   <span>{language === 'en' ? ac.addressEn : ac.addressTa}</span>
@@ -321,7 +323,7 @@ export const DistrictsView: React.FC = () => {
                 href={`https://maps.google.com/?q=${encodeURIComponent(ac.addressEn)}`}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full inline-flex items-center justify-center space-x-1.5 bg-zinc-950 hover:bg-amber-500/10 text-amber-300 border border-amber-500/30 py-2 rounded-xl text-xs font-semibold transition-all mt-2"
+                className="w-full inline-flex items-center justify-center space-x-1.5 bg-zinc-950 hover:bg-amber-500/10 text-amber-300 border border-amber-500/30 py-2.5 rounded-xl text-xs font-bold transition-all mt-2"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 <span>{t.getDirections}</span>
@@ -346,40 +348,41 @@ export const EventsView: React.FC = () => {
   const pastEvents = events.filter(e => !e.isUpcoming);
 
   return (
-    <div className="py-12 bg-zinc-950 text-white min-h-[80vh]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div className="py-16 bg-zinc-950 text-white min-h-[80vh]">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
         
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
             {t.navEvents}
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-amber-100 mt-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-amber-100">
             {t.eventsTitle}
           </h2>
-          <p className="text-sm text-gray-400 mt-2">
+          <p className="text-sm text-zinc-300">
             {t.eventsSubtitle}
           </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Tab Toggle */}
         <div className="flex justify-center">
-          <div className="bg-zinc-900 p-1.5 rounded-2xl border border-amber-500/20 inline-flex space-x-2">
+          <div className="bg-zinc-900 p-1.5 rounded-2xl border border-amber-500/20 inline-flex space-x-2 shadow-lg">
             <button
               onClick={() => setActiveTab('upcoming')}
-              className={`px-5 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all ${
                 activeTab === 'upcoming'
                   ? 'gold-gradient-bg text-red-950 shadow-md'
-                  : 'text-gray-400 hover:text-white'
+                  : 'text-zinc-400 hover:text-white'
               }`}
             >
               {t.upcomingTab} ({upcomingEvents.length})
             </button>
             <button
               onClick={() => setActiveTab('past')}
-              className={`px-5 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all ${
                 activeTab === 'past'
                   ? 'gold-gradient-bg text-red-950 shadow-md'
-                  : 'text-gray-400 hover:text-white'
+                  : 'text-zinc-400 hover:text-white'
               }`}
             >
               {t.pastTab} ({pastEvents.length})
@@ -392,14 +395,14 @@ export const EventsView: React.FC = () => {
           {(activeTab === 'upcoming' ? upcomingEvents : pastEvents).map(ev => (
             <div
               key={ev.id}
-              className="bg-zinc-900 border border-amber-500/20 rounded-2xl p-6 flex flex-col md:flex-row justify-between gap-6 hover:border-amber-400/50 transition-all card-hover"
+              className="bg-zinc-900 border border-amber-500/20 rounded-2xl p-6 flex flex-col md:flex-row justify-between gap-6 hover:border-amber-400/50 transition-all card-hover shadow-lg"
             >
               <div className="space-y-3">
                 <div className="flex items-center space-x-2">
                   <span className="text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-3 py-0.5 rounded-full">
                     {ev.date}
                   </span>
-                  <span className="text-xs font-medium text-gray-400">
+                  <span className="text-xs font-semibold text-zinc-300">
                     {ev.districtEn} District
                   </span>
                 </div>
@@ -408,25 +411,25 @@ export const EventsView: React.FC = () => {
                   {language === 'en' ? ev.titleEn : ev.titleTa}
                 </h3>
 
-                <p className="text-xs text-gray-300 leading-relaxed">
+                <p className="text-xs text-zinc-300 leading-relaxed">
                   {language === 'en' ? ev.descriptionEn : ev.descriptionTa}
                 </p>
 
-                <p className="text-xs text-gray-400 flex items-center gap-1.5">
+                <p className="text-xs text-zinc-300 flex items-center gap-1.5">
                   <MapPin className="w-4 h-4 text-amber-400" />
                   <span>{language === 'en' ? ev.venueEn : ev.venueTa}</span>
                 </p>
               </div>
 
               {!ev.isUpcoming && (
-                <div className="bg-zinc-950 rounded-xl p-4 border border-zinc-800 shrink-0 text-center space-y-2 justify-center flex flex-col">
-                  <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">
+                <div className="bg-zinc-950 rounded-xl p-4 border border-zinc-800 shrink-0 text-center space-y-2 justify-center flex flex-col shadow-inner">
+                  <span className="text-[10px] font-extrabold text-amber-400 uppercase tracking-widest">
                     Medal Tally
                   </span>
                   <div className="flex justify-center space-x-3 text-xs">
-                    <span className="text-amber-400 font-bold">🥇 {ev.goldCount || 0}</span>
-                    <span className="text-gray-300 font-bold">🥈 {ev.silverCount || 0}</span>
-                    <span className="text-amber-600 font-bold">🥉 {ev.bronzeCount || 0}</span>
+                    <span className="text-amber-400 font-extrabold">🥇 {ev.goldCount || 0}</span>
+                    <span className="text-zinc-200 font-extrabold">🥈 {ev.silverCount || 0}</span>
+                    <span className="text-amber-600 font-extrabold">🥉 {ev.bronzeCount || 0}</span>
                   </div>
                 </div>
               )}
@@ -452,19 +455,20 @@ export const AchievementsView: React.FC = () => {
     : achievements.filter(a => a.level === filterLevel);
 
   return (
-    <div className="py-12 bg-zinc-950 text-white min-h-[80vh]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div className="py-16 bg-zinc-950 text-white min-h-[80vh]">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
         
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
             {t.navAchievements}
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-amber-100 mt-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-amber-100">
             {t.achievementsTitle}
           </h2>
-          <p className="text-sm text-gray-400 mt-2">
+          <p className="text-sm text-zinc-300">
             {t.achievementsSubtitle}
           </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Level Filters */}
@@ -473,10 +477,10 @@ export const AchievementsView: React.FC = () => {
             <button
               key={lvl}
               onClick={() => setFilterLevel(lvl)}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 filterLevel === lvl
-                  ? 'gold-gradient-bg text-red-950 font-bold shadow-md'
-                  : 'bg-zinc-900 text-gray-300 hover:bg-zinc-800'
+                  ? 'gold-gradient-bg text-red-950 shadow-md'
+                  : 'bg-zinc-900 text-zinc-300 hover:bg-zinc-800'
               }`}
             >
               {lvl === 'All' ? t.tabAll : lvl}
@@ -489,7 +493,7 @@ export const AchievementsView: React.FC = () => {
           {filtered.map(ach => (
             <div
               key={ach.id}
-              className="bg-zinc-900 border border-amber-500/20 rounded-2xl overflow-hidden hover:border-amber-400/50 transition-all card-hover flex flex-col sm:flex-row"
+              className="bg-zinc-900 border border-amber-500/20 rounded-2xl overflow-hidden hover:border-amber-400/50 transition-all card-hover flex flex-col sm:flex-row shadow-lg"
             >
               <img
                 src={ach.image}
@@ -502,7 +506,7 @@ export const AchievementsView: React.FC = () => {
                   <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-2.5 py-0.5 rounded border border-amber-500/20">
                     {ach.level} • {ach.year}
                   </span>
-                  <span className="text-sm">
+                  <span className="text-sm font-bold">
                     {ach.medal === 'Gold' ? '🥇 Gold' : ach.medal === 'Silver' ? '🥈 Silver' : '🥉 Bronze'}
                   </span>
                 </div>
@@ -511,11 +515,11 @@ export const AchievementsView: React.FC = () => {
                   {language === 'en' ? ach.titleEn : ach.titleTa}
                 </h3>
 
-                <p className="text-xs text-amber-300 font-medium">
+                <p className="text-xs text-amber-300 font-semibold">
                   {t.headInstructor}: {language === 'en' ? ach.athleteEn : ach.athleteTa}
                 </p>
 
-                <p className="text-xs text-gray-400 leading-relaxed">
+                <p className="text-xs text-zinc-300 leading-relaxed">
                   {language === 'en' ? ach.descriptionEn : ach.descriptionTa}
                 </p>
               </div>
@@ -536,19 +540,20 @@ export const ResourcesView: React.FC = () => {
   const { news, documents } = useAdmin();
 
   return (
-    <div className="py-12 bg-zinc-950 text-white min-h-[80vh]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="py-16 bg-zinc-950 text-white min-h-[80vh]">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
         
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
             {t.navResources}
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-amber-100 mt-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-amber-100">
             {t.resourcesTitle}
           </h2>
-          <p className="text-sm text-gray-400 mt-2">
+          <p className="text-sm text-zinc-300">
             {t.resourcesSubtitle}
           </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Section 1: Official Circulars */}
@@ -560,17 +565,17 @@ export const ResourcesView: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {news.map(nw => (
-              <div key={nw.id} className="bg-zinc-900 border border-amber-500/20 rounded-2xl p-6 space-y-3">
+              <div key={nw.id} className="bg-zinc-900 border border-amber-500/20 rounded-2xl p-6 space-y-3 shadow-lg">
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-2.5 py-0.5 rounded">
+                  <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-2.5 py-0.5 rounded border border-amber-500/20">
                     {nw.categoryEn}
                   </span>
-                  <span className="text-xs text-gray-400">{nw.date}</span>
+                  <span className="text-xs text-zinc-400">{nw.date}</span>
                 </div>
-                <h4 className="text-base font-bold text-gray-100">
+                <h4 className="text-base font-bold text-amber-100">
                   {language === 'en' ? nw.titleEn : nw.titleTa}
                 </h4>
-                <p className="text-xs text-gray-400 leading-relaxed">
+                <p className="text-xs text-zinc-300 leading-relaxed">
                   {language === 'en' ? nw.excerptEn : nw.excerptTa}
                 </p>
               </div>
@@ -587,12 +592,12 @@ export const ResourcesView: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {documents.map(doc => (
-              <div key={doc.id} className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex items-center justify-between hover:border-amber-500/30 transition-all">
+              <div key={doc.id} className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex items-center justify-between hover:border-amber-500/30 transition-all shadow-md">
                 <div className="space-y-1">
-                  <h4 className="text-xs font-bold text-gray-200">
+                  <h4 className="text-xs font-bold text-zinc-200">
                     {language === 'en' ? doc.titleEn : doc.titleTa}
                   </h4>
-                  <p className="text-[11px] text-gray-400">
+                  <p className="text-[11px] text-zinc-400">
                     {doc.categoryEn} • {t.fileSize}: {doc.fileSize}
                   </p>
                 </div>
@@ -600,7 +605,7 @@ export const ResourcesView: React.FC = () => {
                 <a
                   href="#"
                   onClick={(e) => { e.preventDefault(); alert(`Downloading official PDF: ${doc.titleEn}`); }}
-                  className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1 shrink-0"
+                  className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1 shrink-0 transition-all"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>PDF</span>
@@ -655,19 +660,20 @@ export const MediaView: React.FC<{ onOpenLightbox: (idx: number) => void }> = ({
   ];
 
   return (
-    <div className="py-12 bg-zinc-950 text-white min-h-[80vh]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div className="py-16 bg-zinc-950 text-white min-h-[80vh]">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
         
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
             {t.navMedia}
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-amber-100 mt-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-amber-100">
             {language === 'en' ? 'TNSKA Official Photo Gallery' : 'அதிகாரப்பூர்வ புகைப்படக் காட்சியகம்'}
           </h2>
-          <p className="text-sm text-gray-400 mt-2">
+          <p className="text-sm text-zinc-300">
             {language === 'en' ? 'Click any photograph to view high-resolution image in Lightbox viewer.' : 'புகைப்படத்தை பெரிதாகப் பார்க்க அழுத்தவும்.'}
           </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Gallery Grid */}
@@ -676,7 +682,7 @@ export const MediaView: React.FC<{ onOpenLightbox: (idx: number) => void }> = ({
             <div
               key={idx}
               onClick={() => onOpenLightbox(idx)}
-              className="bg-zinc-900 border border-amber-500/20 rounded-2xl overflow-hidden cursor-pointer hover:border-amber-400/60 transition-all card-hover group relative"
+              className="bg-zinc-900 border border-amber-500/20 rounded-2xl overflow-hidden cursor-pointer hover:border-amber-400/60 transition-all card-hover group relative shadow-lg"
             >
               <div className="aspect-4/3 overflow-hidden">
                 <img
@@ -690,7 +696,7 @@ export const MediaView: React.FC<{ onOpenLightbox: (idx: number) => void }> = ({
                 <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest">
                   {img.event}
                 </span>
-                <h4 className="text-xs font-bold text-gray-200 group-hover:text-amber-300">
+                <h4 className="text-xs font-bold text-zinc-200 group-hover:text-amber-300">
                   {img.title}
                 </h4>
               </div>
@@ -715,49 +721,50 @@ export const FaqsView: React.FC = () => {
   const filtered = faqs.filter(f => f.category === activePersona);
 
   return (
-    <div className="py-12 bg-zinc-950 text-white min-h-[80vh]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div className="py-16 bg-zinc-950 text-white min-h-[80vh]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
-        <div className="text-center">
-          <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+        <div className="text-center space-y-3">
+          <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
             {t.navFaqs}
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-amber-100 mt-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-amber-100">
             {t.faqsTitle}
           </h2>
-          <p className="text-sm text-gray-400 mt-2">
+          <p className="text-sm text-zinc-300">
             {t.faqsSubtitle}
           </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Persona Tabs */}
         <div className="flex justify-center space-x-2">
           <button
             onClick={() => setActivePersona('parents')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
               activePersona === 'parents'
-                ? 'gold-gradient-bg text-red-950 font-bold shadow-md'
-                : 'bg-zinc-900 text-gray-300'
+                ? 'gold-gradient-bg text-red-950 shadow-md'
+                : 'bg-zinc-900 text-zinc-300'
             }`}
           >
             {t.faqTabParents}
           </button>
           <button
             onClick={() => setActivePersona('students')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
               activePersona === 'students'
-                ? 'gold-gradient-bg text-red-950 font-bold shadow-md'
-                : 'bg-zinc-900 text-gray-300'
+                ? 'gold-gradient-bg text-red-950 shadow-md'
+                : 'bg-zinc-900 text-zinc-300'
             }`}
           >
             {t.faqTabStudents}
           </button>
           <button
             onClick={() => setActivePersona('districts')}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
               activePersona === 'districts'
-                ? 'gold-gradient-bg text-red-950 font-bold shadow-md'
-                : 'bg-zinc-900 text-gray-300'
+                ? 'gold-gradient-bg text-red-950 shadow-md'
+                : 'bg-zinc-900 text-zinc-300'
             }`}
           >
             {t.faqTabDistricts}
@@ -771,7 +778,7 @@ export const FaqsView: React.FC = () => {
             return (
               <div
                 key={faq.id}
-                className="bg-zinc-900 border border-amber-500/20 rounded-2xl overflow-hidden"
+                className="bg-zinc-900 border border-amber-500/20 rounded-2xl overflow-hidden shadow-lg"
               >
                 <button
                   onClick={() => setExpandedId(isExpanded ? null : faq.id)}
@@ -780,11 +787,11 @@ export const FaqsView: React.FC = () => {
                   <h3 className="text-sm font-bold text-amber-200">
                     {language === 'en' ? faq.questionEn : faq.questionTa}
                   </h3>
-                  {isExpanded ? <ChevronUp className="w-5 h-5 text-amber-400 shrink-0" /> : <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />}
+                  {isExpanded ? <ChevronUp className="w-5 h-5 text-amber-400 shrink-0" /> : <ChevronDown className="w-5 h-5 text-zinc-400 shrink-0" />}
                 </button>
 
                 {isExpanded && (
-                  <div className="px-5 pb-5 pt-1 text-xs text-gray-300 leading-relaxed border-t border-zinc-800">
+                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-zinc-300 leading-relaxed border-t border-zinc-800">
                     {language === 'en' ? faq.answerEn : faq.answerTa}
                   </div>
                 )}
@@ -820,19 +827,20 @@ export const ContactView: React.FC = () => {
   };
 
   return (
-    <div className="py-12 bg-zinc-950 text-white min-h-[80vh]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <div className="py-16 bg-zinc-950 text-white min-h-[80vh]">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
         
-        <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
             {t.navContact}
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-amber-100 mt-4">
+          <h2 className="text-3xl sm:text-5xl font-black text-amber-100">
             {t.contactTitle}
           </h2>
-          <p className="text-sm text-gray-400 mt-2">
+          <p className="text-sm text-zinc-300">
             {t.contactSubtitle}
           </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -842,7 +850,7 @@ export const ContactView: React.FC = () => {
               {t.officeAddressTitle}
             </h3>
 
-            <div className="space-y-4 text-xs text-gray-300">
+            <div className="space-y-4 text-xs sm:text-sm text-zinc-300">
               <p className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                 <span>{t.officeAddress}</span>
@@ -858,7 +866,7 @@ export const ContactView: React.FC = () => {
             </div>
 
             {/* Interactive Map Embed Mock */}
-            <div className="border border-amber-500/20 rounded-2xl overflow-hidden aspect-16/9 bg-zinc-950 flex flex-col items-center justify-center p-4 text-center space-y-2">
+            <div className="border border-amber-500/20 rounded-2xl overflow-hidden aspect-16/9 bg-zinc-950 flex flex-col items-center justify-center p-4 text-center space-y-2 shadow-inner">
               <MapPin className="w-8 h-8 text-amber-400 animate-bounce" />
               <p className="text-xs font-bold text-amber-200">Jawaharlal Nehru Indoor Stadium, Periamet, Chennai</p>
               <a
@@ -880,7 +888,7 @@ export const ContactView: React.FC = () => {
                 <h3 className="text-xl font-bold text-emerald-300">
                   {language === 'en' ? 'Inquiry Sent Successfully!' : 'செய்தி வெற்றிபெற அனுப்பப்பட்டது!'}
                 </h3>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-zinc-300">
                   {language === 'en' ? 'Our secretariat office will respond within 24 hours.' : 'எங்கள் அலுவலகம் 24 மணி நேரத்திற்குள் உங்களைத் தொடர்பு கொள்ளும்.'}
                 </p>
               </div>
@@ -891,50 +899,50 @@ export const ContactView: React.FC = () => {
                 </h3>
 
                 <div>
-                  <label className="block text-gray-300 font-semibold mb-1">{t.formName}</label>
+                  <label className="block text-zinc-300 font-semibold mb-1">{t.formName}</label>
                   <input
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-gray-100 focus:border-amber-400"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:border-amber-400"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-gray-300 font-semibold mb-1">{t.formEmail}</label>
+                    <label className="block text-zinc-300 font-semibold mb-1">{t.formEmail}</label>
                     <input
                       type="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-gray-100 focus:border-amber-400"
+                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:border-amber-400"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-300 font-semibold mb-1">{t.formPhone}</label>
+                    <label className="block text-zinc-300 font-semibold mb-1">{t.formPhone}</label>
                     <input
                       type="tel"
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-gray-100 focus:border-amber-400"
+                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:border-amber-400"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 font-semibold mb-1">{t.formMessage}</label>
+                  <label className="block text-zinc-300 font-semibold mb-1">{t.formMessage}</label>
                   <textarea
                     required
                     rows={4}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-gray-100 focus:border-amber-400"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:border-amber-400"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full gold-gradient-bg text-red-950 font-bold py-3.5 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center space-x-2"
+                  className="w-full gold-gradient-bg text-red-950 font-black py-3.5 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center space-x-2"
                 >
                   <Send className="w-4 h-4" />
                   <span>{t.formSubmit}</span>

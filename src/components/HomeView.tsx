@@ -39,19 +39,19 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       {/* 1. Hero Banner */}
       <Hero setCurrentView={setCurrentView} />
 
-      {/* 2. Featured Event Banner */}
+      {/* 2. Featured Event Announcement Ticker */}
       {featuredEvent && (
-        <section className="bg-gradient-to-r from-red-950 via-amber-950 to-red-950 border-y border-amber-500/30 py-4 px-4 sm:px-8 lg:px-12 text-white w-full">
+        <section className="bg-gradient-to-r from-red-950 via-amber-950 to-red-950 border-y border-amber-500/30 py-3.5 px-4 sm:px-8 lg:px-12 text-white w-full shadow-inner">
           <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center space-x-3 text-center md:text-left">
-              <span className="bg-amber-500 text-red-950 font-black text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-md shrink-0">
+              <span className="bg-amber-500 text-red-950 font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded-md shrink-0 shadow-md">
                 {t.noticeTitle}
               </span>
               <div>
                 <h4 className="text-xs sm:text-sm font-bold text-amber-200">
                   {language === 'en' ? featuredEvent.titleEn : featuredEvent.titleTa}
                 </h4>
-                <p className="text-[11px] text-amber-100/70">
+                <p className="text-[11px] text-zinc-300">
                   {featuredEvent.date} • {featuredEvent.venueEn}
                 </p>
               </div>
@@ -62,7 +62,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('events');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="gold-gradient-bg text-red-950 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider shadow-md hover:brightness-110 shrink-0"
+              className="gold-gradient-bg text-red-950 font-black px-4 py-2 rounded-lg text-xs uppercase tracking-wider shadow-md hover:brightness-110 shrink-0 transition-all"
             >
               {t.viewDetails}
             </button>
@@ -73,39 +73,41 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       {/* 3. Trust Lineage Trail */}
       <TrustChain />
 
-      {/* 4. Executive Leadership Teaser Section */}
-      <section className="py-16 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
-        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+      {/* 4. Executive Leadership Messages Section (Varied Header Style 1) */}
+      <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
+          
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
               {t.aboutLeadership}
             </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-amber-100 mt-3">
+            <h2 className="text-2xl sm:text-4xl font-black text-amber-100">
               {language === 'en' ? 'State Association Leadership Message' : 'மாநில சங்கத் தலைவர்களின் உரை'}
             </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* President Card */}
             {president && (
-              <div className="bg-zinc-950 border border-amber-500/20 rounded-3xl p-6 sm:p-8 space-y-4 relative card-hover">
-                <Quote className="w-8 h-8 text-amber-500/20 absolute top-6 right-6" />
+              <div className="bg-zinc-950 border border-amber-500/30 hover:border-amber-400/60 rounded-3xl p-6 sm:p-8 space-y-4 relative card-hover shadow-xl transition-all">
+                <Quote className="w-10 h-10 text-amber-500/15 absolute top-6 right-6" />
                 <div className="flex items-center space-x-4">
                   <img
                     src={president.image}
                     alt={president.nameEn}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-amber-400 shrink-0"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-amber-400 shadow-md shrink-0"
                   />
                   <div>
                     <h3 className="text-base font-bold text-amber-200">
                       {language === 'en' ? president.nameEn : president.nameTa}
                     </h3>
-                    <p className="text-xs text-amber-400 font-semibold">
+                    <p className="text-xs text-amber-400 font-bold">
                       {language === 'en' ? president.roleEn : president.roleTa}
                     </p>
                   </div>
                 </div>
-                <p className="text-xs text-gray-300 leading-relaxed italic">
+                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed italic">
                   "{language === 'en' ? president.bioEn : president.bioTa}"
                 </p>
               </div>
@@ -113,24 +115,24 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
 
             {/* General Secretary Card */}
             {secretary && (
-              <div className="bg-zinc-950 border border-amber-500/20 rounded-3xl p-6 sm:p-8 space-y-4 relative card-hover">
-                <Quote className="w-8 h-8 text-amber-500/20 absolute top-6 right-6" />
+              <div className="bg-zinc-950 border border-amber-500/30 hover:border-amber-400/60 rounded-3xl p-6 sm:p-8 space-y-4 relative card-hover shadow-xl transition-all">
+                <Quote className="w-10 h-10 text-amber-500/15 absolute top-6 right-6" />
                 <div className="flex items-center space-x-4">
                   <img
                     src={secretary.image}
                     alt={secretary.nameEn}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-amber-400 shrink-0"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-amber-400 shadow-md shrink-0"
                   />
                   <div>
                     <h3 className="text-base font-bold text-amber-200">
                       {language === 'en' ? secretary.nameEn : secretary.nameTa}
                     </h3>
-                    <p className="text-xs text-amber-400 font-semibold">
+                    <p className="text-xs text-amber-400 font-bold">
                       {language === 'en' ? secretary.roleEn : secretary.roleTa}
                     </p>
                   </div>
                 </div>
-                <p className="text-xs text-gray-300 leading-relaxed italic">
+                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed italic">
                   "{language === 'en' ? secretary.bioEn : secretary.bioTa}"
                 </p>
               </div>
@@ -139,42 +141,43 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 5. About Kudo Section */}
+      {/* 5. What is Kudo Section (Varied Header Style 2 - Left Accent Bar) */}
       <section className="py-20 bg-zinc-950 text-white border-b border-amber-900/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-6 space-y-6">
-              <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
-                {language === 'en' ? 'Budo Discipline & Safety' : 'பாதுகாப்பு & ஒழக்கம்'}
-              </span>
+              <div className="border-l-4 border-amber-400 pl-4 space-y-2">
+                <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
+                  {language === 'en' ? 'Budo Discipline & Safety' : 'பாதுகாப்பு & ஒழக்கம்'}
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-amber-100 leading-tight">
+                  {t.whatIsKudoTitle}
+                </h2>
+              </div>
 
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-amber-100 leading-tight">
-                {t.whatIsKudoTitle}
-              </h2>
-
-              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                 {t.whatIsKudoDesc}
               </p>
 
               <div className="space-y-4 pt-2">
-                <div className="flex items-start space-x-3 bg-zinc-900/80 p-4 rounded-2xl border border-amber-500/20">
-                  <div className="w-9 h-9 rounded-xl maroon-gradient-bg flex items-center justify-center text-amber-400 shrink-0">
+                <div className="flex items-start space-x-3.5 bg-zinc-900/90 p-4 rounded-2xl border border-amber-500/20 shadow-lg">
+                  <div className="w-10 h-10 rounded-xl maroon-gradient-bg flex items-center justify-center text-amber-400 shrink-0 shadow-md">
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-amber-200">{t.featureSafety}</h4>
-                    <p className="text-[11px] text-gray-400 mt-0.5">{t.featureSafetyDesc}</p>
+                    <h4 className="text-xs sm:text-sm font-bold text-amber-200">{t.featureSafety}</h4>
+                    <p className="text-[11px] sm:text-xs text-zinc-300 mt-0.5">{t.featureSafetyDesc}</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-3 bg-zinc-900/80 p-4 rounded-2xl border border-amber-500/20">
-                  <div className="w-9 h-9 rounded-xl gold-gradient-bg flex items-center justify-center text-red-950 shrink-0">
+                <div className="flex items-start space-x-3.5 bg-zinc-900/90 p-4 rounded-2xl border border-amber-500/20 shadow-lg">
+                  <div className="w-10 h-10 rounded-xl gold-gradient-bg flex items-center justify-center text-red-950 shrink-0 shadow-md">
                     <Award className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-amber-200">{t.featureDiscipline}</h4>
-                    <p className="text-[11px] text-gray-400 mt-0.5">{t.featureDisciplineDesc}</p>
+                    <h4 className="text-xs sm:text-sm font-bold text-amber-200">{t.featureDiscipline}</h4>
+                    <p className="text-[11px] sm:text-xs text-zinc-300 mt-0.5">{t.featureDisciplineDesc}</p>
                   </div>
                 </div>
               </div>
@@ -187,7 +190,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                   alt="Kudo Training"
                   className="rounded-2xl w-full h-80 object-cover border border-amber-400/30"
                 />
-                <div className="absolute bottom-10 left-10 right-10 bg-zinc-950/90 backdrop-blur-md p-4 rounded-xl border border-amber-500/30 text-center">
+                <div className="absolute bottom-10 left-10 right-10 bg-zinc-950/90 backdrop-blur-md p-4 rounded-xl border border-amber-500/30 text-center shadow-xl">
                   <p className="text-xs font-bold text-amber-300">
                     {language === 'en' ? 'Official KIFI & SGFI School Games Pathway' : 'அதிகாரப்பூர்வ SGFI பள்ளி விளையாட்டுப் பாதை'}
                   </p>
@@ -201,14 +204,14 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
 
       {/* 6. Achievement Highlights */}
       <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
-        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
           
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-amber-900/30 pb-4">
             <div>
-              <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+              <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block mb-1">
                 {t.navAchievements}
               </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-100 mt-3">
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-100">
                 {t.achievementsTitle}
               </h2>
             </div>
@@ -218,7 +221,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('achievements');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center space-x-1"
+              className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center space-x-1 transition-colors"
             >
               <span>{language === 'en' ? 'View All Achievements' : 'அனைத்து சாதனைகளையும் பார்க்க'}</span>
               <ArrowRight className="w-4 h-4" />
@@ -227,18 +230,18 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {highlightAchievements.map(ach => (
-              <div key={ach.id} className="bg-zinc-950 border border-amber-500/20 rounded-2xl overflow-hidden card-hover space-y-3 p-5">
+              <div key={ach.id} className="bg-zinc-950 border border-amber-500/20 rounded-2xl overflow-hidden card-hover space-y-3 p-5 shadow-lg">
                 <img src={ach.image} alt={ach.titleEn} className="w-full h-40 object-cover rounded-xl border border-zinc-800" />
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">
+                  <span className="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded border border-amber-500/20">
                     {ach.level} • {ach.year}
                   </span>
-                  <span className="text-xs">🥇 {ach.medal}</span>
+                  <span className="text-xs font-bold">🥇 {ach.medal}</span>
                 </div>
-                <h4 className="text-sm font-bold text-gray-100">
+                <h4 className="text-sm font-bold text-amber-100">
                   {language === 'en' ? ach.titleEn : ach.titleTa}
                 </h4>
-                <p className="text-xs text-gray-400 line-clamp-2">
+                <p className="text-xs text-zinc-300 line-clamp-2 leading-relaxed">
                   {language === 'en' ? ach.descriptionEn : ach.descriptionTa}
                 </p>
               </div>
@@ -248,16 +251,16 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 7. Latest News & Announcements */}
+      {/* 7. Latest News & Official Announcements */}
       <section className="py-20 bg-zinc-950 text-white border-b border-amber-900/20 w-full">
-        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
           
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-amber-900/30 pb-4">
             <div>
-              <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+              <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block mb-1">
                 {t.categoryCirculars}
               </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-100 mt-3">
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-100">
                 {language === 'en' ? 'Latest News & Official Notices' : 'சமீபத்திய செய்திகள் & சுற்றறிக்கைகள்'}
               </h2>
             </div>
@@ -267,7 +270,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('resources');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center space-x-1"
+              className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center space-x-1 transition-colors"
             >
               <span>{language === 'en' ? 'View All Notices' : 'அனைத்து சுற்றறிக்கைகளையும் பார்க்க'}</span>
               <ArrowRight className="w-4 h-4" />
@@ -276,15 +279,17 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {latestNews.map(nw => (
-              <div key={nw.id} className="bg-zinc-900 border border-amber-500/20 rounded-2xl p-6 space-y-3 card-hover">
-                <span className="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">
-                  {nw.categoryEn}
-                </span>
-                <span className="text-xs text-gray-500 block">{nw.date}</span>
+              <div key={nw.id} className="bg-zinc-900 border border-amber-500/20 rounded-2xl p-6 space-y-3 card-hover shadow-lg">
+                <div className="flex justify-between items-center">
+                  <span className="text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded border border-amber-500/20">
+                    {nw.categoryEn}
+                  </span>
+                  <span className="text-[11px] text-zinc-400">{nw.date}</span>
+                </div>
                 <h4 className="text-sm font-bold text-amber-100">
                   {language === 'en' ? nw.titleEn : nw.titleTa}
                 </h4>
-                <p className="text-xs text-gray-400 leading-relaxed">
+                <p className="text-xs text-zinc-300 leading-relaxed">
                   {language === 'en' ? nw.excerptEn : nw.excerptTa}
                 </p>
               </div>
@@ -294,43 +299,43 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 8. Sponsors & Partners Section */}
+      {/* 8. Official Sponsors & Institutional Partners */}
       <section className="py-16 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+          <div className="text-center max-w-3xl mx-auto space-y-2">
+            <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
               {language === 'en' ? 'Official Partners & Sponsors' : 'அதிகாரப்பூர்வ பங்காளிகள்'}
             </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-100 mt-3">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-100">
               {language === 'en' ? 'Partner With Tamil Nadu Kudo' : 'தமிழ்நாடு குடோவுடன் இணையுங்கள்'}
             </h2>
-            <p className="text-xs sm:text-sm text-gray-400 mt-2">
+            <p className="text-xs sm:text-sm text-zinc-300">
               {language === 'en' 
                 ? 'Empowering Tamil Nadu state athletes and supporting recognized martial sports excellence.'
                 : 'மாநில விளையாட்டு வீரர்களுக்கு ஆதரவளித்து தற்காப்பு விளையாட்டை மேம்படுத்துங்கள்.'}
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-center opacity-80 hover:opacity-100 transition-opacity">
-            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 text-center space-y-1">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
               <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
-              <span className="text-xs font-bold text-gray-300 block">KIFI India</span>
-              <span className="text-[10px] text-amber-500 uppercase tracking-widest font-semibold">National Governing Body</span>
+              <span className="text-xs font-bold text-zinc-200 block">KIFI India</span>
+              <span className="text-[10px] text-amber-400 uppercase tracking-widest font-extrabold">National Governing Body</span>
             </div>
-            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 text-center space-y-1">
+            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
               <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
-              <span className="text-xs font-bold text-gray-300 block">SDAT Tamil Nadu</span>
-              <span className="text-[10px] text-amber-500 uppercase tracking-widest font-semibold">Sports Infrastructure</span>
+              <span className="text-xs font-bold text-zinc-200 block">SDAT Tamil Nadu</span>
+              <span className="text-[10px] text-amber-400 uppercase tracking-widest font-extrabold">Sports Infrastructure</span>
             </div>
-            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 text-center space-y-1">
+            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
               <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
-              <span className="text-xs font-bold text-gray-300 block">Neo Protective Equipment</span>
-              <span className="text-[10px] text-amber-500 uppercase tracking-widest font-semibold">Official Safety Gear</span>
+              <span className="text-xs font-bold text-zinc-200 block">Neo Protective Equipment</span>
+              <span className="text-[10px] text-amber-400 uppercase tracking-widest font-extrabold">Official Safety Gear</span>
             </div>
-            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 text-center space-y-1">
+            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
               <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
-              <span className="text-xs font-bold text-gray-300 block">KIF Japan</span>
-              <span className="text-[10px] text-amber-500 uppercase tracking-widest font-semibold">Global Federation</span>
+              <span className="text-xs font-bold text-zinc-200 block">KIF Japan</span>
+              <span className="text-[10px] text-amber-400 uppercase tracking-widest font-extrabold">Global Federation</span>
             </div>
           </div>
 
@@ -340,7 +345,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('contact');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="inline-flex items-center space-x-2 bg-zinc-950 border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider transition-all"
+              className="inline-flex items-center space-x-2 bg-zinc-950 border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg"
             >
               <Send className="w-4 h-4" />
               <span>{language === 'en' ? 'Sponsor / Partner Inquiry' : 'பங்காளர் விருப்பப் படிவம்'}</span>
@@ -349,16 +354,16 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 9. Gallery Preview */}
+      {/* 9. Tournament Photo Gallery Preview */}
       <section className="py-20 bg-zinc-900 text-white border-b border-amber-900/20 w-full">
-        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
+        <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
           
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-amber-900/30 pb-4">
             <div>
-              <span className="text-xs uppercase tracking-widest text-amber-400 font-bold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">
+              <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block mb-1">
                 {t.navMedia}
               </span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-100 mt-3">
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-100">
                 {language === 'en' ? 'State Tournament Gallery Preview' : 'போட்டி புகைப்படங்கள்'}
               </h2>
             </div>
@@ -368,7 +373,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('media');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center space-x-1"
+              className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center space-x-1 transition-colors"
             >
               <span>{language === 'en' ? 'View Full Gallery' : 'முழு புகைப்பட தொகுப்பைப் பார்க்க'}</span>
               <ArrowRight className="w-4 h-4" />
@@ -385,9 +390,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
               <div
                 key={i}
                 onClick={() => onOpenLightbox(i)}
-                className="aspect-square rounded-2xl overflow-hidden border border-amber-500/20 cursor-pointer card-hover"
+                className="aspect-square rounded-2xl overflow-hidden border border-amber-500/20 cursor-pointer card-hover shadow-lg"
               >
-                <img src={url} alt="Kudo Action" className="w-full h-full object-cover hover:scale-105 transition-transform" />
+                <img src={url} alt="Kudo Action" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
               </div>
             ))}
           </div>
@@ -395,13 +400,13 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
         </div>
       </section>
 
-      {/* 10. Call to Action Band */}
-      <section className="py-16 maroon-gradient-bg border-t border-amber-500/30 text-white text-center w-full">
+      {/* 10. Call to Action Banner Band */}
+      <section className="py-16 maroon-gradient-bg border-t border-amber-500/30 text-white text-center w-full shadow-2xl">
         <div className="max-w-4xl mx-auto px-4 space-y-6">
           <h2 className="text-2xl sm:text-4xl font-black text-amber-100">
             {language === 'en' ? 'Join the Official Kudo Movement in Tamil Nadu' : 'தமிழ்நாடு குடோ இயக்கத்தில் இணையுங்கள்'}
           </h2>
-          <p className="text-xs sm:text-base text-amber-100/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-zinc-200 max-w-2xl mx-auto leading-relaxed">
             {language === 'en'
               ? 'Locate a certified training dojo in your district or contact the state secretariat for affiliation inquiry.'
               : 'உங்கள் மாவட்டத்தில் உள்ள சான்றளிக்கப்பட்ட பயிற்றுவிப்பகத்தைக் கண்டறியவும் அல்லது செயலகத்தை தொடர்பு கொள்ளவும்.'}
@@ -413,7 +418,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('districts');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="w-full sm:w-auto gold-gradient-bg text-red-950 font-bold px-8 py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-xl hover:brightness-110"
+              className="w-full sm:w-auto gold-gradient-bg text-red-950 font-black px-8 py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-xl hover:brightness-110 transition-all"
             >
               {t.heroCtaPrimary}
             </button>
@@ -423,7 +428,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('contact');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="w-full sm:w-auto bg-zinc-900/80 border border-amber-500/40 text-amber-200 hover:bg-amber-500/10 font-semibold px-8 py-3.5 rounded-xl text-xs"
+              className="w-full sm:w-auto bg-zinc-900/90 border border-amber-500/40 text-amber-200 hover:bg-amber-500/10 font-bold px-8 py-3.5 rounded-xl text-xs uppercase tracking-wider transition-all"
             >
               {t.navContact}
             </button>
