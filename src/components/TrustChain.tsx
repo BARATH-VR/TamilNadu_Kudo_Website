@@ -9,42 +9,42 @@ export const TrustChain: React.FC = () => {
 
   const nodes = [
     {
+      step: "STEP 01",
       title: t.nodeDistrict,
       subtitle: t.nodeDistrictSub,
       descEn: "14 Affiliated District Secretariats across Tamil Nadu training sub-juniors to seniors.",
       descTa: "14 மாவட்ட செயலாக்க அலுவலகங்கள் மூலம் பயிற்சி வழங்கப்படுகிறது.",
       icon: MapPin,
-      color: "from-amber-600 to-amber-800"
     },
     {
+      step: "STEP 02",
       title: t.nodeState,
       subtitle: t.nodeStateSub,
       descEn: "Official State Body conducting state championships and belt grading certifications.",
       descTa: "மாநில சாம்பியன்ஷிப் மற்றும் பெல்ட் தரவரிசைகளை நடத்தும் அதிகாரப்பூர்வ அமைப்பு.",
       icon: ShieldCheck,
-      color: "from-red-700 to-red-900"
     },
     {
+      step: "STEP 03",
       title: t.nodeNational,
       subtitle: t.nodeNationalSub,
       descEn: "Kudo International Federation India (KIFI) recognized by Ministry & SGFI.",
       descTa: "அமைச்சகம் மற்றும் SGFI ஆல் அங்கீகரிக்கப்பட்ட இந்திய கூட்டமைப்பு.",
       icon: Award,
-      color: "from-amber-500 to-amber-700"
     },
     {
+      step: "STEP 04",
       title: t.nodeGlobal,
       subtitle: t.nodeGlobalSub,
       descEn: "KIF Japan & IOC World Games recognized non-profit international movement.",
       descTa: "ஜப்பான் தலைமை மற்றும் ஒலிம்பிக் இயக்க அங்கீகாரம் பெற்ற உலகளாவிய அமைப்பு.",
       icon: Globe,
-      color: "from-yellow-500 to-amber-600"
     }
   ];
 
   return (
-    <section className="py-20 bg-zinc-900 text-white relative overflow-hidden w-full border-b border-amber-900/30">
-      {/* Background Subtle Radial Glow */}
+    <section className="py-20 bg-zinc-900 text-white relative overflow-hidden w-full border-b border-amber-500/20">
+      {/* Background Subtle Pattern */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:18px_18px]"></div>
 
       <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10 space-y-12">
@@ -58,41 +58,45 @@ export const TrustChain: React.FC = () => {
           <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
             {t.trustChainSubtitle}
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto"></div>
         </div>
 
-        {/* 4 Node Step Cards */}
+        {/* 4 Node Step Cards (Unified Metallic Gold Color Scheme & Clean Spacing) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {nodes.map((node, index) => {
             const Icon = node.icon;
             return (
               <div
                 key={index}
-                className="bg-zinc-950/90 rounded-2xl p-6 border border-amber-500/20 shadow-xl relative hover:border-amber-400/60 transition-all card-hover group backdrop-blur-md"
+                className="bg-zinc-950/90 rounded-2xl p-6 border border-amber-500/20 shadow-xl relative hover:border-amber-400/60 transition-all card-hover group backdrop-blur-md flex flex-col justify-between"
               >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${node.color} flex items-center justify-center text-white mb-5 shadow-lg group-hover:scale-110 transition-transform`}>
-                  <Icon className="w-6 h-6" />
+                <div>
+                  {/* UNIFIED SINGLE GOLD COLOR ICON BADGE */}
+                  <div className="w-12 h-12 rounded-xl gold-gradient-bg flex items-center justify-center text-zinc-950 mb-5 shadow-lg group-hover:scale-110 transition-transform shrink-0 border border-amber-300/40">
+                    <Icon className="w-6 h-6 stroke-[2.5]" />
+                  </div>
+
+                  {/* Clean Non-Overlapping Step Tag */}
+                  <span className="text-[10px] text-amber-400 font-black uppercase tracking-widest block mb-2">
+                    {node.step}
+                  </span>
+
+                  <h3 className="text-base font-bold text-zinc-100 group-hover:text-amber-300 transition-colors">
+                    {node.title}
+                  </h3>
+
+                  <p className="text-xs text-amber-200/90 font-semibold mt-1 mb-3">
+                    {node.subtitle}
+                  </p>
+
+                  <p className="text-xs text-zinc-300 leading-relaxed">
+                    {language === 'en' ? node.descEn : node.descTa}
+                  </p>
                 </div>
-
-                <span className="text-[10px] text-amber-400 font-black uppercase tracking-widest block mb-1">
-                  Step 0{index + 1}
-                </span>
-
-                <h3 className="text-base font-bold text-zinc-100 group-hover:text-amber-300 transition-colors">
-                  {node.title}
-                </h3>
-
-                <p className="text-xs text-amber-200/80 font-semibold mb-3">
-                  {node.subtitle}
-                </p>
-
-                <p className="text-xs text-zinc-300 leading-relaxed">
-                  {language === 'en' ? node.descEn : node.descTa}
-                </p>
 
                 {index < nodes.length - 1 && (
                   <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-20">
-                    <div className="w-6 h-6 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shadow-md">
+                    <div className="w-6 h-6 rounded-full bg-zinc-900 border border-amber-500/40 flex items-center justify-center text-amber-400 shadow-md">
                       <ArrowRight className="w-3.5 h-3.5" />
                     </div>
                   </div>
