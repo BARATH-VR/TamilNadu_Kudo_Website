@@ -57,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
     };
   }, []);
 
-  // Lock body scroll when mobile drawer or login modal is active
+  // Lock body scroll ONLY when mobile menu drawer or admin login modal is active (not desktop dropdowns)
   useEffect(() => {
     if (mobileMenuOpen || showLoginModal) {
       document.body.style.overflow = 'hidden';
@@ -137,7 +137,8 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
 
   return (
     <>
-      <header ref={headerRef} className="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-md text-white border-b border-amber-500/20 shadow-2xl w-full max-w-[100vw] overflow-x-hidden">
+      {/* Header Container (NO overflow-hidden so desktop dropdowns project downwards freely) */}
+      <header ref={headerRef} className="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-md text-white border-b border-amber-500/20 shadow-2xl w-full">
         
         {/* 1. Top Utility Bar */}
         <div className="min-h-[36px] py-1 bg-zinc-950 px-3 sm:px-6 lg:px-10 text-[11px] border-b border-amber-500/20 flex items-center w-full">
@@ -209,13 +210,14 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               </div>
             </div>
 
-            {/* Column 2: Center Navigation (Desktop Only) */}
+            {/* Column 2: Center Navigation (Desktop Dropdowns Visible & Unclipped) */}
             <nav className="hidden lg:flex items-center justify-center space-x-2 xl:space-x-4 shrink-0">
               
               {/* Nav 1: About Dropdown */}
               <div 
                 className="relative shrink-0"
                 onMouseEnter={() => setActiveDropdown('about')}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
                 <button
                   onClick={(e) => toggleDropdown('about', e)}
@@ -231,28 +233,28 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 </button>
 
                 {activeDropdown === 'about' && (
-                  <div className="absolute top-full left-0 w-60 bg-zinc-950 border border-amber-500/30 rounded-2xl shadow-2xl py-2 mt-2 z-50 space-y-1">
+                  <div className="absolute top-full left-0 w-64 bg-zinc-950 border border-amber-500/40 rounded-2xl shadow-2xl p-2 mt-2 z-50 space-y-1 backdrop-blur-md">
                     <button
                       onClick={() => handleNavClick('about')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors"
+                      className="w-full text-left px-4 py-2.5 rounded-xl text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-bold transition-all"
                     >
                       {t.aboutWhoWeAre}
                     </button>
                     <button
                       onClick={() => handleNavClick('about')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors"
+                      className="w-full text-left px-4 py-2.5 rounded-xl text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-bold transition-all"
                     >
                       {t.aboutHistory}
                     </button>
                     <button
                       onClick={() => handleNavClick('about')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors"
+                      className="w-full text-left px-4 py-2.5 rounded-xl text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-bold transition-all"
                     >
                       {t.aboutMission}
                     </button>
                     <button
                       onClick={() => handleNavClick('about')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors border-t border-zinc-900 pt-2"
+                      className="w-full text-left px-4 py-2.5 rounded-xl text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-bold transition-all border-t border-zinc-900 pt-2"
                     >
                       {t.aboutLeadership}
                     </button>
@@ -274,6 +276,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               <div 
                 className="relative shrink-0"
                 onMouseEnter={() => setActiveDropdown('events')}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
                 <button
                   onClick={(e) => toggleDropdown('events', e)}
@@ -289,16 +292,16 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 </button>
 
                 {activeDropdown === 'events' && (
-                  <div className="absolute top-full left-0 w-60 bg-zinc-950 border border-amber-500/30 rounded-2xl shadow-2xl py-2 mt-2 z-50 space-y-1">
+                  <div className="absolute top-full left-0 w-64 bg-zinc-950 border border-amber-500/40 rounded-2xl shadow-2xl p-2 mt-2 z-50 space-y-1 backdrop-blur-md">
                     <button
                       onClick={() => handleNavClick('events')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors"
+                      className="w-full text-left px-4 py-2.5 rounded-xl text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-bold transition-all"
                     >
                       {t.navEvents}
                     </button>
                     <button
                       onClick={() => handleNavClick('achievements')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors border-t border-zinc-900 pt-2"
+                      className="w-full text-left px-4 py-2.5 rounded-xl text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-bold transition-all border-t border-zinc-900 pt-2"
                     >
                       {t.navAchievements}
                     </button>
@@ -310,6 +313,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               <div 
                 className="relative shrink-0"
                 onMouseEnter={() => setActiveDropdown('resources')}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
                 <button
                   onClick={(e) => toggleDropdown('resources', e)}
@@ -325,22 +329,22 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 </button>
 
                 {activeDropdown === 'resources' && (
-                  <div className="absolute top-full left-0 w-60 bg-zinc-950 border border-amber-500/30 rounded-2xl shadow-2xl py-2 mt-2 z-50 space-y-1">
+                  <div className="absolute top-full left-0 w-64 bg-zinc-950 border border-amber-500/40 rounded-2xl shadow-2xl p-2 mt-2 z-50 space-y-1 backdrop-blur-md">
                     <button
                       onClick={() => handleNavClick('resources')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors"
+                      className="w-full text-left px-4 py-2.5 rounded-xl text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-bold transition-all"
                     >
                       {t.navResources}
                     </button>
                     <button
                       onClick={() => handleNavClick('media')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors"
+                      className="w-full text-left px-4 py-2.5 rounded-xl text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-bold transition-all"
                     >
                       {t.navMedia}
                     </button>
                     <button
                       onClick={() => handleNavClick('faqs')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors border-t border-zinc-900 pt-2"
+                      className="w-full text-left px-4 py-2.5 rounded-xl text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-bold transition-all border-t border-zinc-900 pt-2"
                     >
                       {t.navFaqs}
                     </button>
