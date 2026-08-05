@@ -57,6 +57,18 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
     };
   }, []);
 
+  // Lock body scroll when mobile drawer or login modal is active
+  useEffect(() => {
+    if (mobileMenuOpen || showLoginModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen, showLoginModal]);
+
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'ta' : 'en');
   };
@@ -358,7 +370,6 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
-              {/* Hide "Find Dojo" in header top bar on small screens where hamburger menu is open */}
               <button
                 onClick={() => handleNavClick('districts')}
                 className="hidden sm:flex gold-gradient-bg text-zinc-950 font-black px-3.5 py-2 sm:px-4 rounded-lg text-xs uppercase tracking-wider shadow-lg hover:brightness-110 transition-all whitespace-nowrap items-center space-x-1.5 h-9"
