@@ -3,7 +3,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdmin } from '@/context/AdminContext';
-import { Search, Globe, Menu, X, Shield, ChevronDown, Lock, MapPin, KeyRound, AlertCircle } from 'lucide-react';
+import {
+  Search,
+  Globe,
+  Menu,
+  X,
+  Shield,
+  ChevronDown,
+  Lock,
+  MapPin,
+  KeyRound,
+  AlertCircle,
+  Home,
+  Info,
+  Trophy,
+  FileText,
+  Phone,
+  ChevronRight
+} from 'lucide-react';
 
 interface HeaderProps {
   currentView: string;
@@ -16,6 +33,9 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
   const { isAdminLoggedIn, loginAdmin } = useAdmin();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
+  // Mobile Accordion Section Expand State
+  const [expandedMobileSection, setExpandedMobileSection] = useState<string | null>('about');
 
   // Admin Login Modal State
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -53,6 +73,10 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
     setActiveDropdown(prev => (prev === dropdownName ? null : dropdownName));
   };
 
+  const toggleMobileAccordion = (sectionName: string) => {
+    setExpandedMobileSection(prev => (prev === sectionName ? null : sectionName));
+  };
+
   const handleAdminButtonClick = () => {
     if (isAdminLoggedIn) {
       handleNavClick('admin');
@@ -79,7 +103,6 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
   const navLabels = {
     en: {
       brandTitle: "Tamil Nadu State Kudo Association",
-      brandShort: "TNSKA Tamil Nadu",
       about: "About TNSKA",
       districts: "Districts & Academies",
       events: "Events & Results",
@@ -89,7 +112,6 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
     },
     ta: {
       brandTitle: "தமிழ்நாடு மாநில குடோ சங்கம்",
-      brandShort: "தமிழ்நாடு குடோ சங்கம்",
       about: "எங்களைப் பற்றி",
       districts: "மாவட்டங்கள்",
       events: "நிகழ்வுகள்",
@@ -105,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
     <>
       <header ref={headerRef} className="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-md text-white border-b border-amber-500/20 shadow-2xl w-full max-w-[100vw] overflow-x-hidden">
         
-        {/* 1. Top Utility Bar (Fully Responsive & Overflow-Safe) */}
+        {/* 1. Top Utility Bar */}
         <div className="min-h-[36px] py-1 bg-zinc-950 px-3 sm:px-6 lg:px-10 text-[11px] border-b border-amber-500/20 flex items-center w-full">
           <div className="w-full flex justify-between items-center gap-2">
             
@@ -127,7 +149,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               
               <button
                 onClick={handleAdminButtonClick}
-                className={`flex items-center space-x-1 px-2 py-0.5 rounded-md border transition-all text-[10px] sm:text-[11px] font-bold ${
+                className={`flex items-center space-x-1 px-2.5 py-0.5 rounded-md border transition-all text-[10px] sm:text-[11px] font-bold ${
                   isAdminLoggedIn
                     ? 'text-emerald-400 bg-emerald-950/90 border-emerald-500/50 hover:bg-emerald-900'
                     : 'text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/30'
@@ -154,10 +176,10 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
         <div className="w-full px-3 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between h-[68px] sm:h-[76px] gap-2 sm:gap-4 w-full">
             
-            {/* Column 1: Brand Lockup (Truncated cleanly on mobile) */}
+            {/* Column 1: Brand Lockup */}
             <div 
               onClick={() => handleNavClick('home')}
-              className="flex items-center space-x-2 sm:space-x-3 cursor-pointer group shrink min-w-0"
+              className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer group shrink min-w-0"
             >
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-0.5 shadow-lg group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
                 <div className="w-full h-full bg-zinc-950 rounded-full flex items-center justify-center text-amber-400 font-black text-xs sm:text-base border border-amber-400/40">
@@ -336,6 +358,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
+              {/* Hide "Find Dojo" in header top bar on small screens where hamburger menu is open */}
               <button
                 onClick={() => handleNavClick('districts')}
                 className="hidden sm:flex gold-gradient-bg text-zinc-950 font-black px-3.5 py-2 sm:px-4 rounded-lg text-xs uppercase tracking-wider shadow-lg hover:brightness-110 transition-all whitespace-nowrap items-center space-x-1.5 h-9"
@@ -356,104 +379,183 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
           </div>
         </div>
 
-        {/* 3. Mobile Navigation Drawer */}
+        {/* 3. Sleek Accordion Drawer System for Mobile & Tablet */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-zinc-950 border-b border-amber-500/30 px-4 pt-3 pb-8 space-y-4 shadow-2xl">
-            <div className="pt-1">
+          <div className="lg:hidden bg-zinc-950 border-b border-amber-500/30 px-4 pt-3 pb-8 space-y-3 shadow-2xl max-h-[85vh] overflow-y-auto">
+            
+            {/* Show CTA button inside drawer ONLY on mobile screens where top bar button is hidden */}
+            <div className="sm:hidden pt-1 pb-2">
               <button
                 onClick={() => handleNavClick('districts')}
                 className="w-full gold-gradient-bg text-zinc-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider shadow-xl flex items-center justify-center space-x-2"
               >
-                <MapPin className="w-4 h-4" />
+                <MapPin className="w-4 h-4 shrink-0" />
                 <span>{t.heroCtaPrimary}</span>
               </button>
             </div>
 
-            <div className="space-y-1 pt-2">
+            {/* Accordion List Cards */}
+            <div className="space-y-2">
+              
+              {/* Home Item */}
               <button
                 onClick={() => handleNavClick('home')}
-                className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold text-amber-200 hover:bg-zinc-900"
+                className={`w-full flex items-center justify-between p-3.5 rounded-xl border text-xs font-bold transition-all ${
+                  currentView === 'home'
+                    ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
+                    : 'bg-zinc-900/90 border-zinc-800 text-zinc-200 hover:border-amber-500/30'
+                }`}
               >
-                {t.navHome}
+                <span className="flex items-center space-x-2.5">
+                  <Home className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>{t.navHome}</span>
+                </span>
+                <ChevronRight className="w-4 h-4 text-zinc-500" />
               </button>
 
-              <div className="border-t border-zinc-900 pt-2">
-                <span className="px-3 text-[10px] font-extrabold uppercase tracking-widest text-amber-400/80 block mb-1">
-                  {t.navAbout}
+              {/* Accordion 1: About TNSKA */}
+              <div className="bg-zinc-900/90 border border-amber-500/20 rounded-xl overflow-hidden shadow-md">
+                <button
+                  onClick={() => toggleMobileAccordion('about')}
+                  className="w-full flex items-center justify-between p-3.5 text-xs font-bold text-amber-200 hover:bg-amber-500/10 transition-colors"
+                >
+                  <span className="flex items-center space-x-2.5">
+                    <Info className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>{currentLabels.about}</span>
+                  </span>
+                  <ChevronDown className={`w-4 h-4 text-amber-400 transition-transform duration-200 ${expandedMobileSection === 'about' ? 'rotate-180' : ''}`} />
+                </button>
+
+                {expandedMobileSection === 'about' && (
+                  <div className="px-3 pb-3 pt-1 space-y-1.5 border-t border-zinc-800/80 bg-zinc-950/60">
+                    <button
+                      onClick={() => handleNavClick('about')}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-zinc-300 hover:bg-amber-500/15 hover:text-amber-300"
+                    >
+                      {t.aboutWhoWeAre}
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('about')}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-zinc-300 hover:bg-amber-500/15 hover:text-amber-300"
+                    >
+                      {t.aboutHistory}
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('about')}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-zinc-300 hover:bg-amber-500/15 hover:text-amber-300"
+                    >
+                      {t.aboutMission}
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('about')}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-zinc-300 hover:bg-amber-500/15 hover:text-amber-300 border-t border-zinc-900 pt-2"
+                    >
+                      {t.aboutLeadership}
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Districts & Academies Item */}
+              <button
+                onClick={() => handleNavClick('districts')}
+                className={`w-full flex items-center justify-between p-3.5 rounded-xl border text-xs font-bold transition-all ${
+                  currentView === 'districts'
+                    ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
+                    : 'bg-zinc-900/90 border-zinc-800 text-zinc-200 hover:border-amber-500/30'
+                }`}
+              >
+                <span className="flex items-center space-x-2.5">
+                  <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>{currentLabels.districts}</span>
                 </span>
+                <ChevronRight className="w-4 h-4 text-zinc-500" />
+              </button>
+
+              {/* Accordion 2: Events & Results */}
+              <div className="bg-zinc-900/90 border border-amber-500/20 rounded-xl overflow-hidden shadow-md">
                 <button
-                  onClick={() => handleNavClick('about')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
+                  onClick={() => toggleMobileAccordion('events')}
+                  className="w-full flex items-center justify-between p-3.5 text-xs font-bold text-amber-200 hover:bg-amber-500/10 transition-colors"
                 >
-                  {t.aboutWhoWeAre}
+                  <span className="flex items-center space-x-2.5">
+                    <Trophy className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>{currentLabels.events}</span>
+                  </span>
+                  <ChevronDown className={`w-4 h-4 text-amber-400 transition-transform duration-200 ${expandedMobileSection === 'events' ? 'rotate-180' : ''}`} />
                 </button>
-                <button
-                  onClick={() => handleNavClick('about')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
-                >
-                  {t.aboutLeadership}
-                </button>
+
+                {expandedMobileSection === 'events' && (
+                  <div className="px-3 pb-3 pt-1 space-y-1.5 border-t border-zinc-800/80 bg-zinc-950/60">
+                    <button
+                      onClick={() => handleNavClick('events')}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-zinc-300 hover:bg-amber-500/15 hover:text-amber-300"
+                    >
+                      {t.navEvents}
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('achievements')}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-zinc-300 hover:bg-amber-500/15 hover:text-amber-300 border-t border-zinc-900 pt-2"
+                    >
+                      {t.navAchievements}
+                    </button>
+                  </div>
+                )}
               </div>
 
-              <div className="border-t border-zinc-900 pt-2">
+              {/* Accordion 3: Media & Resources */}
+              <div className="bg-zinc-900/90 border border-amber-500/20 rounded-xl overflow-hidden shadow-md">
                 <button
-                  onClick={() => handleNavClick('districts')}
-                  className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold text-amber-200 hover:bg-zinc-900"
+                  onClick={() => toggleMobileAccordion('resources')}
+                  className="w-full flex items-center justify-between p-3.5 text-xs font-bold text-amber-200 hover:bg-amber-500/10 transition-colors"
                 >
-                  {t.navDistricts}
+                  <span className="flex items-center space-x-2.5">
+                    <FileText className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>{currentLabels.resources}</span>
+                  </span>
+                  <ChevronDown className={`w-4 h-4 text-amber-400 transition-transform duration-200 ${expandedMobileSection === 'resources' ? 'rotate-180' : ''}`} />
                 </button>
+
+                {expandedMobileSection === 'resources' && (
+                  <div className="px-3 pb-3 pt-1 space-y-1.5 border-t border-zinc-800/80 bg-zinc-950/60">
+                    <button
+                      onClick={() => handleNavClick('resources')}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-zinc-300 hover:bg-amber-500/15 hover:text-amber-300"
+                    >
+                      {t.navResources}
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('media')}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-zinc-300 hover:bg-amber-500/15 hover:text-amber-300"
+                    >
+                      {t.navMedia}
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('faqs')}
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-zinc-300 hover:bg-amber-500/15 hover:text-amber-300 border-t border-zinc-900 pt-2"
+                    >
+                      {t.navFaqs}
+                    </button>
+                  </div>
+                )}
               </div>
 
-              <div className="border-t border-zinc-900 pt-2">
-                <span className="px-3 text-[10px] font-extrabold uppercase tracking-widest text-amber-400/80 block mb-1">
-                  {t.navEvents}
+              {/* Contact Item */}
+              <button
+                onClick={() => handleNavClick('contact')}
+                className={`w-full flex items-center justify-between p-3.5 rounded-xl border text-xs font-bold transition-all ${
+                  currentView === 'contact'
+                    ? 'bg-amber-500/15 border-amber-500/40 text-amber-300'
+                    : 'bg-zinc-900/90 border-zinc-800 text-zinc-200 hover:border-amber-500/30'
+                }`}
+              >
+                <span className="flex items-center space-x-2.5">
+                  <Phone className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>{currentLabels.contact}</span>
                 </span>
-                <button
-                  onClick={() => handleNavClick('events')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
-                >
-                  {t.navEvents}
-                </button>
-                <button
-                  onClick={() => handleNavClick('achievements')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
-                >
-                  {t.navAchievements}
-                </button>
-              </div>
+                <ChevronRight className="w-4 h-4 text-zinc-500" />
+              </button>
 
-              <div className="border-t border-zinc-900 pt-2">
-                <span className="px-3 text-[10px] font-extrabold uppercase tracking-widest text-amber-400/80 block mb-1">
-                  {t.navResources}
-                </span>
-                <button
-                  onClick={() => handleNavClick('resources')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
-                >
-                  {t.navResources}
-                </button>
-                <button
-                  onClick={() => handleNavClick('media')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
-                >
-                  {t.navMedia}
-                </button>
-                <button
-                  onClick={() => handleNavClick('faqs')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
-                >
-                  {t.navFaqs}
-                </button>
-              </div>
-
-              <div className="border-t border-zinc-900 pt-2">
-                <button
-                  onClick={() => handleNavClick('contact')}
-                  className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold text-amber-200 hover:bg-zinc-900"
-                >
-                  {t.navContact}
-                </button>
-              </div>
             </div>
 
           </div>
