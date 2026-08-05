@@ -34,24 +34,24 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
   const secretary = committee.find(c => c.order === 2) || committee[1];
 
   return (
-    <div className="space-y-0 w-full">
+    <div className="space-y-0 w-full max-w-[100vw] overflow-x-hidden">
       
       {/* 1. Hero Banner */}
       <Hero setCurrentView={setCurrentView} />
 
-      {/* 2. Featured Event Announcement Ticker (Sleek Obsidian & Pure Gold Theme - Replaces Red Background) */}
+      {/* 2. Featured Event Announcement Ticker (Optimized Responsive Mobile Layout) */}
       {featuredEvent && (
-        <section className="bg-zinc-900/90 border-y border-amber-500/30 py-3.5 px-4 sm:px-8 lg:px-12 text-white w-full backdrop-blur-md shadow-xl">
-          <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-3.5 text-center md:text-left">
-              <span className="gold-gradient-bg text-zinc-950 font-black text-[10px] uppercase tracking-widest px-3 py-1 rounded-md shrink-0 shadow-md">
+        <section className="bg-zinc-900/90 border-y border-amber-500/30 py-4 px-4 sm:px-8 lg:px-12 text-white w-full backdrop-blur-md shadow-xl">
+          <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
+              <span className="gold-gradient-bg text-zinc-950 font-black text-[10px] sm:text-[11px] uppercase tracking-widest px-3 py-1 rounded-md shrink-0 shadow-md">
                 {t.noticeTitle}
               </span>
-              <div>
-                <h4 className="text-xs sm:text-sm font-bold text-amber-200">
+              <div className="w-full">
+                <h4 className="text-xs sm:text-sm font-bold text-amber-200 leading-snug">
                   {language === 'en' ? featuredEvent.titleEn : featuredEvent.titleTa}
                 </h4>
-                <p className="text-[11px] text-zinc-300">
+                <p className="text-[11px] sm:text-xs text-zinc-300 mt-0.5">
                   {featuredEvent.date} • {featuredEvent.venueEn}
                 </p>
               </div>
@@ -62,7 +62,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 setCurrentView('events');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="bg-zinc-950 hover:bg-amber-500/10 text-amber-300 border border-amber-500/40 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider shadow-md shrink-0 transition-all"
+              className="w-full md:w-auto bg-zinc-950 hover:bg-amber-500/10 text-amber-300 border border-amber-500/40 font-bold px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider shadow-md shrink-0 transition-all"
             >
               {t.viewDetails}
             </button>
@@ -74,7 +74,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       <TrustChain />
 
       {/* 4. Executive Leadership Messages Section */}
-      <section className="py-20 bg-zinc-900 text-white border-b border-amber-500/20 w-full">
+      <section className="py-16 sm:py-20 bg-zinc-900 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-12">
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -91,15 +91,15 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
             {/* President Card */}
             {president && (
               <div className="bg-zinc-950 border border-amber-500/30 hover:border-amber-400/60 rounded-3xl p-6 sm:p-8 space-y-4 relative card-hover shadow-xl transition-all">
-                <Quote className="w-10 h-10 text-amber-500/15 absolute top-6 right-6" />
+                <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-amber-500/15 absolute top-6 right-6" />
                 <div className="flex items-center space-x-4">
                   <img
                     src={president.image}
                     alt={president.nameEn}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-amber-400 shadow-md shrink-0"
+                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-amber-400 shadow-md shrink-0"
                   />
                   <div>
-                    <h3 className="text-base font-bold text-amber-200">
+                    <h3 className="text-sm sm:text-base font-bold text-amber-200">
                       {language === 'en' ? president.nameEn : president.nameTa}
                     </h3>
                     <p className="text-xs text-amber-400 font-bold">
@@ -116,15 +116,15 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
             {/* General Secretary Card */}
             {secretary && (
               <div className="bg-zinc-950 border border-amber-500/30 hover:border-amber-400/60 rounded-3xl p-6 sm:p-8 space-y-4 relative card-hover shadow-xl transition-all">
-                <Quote className="w-10 h-10 text-amber-500/15 absolute top-6 right-6" />
+                <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-amber-500/15 absolute top-6 right-6" />
                 <div className="flex items-center space-x-4">
                   <img
                     src={secretary.image}
                     alt={secretary.nameEn}
-                    className="w-16 h-16 rounded-full object-cover border-2 border-amber-400 shadow-md shrink-0"
+                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-amber-400 shadow-md shrink-0"
                   />
                   <div>
-                    <h3 className="text-base font-bold text-amber-200">
+                    <h3 className="text-sm sm:text-base font-bold text-amber-200">
                       {language === 'en' ? secretary.nameEn : secretary.nameTa}
                     </h3>
                     <p className="text-xs text-amber-400 font-bold">
@@ -142,7 +142,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 5. What is Kudo Section */}
-      <section className="py-20 bg-zinc-950 text-white border-b border-amber-500/20 w-full">
+      <section className="py-16 sm:py-20 bg-zinc-950 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
@@ -151,7 +151,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
                 <span className="text-xs uppercase tracking-widest text-amber-400 font-extrabold block">
                   {language === 'en' ? 'Budo Discipline & Safety' : 'பாதுகாப்பு & ஒழக்கம்'}
                 </span>
-                <h2 className="text-3xl sm:text-4xl font-extrabold text-amber-100 leading-tight">
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-100 leading-tight">
                   {t.whatIsKudoTitle}
                 </h2>
               </div>
@@ -184,14 +184,14 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
             </div>
 
             <div className="lg:col-span-6">
-              <div className="bg-zinc-900 p-6 rounded-3xl border border-amber-500/30 shadow-2xl relative">
+              <div className="bg-zinc-900 p-4 sm:p-6 rounded-3xl border border-amber-500/30 shadow-2xl relative">
                 <img
                   src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80"
                   alt="Kudo Training"
-                  className="rounded-2xl w-full h-80 object-cover border border-amber-400/30"
+                  className="rounded-2xl w-full h-64 sm:h-80 object-cover border border-amber-400/30"
                 />
-                <div className="absolute bottom-10 left-10 right-10 bg-zinc-950/90 backdrop-blur-md p-4 rounded-xl border border-amber-500/30 text-center shadow-xl">
-                  <p className="text-xs font-bold text-amber-300">
+                <div className="absolute bottom-6 left-6 right-6 sm:bottom-10 sm:left-10 sm:right-10 bg-zinc-950/90 backdrop-blur-md p-3 sm:p-4 rounded-xl border border-amber-500/30 text-center shadow-xl">
+                  <p className="text-[11px] sm:text-xs font-bold text-amber-300">
                     {language === 'en' ? 'Official KIFI & SGFI School Games Pathway' : 'அதிகாரப்பூர்வ SGFI பள்ளி விளையாட்டுப் பாதை'}
                   </p>
                 </div>
@@ -203,7 +203,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 6. Achievement Highlights */}
-      <section className="py-20 bg-zinc-900 text-white border-b border-amber-500/20 w-full">
+      <section className="py-16 sm:py-20 bg-zinc-900 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-amber-900/30 pb-4">
@@ -252,7 +252,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 7. Latest News & Official Announcements */}
-      <section className="py-20 bg-zinc-950 text-white border-b border-amber-500/20 w-full">
+      <section className="py-16 sm:py-20 bg-zinc-950 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-amber-900/30 pb-4">
@@ -316,24 +316,24 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
-            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
-              <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 items-center justify-center opacity-90 hover:opacity-100 transition-opacity">
+            <div className="bg-zinc-950 p-5 sm:p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
+              <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400 mx-auto" />
               <span className="text-xs font-bold text-zinc-200 block">KIFI India</span>
               <span className="text-[10px] text-amber-400 uppercase tracking-widest font-extrabold">National Governing Body</span>
             </div>
-            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
-              <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
+            <div className="bg-zinc-950 p-5 sm:p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
+              <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400 mx-auto" />
               <span className="text-xs font-bold text-zinc-200 block">SDAT Tamil Nadu</span>
               <span className="text-[10px] text-amber-400 uppercase tracking-widest font-extrabold">Sports Infrastructure</span>
             </div>
-            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
-              <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
+            <div className="bg-zinc-950 p-5 sm:p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
+              <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400 mx-auto" />
               <span className="text-xs font-bold text-zinc-200 block">Neo Protective Equipment</span>
               <span className="text-[10px] text-amber-400 uppercase tracking-widest font-extrabold">Official Safety Gear</span>
             </div>
-            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
-              <Building2 className="w-8 h-8 text-amber-400 mx-auto" />
+            <div className="bg-zinc-950 p-5 sm:p-6 rounded-2xl border border-zinc-800 hover:border-amber-500/30 text-center space-y-1.5 transition-all">
+              <Building2 className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400 mx-auto" />
               <span className="text-xs font-bold text-zinc-200 block">KIF Japan</span>
               <span className="text-[10px] text-amber-400 uppercase tracking-widest font-extrabold">Global Federation</span>
             </div>
@@ -355,7 +355,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ setCurrentView, onOpenLightb
       </section>
 
       {/* 9. Tournament Photo Gallery Preview */}
-      <section className="py-20 bg-zinc-900 text-white border-b border-amber-500/20 w-full">
+      <section className="py-16 sm:py-20 bg-zinc-900 text-white border-b border-amber-500/20 w-full">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
           
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 border-b border-amber-900/30 pb-4">

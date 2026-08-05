@@ -79,6 +79,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
   const navLabels = {
     en: {
       brandTitle: "Tamil Nadu State Kudo Association",
+      brandShort: "TNSKA Tamil Nadu",
       about: "About TNSKA",
       districts: "Districts & Academies",
       events: "Events & Results",
@@ -88,6 +89,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
     },
     ta: {
       brandTitle: "தமிழ்நாடு மாநில குடோ சங்கம்",
+      brandShort: "தமிழ்நாடு குடோ சங்கம்",
       about: "எங்களைப் பற்றி",
       districts: "மாவட்டங்கள்",
       events: "நிகழ்வுகள்",
@@ -101,26 +103,31 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
 
   return (
     <>
-      <header ref={headerRef} className="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-md text-white border-b border-amber-500/20 shadow-2xl w-full">
+      <header ref={headerRef} className="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-md text-white border-b border-amber-500/20 shadow-2xl w-full max-w-[100vw] overflow-x-hidden">
         
-        {/* 1. Top Utility Bar */}
+        {/* 1. Top Utility Bar (Fully Responsive & Overflow-Safe) */}
         <div className="min-h-[36px] py-1 bg-zinc-950 px-3 sm:px-6 lg:px-10 text-[11px] border-b border-amber-500/20 flex items-center w-full">
           <div className="w-full flex justify-between items-center gap-2">
             
             {/* Trust Badges Bar */}
-            <div className="flex items-center space-x-2 sm:space-x-4 text-amber-300 font-medium truncate">
+            <div className="hidden sm:flex items-center space-x-2 text-amber-300 font-medium truncate">
               <span className="flex items-center gap-1.5 shrink-0 text-[10px] sm:text-xs">
                 <Shield className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 <span>{language === 'en' ? 'SGFI & KIFI Recognized Governing Body' : 'SGFI & KIFI அங்கீகாரம் பெற்ற அமைப்பு'}</span>
               </span>
             </div>
 
+            <div className="sm:hidden flex items-center space-x-1 text-amber-400 font-bold text-[10px]">
+              <Shield className="w-3 h-3 shrink-0" />
+              <span>TNSKA Official</span>
+            </div>
+
             {/* Right Controls: Admin Button & Language Switcher */}
-            <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
+            <div className="flex items-center space-x-2 shrink-0 ml-auto">
               
               <button
                 onClick={handleAdminButtonClick}
-                className={`flex items-center space-x-1 px-2.5 py-0.5 rounded-md border transition-all text-[11px] font-bold ${
+                className={`flex items-center space-x-1 px-2 py-0.5 rounded-md border transition-all text-[10px] sm:text-[11px] font-bold ${
                   isAdminLoggedIn
                     ? 'text-emerald-400 bg-emerald-950/90 border-emerald-500/50 hover:bg-emerald-900'
                     : 'text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/30'
@@ -128,15 +135,15 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 title={isAdminLoggedIn ? "Open Admin Panel" : "Admin Login Portal"}
               >
                 <Lock className="w-3 h-3 text-amber-400 shrink-0" />
-                <span>{isAdminLoggedIn ? (language === 'en' ? 'Admin Active' : 'நிர்வாகி செயலில்') : (language === 'en' ? 'Admin Portal' : 'நிர்வாகி')}</span>
+                <span>{isAdminLoggedIn ? (language === 'en' ? 'Admin' : 'நிர்வாகி') : (language === 'en' ? 'Admin Portal' : 'நிர்வாகி')}</span>
               </button>
 
               <button
                 onClick={toggleLanguage}
-                className="flex items-center space-x-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full border border-amber-500/30 transition-all font-bold text-[11px] sm:text-xs shrink-0"
+                className="flex items-center space-x-1 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-500/30 transition-all font-bold text-[10px] sm:text-xs shrink-0"
                 title="Switch Language"
               >
-                <Globe className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <Globe className="w-3 h-3 text-amber-400 shrink-0" />
                 <span>{language === 'en' ? 'தமிழ்' : 'English'}</span>
               </button>
             </div>
@@ -145,21 +152,21 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
 
         {/* 2. Main Navigation Header Bar */}
         <div className="w-full px-3 sm:px-6 lg:px-10">
-          <div className="flex items-center justify-between h-[76px] gap-4 xl:gap-8 w-full">
+          <div className="flex items-center justify-between h-[68px] sm:h-[76px] gap-2 sm:gap-4 w-full">
             
-            {/* Column 1: Brand Lockup */}
+            {/* Column 1: Brand Lockup (Truncated cleanly on mobile) */}
             <div 
               onClick={() => handleNavClick('home')}
-              className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer group shrink-0"
+              className="flex items-center space-x-2 sm:space-x-3 cursor-pointer group shrink min-w-0"
             >
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-0.5 shadow-lg group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-0.5 shadow-lg group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
                 <div className="w-full h-full bg-zinc-950 rounded-full flex items-center justify-center text-amber-400 font-black text-xs sm:text-base border border-amber-400/40">
                   TN
                 </div>
               </div>
               
-              <div className="shrink-0">
-                <h1 className="text-xs sm:text-sm xl:text-base font-black text-white leading-tight group-hover:text-amber-400 transition-colors whitespace-nowrap">
+              <div className="shrink min-w-0">
+                <h1 className="text-xs sm:text-sm xl:text-base font-black text-white leading-tight group-hover:text-amber-400 transition-colors truncate max-w-[160px] xs:max-w-[220px] sm:max-w-none">
                   {currentLabels.brandTitle}
                 </h1>
                 <p className="text-[10px] text-amber-200/80 whitespace-nowrap hidden 2xl:block">
@@ -168,7 +175,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               </div>
             </div>
 
-            {/* Column 2: Center Navigation (Click + Hover Enabled Dropdowns) */}
+            {/* Column 2: Center Navigation (Desktop Only) */}
             <nav className="hidden lg:flex items-center justify-center space-x-2 xl:space-x-4 shrink-0">
               
               {/* Nav 1: About Dropdown */}
@@ -319,14 +326,14 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             </nav>
 
             {/* Column 3: Right Action Cluster */}
-            <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
+            <div className="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
               <button
                 onClick={onOpenSearch}
-                className="p-2 rounded-full text-amber-300 hover:text-amber-200 hover:bg-amber-500/10 transition-colors"
+                className="p-1.5 sm:p-2 rounded-full text-amber-300 hover:text-amber-200 hover:bg-amber-500/10 transition-colors"
                 aria-label="Search"
                 title="Search website"
               >
-                <Search className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
               <button
@@ -339,7 +346,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 rounded-xl text-amber-300 bg-zinc-900 border border-amber-500/30 hover:bg-amber-500/20 transition-all"
+                className="lg:hidden p-1.5 sm:p-2 rounded-xl text-amber-300 bg-zinc-900 border border-amber-500/30 hover:bg-amber-500/20 transition-all"
                 aria-label="Toggle Navigation Menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
