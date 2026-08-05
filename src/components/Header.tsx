@@ -253,13 +253,13 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                       onClick={() => handleNavClick('events')}
                       className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors"
                     >
-                      🏆 {t.navEvents}
+                      {t.navEvents}
                     </button>
                     <button
                       onClick={() => handleNavClick('achievements')}
                       className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors border-t border-zinc-900 pt-2"
                     >
-                      🥇 {t.navAchievements}
+                      {t.navAchievements}
                     </button>
                   </div>
                 )}
@@ -289,19 +289,19 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                       onClick={() => handleNavClick('resources')}
                       className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors"
                     >
-                      📜 {t.navResources}
+                      {t.navResources}
                     </button>
                     <button
                       onClick={() => handleNavClick('media')}
                       className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors"
                     >
-                      🖼️ {t.navMedia}
+                      {t.navMedia}
                     </button>
                     <button
                       onClick={() => handleNavClick('faqs')}
                       className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/15 hover:text-amber-300 font-medium transition-colors border-t border-zinc-900 pt-2"
                     >
-                      ❓ {t.navFaqs}
+                      {t.navFaqs}
                     </button>
                   </div>
                 )}
