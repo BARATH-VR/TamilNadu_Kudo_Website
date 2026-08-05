@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 
 // ==============================================
-// ABOUT VIEW (Hand-Crafted Senior UI/UX Polish)
+// ABOUT VIEW (Sleek Obsidian & Pure Gold Palette)
 // ==============================================
 export const AboutView: React.FC = () => {
   const { language, t } = useLanguage();
@@ -76,14 +76,16 @@ export const AboutView: React.FC = () => {
           <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
             {t.associationSub}
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto"></div>
         </div>
 
-        {/* Who We Are & Mission Grid */}
+        {/* Who We Are & Mission Grid (Unified Single Gold Icon Theme) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          
+          {/* Who We Are Card */}
           <div className="bg-zinc-900 border border-amber-500/30 hover:border-amber-400/60 rounded-3xl p-8 space-y-4 shadow-xl transition-all">
-            <div className="w-12 h-12 rounded-xl maroon-gradient-bg border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold shadow-md">
-              <ShieldCheck className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-xl gold-gradient-bg border border-amber-300/40 flex items-center justify-center text-zinc-950 font-black shadow-md">
+              <ShieldCheck className="w-6 h-6 stroke-[2.5]" />
             </div>
             <h3 className="text-xl font-bold text-amber-200">
               {t.aboutWhoWeAre}
@@ -95,9 +97,10 @@ export const AboutView: React.FC = () => {
             </p>
           </div>
 
+          {/* Mission & Vision Card */}
           <div className="bg-zinc-900 border border-amber-500/30 hover:border-amber-400/60 rounded-3xl p-8 space-y-4 shadow-xl transition-all">
-            <div className="w-12 h-12 rounded-xl gold-gradient-bg flex items-center justify-center text-red-950 font-bold shadow-md">
-              <Award className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-xl gold-gradient-bg border border-amber-300/40 flex items-center justify-center text-zinc-950 font-black shadow-md">
+              <Award className="w-6 h-6 stroke-[2.5]" />
             </div>
             <h3 className="text-xl font-bold text-amber-200">
               {t.aboutMission}
@@ -108,6 +111,7 @@ export const AboutView: React.FC = () => {
                 : "எங்கள் நோக்கம் அனைத்து மாவட்டங்களிலும் உள்ள இளைஞர்களிடையே உடற்தகுதி, மன ஒழுக்கம் மற்றும் உலகத்தரம் வாய்ந்த விளையாட்டு சிறப்பை பாதுகாப்பான முறையில் வளர்ப்பதாகும்."}
             </p>
           </div>
+
         </div>
 
         {/* Visual History Timeline */}
@@ -250,7 +254,7 @@ export const DistrictsView: React.FC = () => {
           <p className="text-sm text-zinc-300">
             {t.academiesSubtitle}
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Filter & Search Bar */}
@@ -263,7 +267,7 @@ export const DistrictsView: React.FC = () => {
                 onClick={() => setSelectedDistrict(dist)}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
                   selectedDistrict === dist
-                    ? 'gold-gradient-bg text-red-950 shadow-md'
+                    ? 'gold-gradient-bg text-zinc-950 shadow-md'
                     : 'bg-zinc-950 text-zinc-300 hover:bg-zinc-800'
                 }`}
               >
@@ -361,7 +365,7 @@ export const EventsView: React.FC = () => {
           <p className="text-sm text-zinc-300">
             {t.eventsSubtitle}
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Tab Toggle */}
@@ -371,7 +375,7 @@ export const EventsView: React.FC = () => {
               onClick={() => setActiveTab('upcoming')}
               className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all ${
                 activeTab === 'upcoming'
-                  ? 'gold-gradient-bg text-red-950 shadow-md'
+                  ? 'gold-gradient-bg text-zinc-950 shadow-md'
                   : 'text-zinc-400 hover:text-white'
               }`}
             >
@@ -381,7 +385,7 @@ export const EventsView: React.FC = () => {
               onClick={() => setActiveTab('past')}
               className={`px-6 py-2.5 rounded-xl text-xs font-black transition-all ${
                 activeTab === 'past'
-                  ? 'gold-gradient-bg text-red-950 shadow-md'
+                  ? 'gold-gradient-bg text-zinc-950 shadow-md'
                   : 'text-zinc-400 hover:text-white'
               }`}
             >
@@ -468,7 +472,7 @@ export const AchievementsView: React.FC = () => {
           <p className="text-sm text-zinc-300">
             {t.achievementsSubtitle}
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Level Filters */}
@@ -479,7 +483,7 @@ export const AchievementsView: React.FC = () => {
               onClick={() => setFilterLevel(lvl)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 filterLevel === lvl
-                  ? 'gold-gradient-bg text-red-950 shadow-md'
+                  ? 'gold-gradient-bg text-zinc-950 shadow-md'
                   : 'bg-zinc-900 text-zinc-300 hover:bg-zinc-800'
               }`}
             >
@@ -553,7 +557,7 @@ export const ResourcesView: React.FC = () => {
           <p className="text-sm text-zinc-300">
             {t.resourcesSubtitle}
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Section 1: Official Circulars */}
@@ -673,7 +677,7 @@ export const MediaView: React.FC<{ onOpenLightbox: (idx: number) => void }> = ({
           <p className="text-sm text-zinc-300">
             {language === 'en' ? 'Click any photograph to view high-resolution image in Lightbox viewer.' : 'புகைப்படத்தை பெரிதாகப் பார்க்க அழுத்தவும்.'}
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Gallery Grid */}
@@ -734,7 +738,7 @@ export const FaqsView: React.FC = () => {
           <p className="text-sm text-zinc-300">
             {t.faqsSubtitle}
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto"></div>
         </div>
 
         {/* Persona Tabs */}
@@ -743,7 +747,7 @@ export const FaqsView: React.FC = () => {
             onClick={() => setActivePersona('parents')}
             className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
               activePersona === 'parents'
-                ? 'gold-gradient-bg text-red-950 shadow-md'
+                ? 'gold-gradient-bg text-zinc-950 shadow-md'
                 : 'bg-zinc-900 text-zinc-300'
             }`}
           >
@@ -753,7 +757,7 @@ export const FaqsView: React.FC = () => {
             onClick={() => setActivePersona('students')}
             className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
               activePersona === 'students'
-                ? 'gold-gradient-bg text-red-950 shadow-md'
+                ? 'gold-gradient-bg text-zinc-950 shadow-md'
                 : 'bg-zinc-900 text-zinc-300'
             }`}
           >
@@ -763,7 +767,7 @@ export const FaqsView: React.FC = () => {
             onClick={() => setActivePersona('districts')}
             className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
               activePersona === 'districts'
-                ? 'gold-gradient-bg text-red-950 shadow-md'
+                ? 'gold-gradient-bg text-zinc-950 shadow-md'
                 : 'bg-zinc-900 text-zinc-300'
             }`}
           >
@@ -840,7 +844,7 @@ export const ContactView: React.FC = () => {
           <p className="text-sm text-zinc-300">
             {t.contactSubtitle}
           </p>
-          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-red-600 rounded-full mx-auto"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full mx-auto"></div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -942,7 +946,7 @@ export const ContactView: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full gold-gradient-bg text-red-950 font-black py-3.5 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center space-x-2"
+                  className="w-full gold-gradient-bg text-zinc-950 font-black py-3.5 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center space-x-2"
                 >
                   <Send className="w-4 h-4" />
                   <span>{t.formSubmit}</span>
