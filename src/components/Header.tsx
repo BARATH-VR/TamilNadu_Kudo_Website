@@ -13,7 +13,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onOpenSearch }) => {
   const { language, setLanguage, t } = useLanguage();
-  const { isAdminLoggedIn, loginAdmin, logoutAdmin } = useAdmin();
+  const { isAdminLoggedIn, loginAdmin } = useAdmin();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -83,27 +83,27 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
 
   return (
     <>
-      <header className="sticky top-0 z-50 glass-header text-white border-b border-amber-900/30 shadow-xl w-full">
+      <header className="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-md text-white border-b border-amber-500/20 shadow-2xl w-full">
         
-        {/* 1. Top Utility Bar */}
-        <div className="min-h-[36px] py-1 bg-gradient-to-r from-red-950 via-red-900 to-amber-950 px-3 sm:px-6 lg:px-10 text-[11px] border-b border-amber-500/20 flex items-center w-full">
+        {/* 1. Top Utility Bar (Sleek Obsidian & Pure Gold Accent) */}
+        <div className="min-h-[36px] py-1 bg-zinc-950 px-3 sm:px-6 lg:px-10 text-[11px] border-b border-amber-500/20 flex items-center w-full">
           <div className="w-full flex justify-between items-center gap-2">
             
             {/* Trust Badges Bar */}
-            <div className="flex items-center space-x-2 sm:space-x-4 text-amber-200/90 font-medium truncate">
+            <div className="flex items-center space-x-2 sm:space-x-4 text-amber-300 font-medium truncate">
               <span className="flex items-center gap-1.5 shrink-0 text-[10px] sm:text-xs">
                 <Shield className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 <span>{language === 'en' ? 'SGFI & KIFI Recognized Governing Body' : 'SGFI & KIFI அங்கீகாரம் பெற்ற அமைப்பு'}</span>
               </span>
             </div>
 
-            {/* Right Controls: Always-Visible Admin Button & Language Switcher */}
+            {/* Right Controls: Admin Button & Language Switcher */}
             <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
               
-              {/* ALWAYS-VISIBLE ADMIN BUTTON (Right next to Language Switcher) */}
+              {/* Always-Visible Admin Button */}
               <button
                 onClick={handleAdminButtonClick}
-                className={`flex items-center space-x-1 px-2.5 py-0.5 rounded border transition-all text-[11px] font-bold ${
+                className={`flex items-center space-x-1 px-2.5 py-0.5 rounded-md border transition-all text-[11px] font-bold ${
                   isAdminLoggedIn
                     ? 'text-emerald-400 bg-emerald-950/90 border-emerald-500/50 hover:bg-emerald-900'
                     : 'text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/30'
@@ -131,22 +131,22 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
         <div className="w-full px-3 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between h-[76px] gap-4 xl:gap-8 w-full">
             
-            {/* Column 1: Natural Full Brand Lockup */}
+            {/* Column 1: Brand Lockup */}
             <div 
               onClick={() => handleNavClick('home')}
               className="flex items-center space-x-2.5 sm:space-x-3 cursor-pointer group shrink-0"
             >
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-amber-400 via-amber-600 to-red-900 p-0.5 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
-                <div className="w-full h-full bg-red-950 rounded-full flex items-center justify-center text-amber-400 font-extrabold text-xs sm:text-base border border-amber-400/40">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-0.5 shadow-lg group-hover:scale-105 transition-transform flex items-center justify-center shrink-0">
+                <div className="w-full h-full bg-zinc-950 rounded-full flex items-center justify-center text-amber-400 font-black text-xs sm:text-base border border-amber-400/40">
                   TN
                 </div>
               </div>
               
               <div className="shrink-0">
-                <h1 className="text-xs sm:text-sm xl:text-base font-bold text-amber-100 leading-tight group-hover:text-amber-400 transition-colors whitespace-nowrap">
+                <h1 className="text-xs sm:text-sm xl:text-base font-black text-white leading-tight group-hover:text-amber-400 transition-colors whitespace-nowrap">
                   {currentLabels.brandTitle}
                 </h1>
-                <p className="text-[10px] text-amber-200/70 whitespace-nowrap hidden 2xl:block">
+                <p className="text-[10px] text-amber-200/80 whitespace-nowrap hidden 2xl:block">
                   {t.associationSub}
                 </p>
               </div>
@@ -166,7 +166,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                   className={`flex items-center space-x-1 px-2.5 xl:px-3 py-2 rounded-md ${
                     language === 'ta' ? 'text-xs xl:text-sm font-semibold' : 'text-xs xl:text-sm font-semibold'
                   } whitespace-nowrap transition-colors ${
-                    currentView === 'about' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
+                    currentView === 'about' ? 'text-amber-400 bg-amber-500/10' : 'text-zinc-200 hover:text-amber-300'
                   }`}
                 >
                   <span>{currentLabels.about}</span>
@@ -174,28 +174,28 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 </button>
 
                 {activeDropdown === 'about' && (
-                  <div className="absolute top-full left-0 w-56 bg-zinc-900/95 backdrop-blur-md rounded-xl shadow-2xl border border-amber-500/20 py-2 mt-1 z-50">
+                  <div className="absolute top-full left-0 w-56 bg-zinc-950/95 backdrop-blur-md rounded-xl shadow-2xl border border-amber-500/20 py-2 mt-1 z-50">
                     <button
                       onClick={() => handleNavClick('about')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-gray-200 hover:bg-amber-500/10 hover:text-amber-300"
+                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/10 hover:text-amber-300"
                     >
                       {t.aboutWhoWeAre}
                     </button>
                     <button
                       onClick={() => handleNavClick('about')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-gray-200 hover:bg-amber-500/10 hover:text-amber-300"
+                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/10 hover:text-amber-300"
                     >
                       {t.aboutHistory}
                     </button>
                     <button
                       onClick={() => handleNavClick('about')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-gray-200 hover:bg-amber-500/10 hover:text-amber-300"
+                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/10 hover:text-amber-300"
                     >
                       {t.aboutMission}
                     </button>
                     <button
                       onClick={() => handleNavClick('about')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-gray-200 hover:bg-amber-500/10 hover:text-amber-300"
+                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/10 hover:text-amber-300"
                     >
                       {t.aboutLeadership}
                     </button>
@@ -209,7 +209,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 className={`px-2.5 xl:px-3 py-2 rounded-md ${
                   language === 'ta' ? 'text-xs xl:text-sm font-semibold' : 'text-xs xl:text-sm font-semibold'
                 } whitespace-nowrap transition-colors shrink-0 ${
-                  currentView === 'districts' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
+                  currentView === 'districts' ? 'text-amber-400 bg-amber-500/10' : 'text-zinc-200 hover:text-amber-300'
                 }`}
               >
                 {currentLabels.districts}
@@ -226,7 +226,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                   className={`flex items-center space-x-1 px-2.5 xl:px-3 py-2 rounded-md ${
                     language === 'ta' ? 'text-xs xl:text-sm font-semibold' : 'text-xs xl:text-sm font-semibold'
                   } whitespace-nowrap transition-colors ${
-                    currentView === 'events' || currentView === 'achievements' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
+                    currentView === 'events' || currentView === 'achievements' ? 'text-amber-400 bg-amber-500/10' : 'text-zinc-200 hover:text-amber-300'
                   }`}
                 >
                   <span>{currentLabels.events}</span>
@@ -234,16 +234,16 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 </button>
 
                 {activeDropdown === 'events' && (
-                  <div className="absolute top-full left-0 w-56 bg-zinc-900/95 backdrop-blur-md rounded-xl shadow-2xl border border-amber-500/20 py-2 mt-1 z-50">
+                  <div className="absolute top-full left-0 w-56 bg-zinc-950/95 backdrop-blur-md rounded-xl shadow-2xl border border-amber-500/20 py-2 mt-1 z-50">
                     <button
                       onClick={() => handleNavClick('events')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-gray-200 hover:bg-amber-500/10 hover:text-amber-300"
+                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/10 hover:text-amber-300"
                     >
                       {t.navEvents}
                     </button>
                     <button
                       onClick={() => handleNavClick('achievements')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-gray-200 hover:bg-amber-500/10 hover:text-amber-300"
+                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/10 hover:text-amber-300"
                     >
                       {t.navAchievements}
                     </button>
@@ -262,7 +262,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                   className={`flex items-center space-x-1 px-2.5 xl:px-3 py-2 rounded-md ${
                     language === 'ta' ? 'text-xs xl:text-sm font-semibold' : 'text-xs xl:text-sm font-semibold'
                   } whitespace-nowrap transition-colors ${
-                    currentView === 'resources' || currentView === 'media' || currentView === 'faqs' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
+                    currentView === 'resources' || currentView === 'media' || currentView === 'faqs' ? 'text-amber-400 bg-amber-500/10' : 'text-zinc-200 hover:text-amber-300'
                   }`}
                 >
                   <span>{currentLabels.resources}</span>
@@ -270,22 +270,22 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 </button>
 
                 {activeDropdown === 'resources' && (
-                  <div className="absolute top-full left-0 w-56 bg-zinc-900/95 backdrop-blur-md rounded-xl shadow-2xl border border-amber-500/20 py-2 mt-1 z-50">
+                  <div className="absolute top-full left-0 w-56 bg-zinc-950/95 backdrop-blur-md rounded-xl shadow-2xl border border-amber-500/20 py-2 mt-1 z-50">
                     <button
                       onClick={() => handleNavClick('resources')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-gray-200 hover:bg-amber-500/10 hover:text-amber-300"
+                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/10 hover:text-amber-300"
                     >
                       {t.navResources}
                     </button>
                     <button
                       onClick={() => handleNavClick('media')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-gray-200 hover:bg-amber-500/10 hover:text-amber-300"
+                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/10 hover:text-amber-300"
                     >
                       {t.navMedia}
                     </button>
                     <button
                       onClick={() => handleNavClick('faqs')}
-                      className="w-full text-left px-4 py-2.5 text-xs text-gray-200 hover:bg-amber-500/10 hover:text-amber-300"
+                      className="w-full text-left px-4 py-2.5 text-xs text-zinc-200 hover:bg-amber-500/10 hover:text-amber-300"
                     >
                       {t.navFaqs}
                     </button>
@@ -299,7 +299,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 className={`px-2.5 xl:px-3 py-2 rounded-md ${
                   language === 'ta' ? 'text-xs xl:text-sm font-semibold' : 'text-xs xl:text-sm font-semibold'
                 } whitespace-nowrap transition-colors shrink-0 ${
-                  currentView === 'contact' ? 'text-amber-400 bg-amber-500/10' : 'text-gray-200 hover:text-amber-300'
+                  currentView === 'contact' ? 'text-amber-400 bg-amber-500/10' : 'text-zinc-200 hover:text-amber-300'
                 }`}
               >
                 {currentLabels.contact}
@@ -311,7 +311,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               {/* Search Trigger */}
               <button
                 onClick={onOpenSearch}
-                className="p-2 rounded-full text-amber-200/90 hover:text-amber-300 hover:bg-amber-500/10 transition-colors"
+                className="p-2 rounded-full text-amber-300 hover:text-amber-200 hover:bg-amber-500/10 transition-colors"
                 aria-label="Search"
                 title="Search website"
               >
@@ -321,13 +321,13 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               {/* Primary CTA Button */}
               <button
                 onClick={() => handleNavClick('districts')}
-                className="hidden sm:flex gold-gradient-bg text-red-950 font-extrabold px-3 py-2 sm:px-4 rounded-lg text-xs uppercase tracking-wider shadow-lg hover:brightness-110 transition-all whitespace-nowrap items-center space-x-1.5 h-9"
+                className="hidden sm:flex gold-gradient-bg text-zinc-950 font-black px-3 py-2 sm:px-4 rounded-lg text-xs uppercase tracking-wider shadow-lg hover:brightness-110 transition-all whitespace-nowrap items-center space-x-1.5 h-9"
               >
                 <MapPin className="w-3.5 h-3.5 shrink-0" />
                 <span>{currentLabels.cta}</span>
               </button>
 
-              {/* Mobile Hamburger Drawer Trigger */}
+              {/* Mobile Hamburger Trigger */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="lg:hidden p-2 rounded-xl text-amber-300 bg-zinc-900 border border-amber-500/30 hover:bg-amber-500/20 transition-all"
@@ -346,7 +346,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             <div className="pt-1">
               <button
                 onClick={() => handleNavClick('districts')}
-                className="w-full gold-gradient-bg text-red-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider shadow-xl flex items-center justify-center space-x-2"
+                className="w-full gold-gradient-bg text-zinc-950 font-black py-3 rounded-xl text-xs uppercase tracking-wider shadow-xl flex items-center justify-center space-x-2"
               >
                 <MapPin className="w-4 h-4" />
                 <span>{t.heroCtaPrimary}</span>
@@ -356,7 +356,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             <div className="space-y-1 pt-2">
               <button
                 onClick={() => handleNavClick('home')}
-                className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold text-amber-200 hover:bg-amber-900/30"
+                className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold text-amber-200 hover:bg-zinc-900"
               >
                 {t.navHome}
               </button>
@@ -367,13 +367,13 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 </span>
                 <button
                   onClick={() => handleNavClick('about')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-gray-300 hover:bg-amber-900/30"
+                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
                 >
                   {t.aboutWhoWeAre}
                 </button>
                 <button
                   onClick={() => handleNavClick('about')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-gray-300 hover:bg-amber-900/30"
+                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
                 >
                   {t.aboutLeadership}
                 </button>
@@ -382,7 +382,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               <div className="border-t border-zinc-900 pt-2">
                 <button
                   onClick={() => handleNavClick('districts')}
-                  className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold text-amber-200 hover:bg-amber-900/30"
+                  className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold text-amber-200 hover:bg-zinc-900"
                 >
                   {t.navDistricts}
                 </button>
@@ -394,13 +394,13 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 </span>
                 <button
                   onClick={() => handleNavClick('events')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-gray-300 hover:bg-amber-900/30"
+                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
                 >
                   {t.navEvents}
                 </button>
                 <button
                   onClick={() => handleNavClick('achievements')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-gray-300 hover:bg-amber-900/30"
+                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
                 >
                   {t.navAchievements}
                 </button>
@@ -412,19 +412,19 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                 </span>
                 <button
                   onClick={() => handleNavClick('resources')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-gray-300 hover:bg-amber-900/30"
+                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
                 >
                   {t.navResources}
                 </button>
                 <button
                   onClick={() => handleNavClick('media')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-gray-300 hover:bg-amber-900/30"
+                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
                 >
                   {t.navMedia}
                 </button>
                 <button
                   onClick={() => handleNavClick('faqs')}
-                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-gray-300 hover:bg-amber-900/30"
+                  className="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-zinc-300 hover:bg-zinc-900"
                 >
                   {t.navFaqs}
                 </button>
@@ -433,7 +433,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
               <div className="border-t border-zinc-900 pt-2">
                 <button
                   onClick={() => handleNavClick('contact')}
-                  className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold text-amber-200 hover:bg-amber-900/30"
+                  className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-bold text-amber-200 hover:bg-zinc-900"
                 >
                   {t.navContact}
                 </button>
@@ -446,24 +446,24 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
 
       {/* 4. ADMIN LOGIN MODAL */}
       {showLoginModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-zinc-950 border border-amber-500/30 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative space-y-6">
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-zinc-950 border border-amber-500/40 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative space-y-6">
             
             <button
               onClick={() => setShowLoginModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white p-2 rounded-full hover:bg-zinc-900"
+              className="absolute top-4 right-4 text-zinc-400 hover:text-white p-2 rounded-full hover:bg-zinc-900"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="text-center space-y-2">
-              <div className="w-12 h-12 rounded-2xl maroon-gradient-bg border border-amber-500/40 flex items-center justify-center text-amber-400 mx-auto">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 border border-amber-300/40 flex items-center justify-center text-zinc-950 font-black mx-auto shadow-lg">
                 <KeyRound className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-amber-100">
                 {language === 'en' ? 'TNSKA Admin Portal Login' : 'TNSKA நிர்வாகி உள்நுழைவு'}
               </h3>
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-zinc-300">
                 {language === 'en'
                   ? 'Enter the official state administrator passcode to access CMS management.'
                   : 'CMS மேலாண்மைக்கான அதிகாரப்பூர்வ கடவுச்சொல்லை உள்ளிடவும்.'}
@@ -472,7 +472,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
 
             <form onSubmit={handleLoginSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-amber-200/80 mb-1">
+                <label className="block text-xs font-semibold text-amber-200/90 mb-1">
                   {language === 'en' ? 'Admin Passcode' : 'நிர்வாகி கடவுச்சொல்'}
                 </label>
                 <input
@@ -483,7 +483,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
                     setLoginError(false);
                   }}
                   placeholder="Enter passcode (e.g. kudo2026)"
-                  className="w-full bg-zinc-900 border border-amber-500/30 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-400"
+                  className="w-full bg-zinc-900 border border-amber-500/30 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400"
                   autoFocus
                 />
               </div>
@@ -501,13 +501,13 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
 
               <button
                 type="submit"
-                className="w-full gold-gradient-bg text-red-950 font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-lg hover:brightness-110 transition-all"
+                className="w-full gold-gradient-bg text-zinc-950 font-black py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-lg hover:brightness-110 transition-all"
               >
                 {language === 'en' ? 'Authenticate & Enter Admin' : 'உள்நுழையவும்'}
               </button>
             </form>
 
-            <div className="bg-zinc-900/60 p-3 rounded-xl border border-zinc-800 text-[11px] text-gray-400 text-center">
+            <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800 text-[11px] text-zinc-300 text-center">
               💡 {language === 'en' ? 'Demo Passcode:' : 'டெமோ கடவுச்சொல்:'} <code className="text-amber-300 font-bold">kudo2026</code>
             </div>
 
