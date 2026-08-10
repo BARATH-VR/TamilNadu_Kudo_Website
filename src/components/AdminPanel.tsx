@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdmin } from '@/context/AdminContext';
-import { Lock, Plus, Trash2, CheckCircle2, ShieldAlert, LogOut, FileText, Calendar, MapPin, Download } from 'lucide-react';
-
+import { Lock, Plus, Trash2, CheckCircle2, ShieldAlert, LogOut, FileText, Calendar, MapPin, Download, UploadCloud } from 'lucide-react';
 import { TAMILNADU_DISTRICTS } from '@/data/kudoData';
 
 export const AdminPanel: React.FC = () => {
@@ -53,10 +52,13 @@ export const AdminPanel: React.FC = () => {
   const [academyAddressTa, setAcademyAddressTa] = useState('');
   const [academyPhone, setAcademyPhone] = useState('');
 
+  // Document Upload States
   const [docTitleEn, setDocTitleEn] = useState('');
   const [docTitleTa, setDocTitleTa] = useState('');
   const [docCategoryEn, setDocCategoryEn] = useState('Official Circular');
-  const [docSize, setDocSize] = useState('1.2 MB');
+  const [docFile, setDocFile] = useState<File | null>(null);
+  const [docFileUrl, setDocFileUrl] = useState<string>('');
+  const [docSizeStr, setDocSizeStr] = useState<string>('1.2 MB');
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -72,6 +74,26 @@ export const AdminPanel: React.FC = () => {
       setLoginError(false);
       setPasswordInput('');
       showToast('Login successful!');
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setDocFile(file);
+      
+      // Calculate human size
+      const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+      setDocSizeStr(`${sizeMb} MB`);
+
+      // Read file as Data URL for client-side persistence
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setDocFileUrl(event.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -152,12 +174,14 @@ export const AdminPanel: React.FC = () => {
       titleTa: docTitleTa || docTitleEn,
       categoryEn: docCategoryEn,
       categoryTa: docCategoryEn,
-      fileSize: docSize,
+      fileSize: docFile ? docSizeStr : '1.2 MB',
       uploadDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      fileUrl: '#'
+      fileUrl: docFileUrl || '#'
     });
     setDocTitleEn('');
     setDocTitleTa('');
+    setDocFile(null);
+    setDocFileUrl('');
     showToast('Document uploaded to download library!');
   };
 
@@ -621,7 +645,18 @@ export const AdminPanel: React.FC = () => {
                     value={docTitleEn}
                     onChange={(e) => setDocTitleEn(e.target.value)}
                     placeholder="e.g. 2026 Athlete Medical Clearance Form"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-gray-300 font-semibold mb-1">Document Title (Tamil)</label>
+                  <input
+                    type="text"
+                    value={docTitleTa}
+                    onChange={(e) => setDocTitleTa(e.target.value)}
+                    placeholder="e.g. 2026 விளையாட்டு வீரர் மருத்துவச் சான்றிதழ் படிவம்"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
                   />
                 </div>
 
@@ -630,7 +665,7 @@ export const AdminPanel: React.FC = () => {
                   <select
                     value={docCategoryEn}
                     onChange={(e) => setDocCategoryEn(e.target.value)}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
                   >
                     <option value="Official Circular">Official Circular</option>
                     <option value="Forms & Downloads">Forms & Downloads</option>
@@ -638,11 +673,33 @@ export const AdminPanel: React.FC = () => {
                   </select>
                 </div>
 
+                {/* REAL FILE INPUT SELECTOR */}
+                <div>
+                  <label className="block text-gray-300 font-semibold mb-1">Choose PDF / File</label>
+                  <div className="relative border-2 border-dashed border-amber-500/40 rounded-xl p-4 text-center bg-zinc-950 hover:border-amber-400 transition-colors">
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx,.png,.jpg"
+                      onChange={handleFileChange}
+                      className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                    />
+                    <div className="space-y-1">
+                      <UploadCloud className="w-8 h-8 text-amber-400 mx-auto" />
+                      <p className="text-xs font-bold text-amber-200">
+                        {docFile ? docFile.name : 'Click or Drag PDF file here'}
+                      </p>
+                      <p className="text-[10px] text-gray-400">
+                        {docFile ? `Selected File • ${docSizeStr}` : 'Supports PDF, DOC, DOCX up to 25MB'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <button
                   type="submit"
-                  className="w-full gold-gradient-bg text-red-950 font-bold py-2.5 rounded-lg uppercase tracking-wider"
+                  className="w-full gold-gradient-bg text-red-950 font-bold py-2.5 rounded-lg uppercase tracking-wider hover:brightness-110 transition-all shadow-lg"
                 >
-                  Upload Document
+                  Upload & Save Document
                 </button>
               </form>
             </div>

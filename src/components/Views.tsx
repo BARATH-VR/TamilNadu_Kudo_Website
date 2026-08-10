@@ -607,9 +607,24 @@ export const ResourcesView: React.FC = () => {
                 </div>
 
                 <a
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); alert(`Downloading official PDF: ${doc.titleEn}`); }}
-                  className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1 shrink-0 transition-all"
+                  href={doc.fileUrl !== '#' ? doc.fileUrl : '#'}
+                  download={doc.fileUrl !== '#' ? `${doc.titleEn}.pdf` : undefined}
+                  onClick={(e) => {
+                    if (doc.fileUrl === '#' || !doc.fileUrl) {
+                      e.preventDefault();
+                      // Create a downloadable sample PDF blob fallback
+                      const blob = new Blob([`TNSKA Official Document: ${doc.titleEn}\nCategory: ${doc.categoryEn}\nDate: ${doc.uploadDate}\n\nTamil Nadu State Kudo Association (TNSKA)`], { type: 'text/plain' });
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = `${doc.titleEn.replace(/\s+/g, '_')}.txt`;
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    }
+                  }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1 shrink-0 transition-all cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>PDF</span>
