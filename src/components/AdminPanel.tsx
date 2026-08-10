@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdmin } from '@/context/AdminContext';
-import { Lock, Plus, Trash2, CheckCircle2, ShieldAlert, LogOut, FileText, Calendar, MapPin, Download, UploadCloud } from 'lucide-react';
+import { Lock, Plus, Trash2, CheckCircle2, ShieldAlert, LogOut, FileText, Calendar, MapPin, Download, UploadCloud, AlertCircle, FileCheck } from 'lucide-react';
 import { TAMILNADU_DISTRICTS } from '@/data/kudoData';
 
 export const AdminPanel: React.FC = () => {
@@ -59,6 +59,7 @@ export const AdminPanel: React.FC = () => {
   const [docFile, setDocFile] = useState<File | null>(null);
   const [docFileUrl, setDocFileUrl] = useState<string>('');
   const [docSizeStr, setDocSizeStr] = useState<string>('1.2 MB');
+  const [fileTypeError, setFileTypeError] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -79,22 +80,54 @@ export const AdminPanel: React.FC = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setDocFile(file);
-      
-      // Calculate human size
-      const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
-      setDocSizeStr(`${sizeMb} MB`);
+    if (!file) return;
 
-      // Read file as Data URL for client-side persistence
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          setDocFileUrl(event.target.result as string);
-        }
-      };
-      reader.readAsDataURL(file);
+    // Strict File Type Validation (Only PDF, DOC, DOCX)
+    const validExtensions = ['.pdf', '.doc', '.docx'];
+    const validMimetypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    ];
+
+    const fileNameLower = file.name.toLowerCase();
+    const isValidExt = validExtensions.some(ext => fileNameLower.endsWith(ext));
+    const isValidMime = validMimetypes.includes(file.type);
+
+    if (!isValidExt && !isValidMime) {
+      setFileTypeError('Invalid file format! Only PDF (.pdf) and Word documents (.doc, .docx) are allowed.');
+      setDocFile(null);
+      setDocFileUrl('');
+      e.target.value = '';
+      return;
     }
+
+    // Strict Size Restriction (Max 15MB)
+    if (file.size > 15 * 1024 * 1024) {
+      setFileTypeError('File size exceeds the 15MB limit. Please select a smaller file.');
+      setDocFile(null);
+      setDocFileUrl('');
+      e.target.value = '';
+      return;
+    }
+
+    // Clear error & set file
+    setFileTypeError(null);
+    setDocFile(file);
+
+    // Calculate human-readable size
+    const sizeInMb = (file.size / (1024 * 1024)).toFixed(1);
+    const sizeStr = file.size < 1024 * 1024 ? `${(file.size / 1024).toFixed(0)} KB` : `${sizeInMb} MB`;
+    setDocSizeStr(sizeStr);
+
+    // Read Data URL for download binding
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        setDocFileUrl(event.target.result as string);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleAddNews = (e: React.FormEvent) => {
@@ -169,6 +202,12 @@ export const AdminPanel: React.FC = () => {
   const handleAddDocument = (e: React.FormEvent) => {
     e.preventDefault();
     if (!docTitleEn) return;
+
+    if (fileTypeError) {
+      showToast('Please upload a valid PDF or Word document.');
+      return;
+    }
+
     addDocument({
       titleEn: docTitleEn,
       titleTa: docTitleTa || docTitleEn,
@@ -182,6 +221,7 @@ export const AdminPanel: React.FC = () => {
     setDocTitleTa('');
     setDocFile(null);
     setDocFileUrl('');
+    setFileTypeError(null);
     showToast('Document uploaded to download library!');
   };
 
@@ -673,31 +713,67 @@ export const AdminPanel: React.FC = () => {
                   </select>
                 </div>
 
-                {/* REAL FILE INPUT SELECTOR */}
+                {/* REAL FILE INPUT SELECTOR WITH STRICT FILE TYPE RESTRICTIONS */}
                 <div>
-                  <label className="block text-gray-300 font-semibold mb-1">Choose PDF / File</label>
-                  <div className="relative border-2 border-dashed border-amber-500/40 rounded-xl p-4 text-center bg-zinc-950 hover:border-amber-400 transition-colors">
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="block text-gray-300 font-semibold">Choose PDF / Document</label>
+                    <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider">
+                      Restricted: PDF, DOC, DOCX
+                    </span>
+                  </div>
+
+                  <div className={`relative border-2 border-dashed rounded-xl p-4 text-center bg-zinc-950 transition-colors ${
+                    fileTypeError ? 'border-red-500/70 bg-red-950/20' : docFile ? 'border-emerald-500/70 bg-emerald-950/20' : 'border-amber-500/40 hover:border-amber-400'
+                  }`}>
                     <input
                       type="file"
-                      accept=".pdf,.doc,.docx,.png,.jpg"
+                      accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                       onChange={handleFileChange}
-                      className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                      className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10"
                     />
-                    <div className="space-y-1">
-                      <UploadCloud className="w-8 h-8 text-amber-400 mx-auto" />
-                      <p className="text-xs font-bold text-amber-200">
-                        {docFile ? docFile.name : 'Click or Drag PDF file here'}
-                      </p>
-                      <p className="text-[10px] text-gray-400">
-                        {docFile ? `Selected File • ${docSizeStr}` : 'Supports PDF, DOC, DOCX up to 25MB'}
-                      </p>
+
+                    <div className="space-y-1.5 pointer-events-none">
+                      {docFile ? (
+                        <>
+                          <FileCheck className="w-8 h-8 text-emerald-400 mx-auto animate-bounce" />
+                          <p className="text-xs font-bold text-emerald-200 truncate px-2">
+                            {docFile.name}
+                          </p>
+                          <span className="inline-block text-[10px] font-bold text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30">
+                            Valid {docFile.name.endsWith('.pdf') ? 'PDF Document' : 'Word Document'} ({docSizeStr})
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <UploadCloud className="w-8 h-8 text-amber-400 mx-auto" />
+                          <p className="text-xs font-bold text-amber-200">
+                            Click or Drag PDF / DOC File Here
+                          </p>
+                          <p className="text-[10px] text-gray-400">
+                            Only <span className="text-amber-300 font-semibold">PDF (.pdf)</span> & <span className="text-amber-300 font-semibold">Word (.doc, .docx)</span> files under 15MB allowed
+                          </p>
+                        </>
+                      )}
                     </div>
                   </div>
+
+                  {/* File Type Error Alert */}
+                  {fileTypeError && (
+                    <div className="mt-2 flex items-center space-x-1.5 text-xs text-red-400 bg-red-950/60 p-2.5 rounded-xl border border-red-500/40">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{fileTypeError}</span>
+                    </div>
+                  )}
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full gold-gradient-bg text-red-950 font-bold py-2.5 rounded-lg uppercase tracking-wider hover:brightness-110 transition-all shadow-lg"
+                  disabled={!!fileTypeError}
+                  className={`w-full font-bold py-2.5 rounded-lg uppercase tracking-wider transition-all shadow-lg ${
+                    fileTypeError
+                      ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                      : 'gold-gradient-bg text-red-950 hover:brightness-110'
+                  }`}
                 >
                   Upload & Save Document
                 </button>
