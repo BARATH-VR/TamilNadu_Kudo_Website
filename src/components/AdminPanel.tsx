@@ -5,6 +5,8 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useAdmin } from '@/context/AdminContext';
 import { Lock, Plus, Trash2, CheckCircle2, ShieldAlert, LogOut, FileText, Calendar, MapPin, Download } from 'lucide-react';
 
+import { TAMILNADU_DISTRICTS } from '@/data/kudoData';
+
 export const AdminPanel: React.FC = () => {
   const { language, t } = useLanguage();
   const {
@@ -508,19 +510,11 @@ export const AdminPanel: React.FC = () => {
                   <select
                     value={academyDistrictEn}
                     onChange={(e) => setAcademyDistrictEn(e.target.value)}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
                   >
-                    <option value="Chennai">Chennai</option>
-                    <option value="Coimbatore">Coimbatore</option>
-                    <option value="Madurai">Madurai</option>
-                    <option value="Tiruchirappalli">Tiruchirappalli</option>
-                    <option value="Salem">Salem</option>
-                    <option value="Tirunelveli">Tirunelveli</option>
-                    <option value="Erode">Erode</option>
-                    <option value="Vellore">Vellore</option>
-                    <option value="Thanjavur">Thanjavur</option>
-                    <option value="Kanchipuram">Kanchipuram</option>
-                    <option value="Tiruppur">Tiruppur</option>
+                    {TAMILNADU_DISTRICTS.map(dist => (
+                      <option key={dist} value={dist}>{dist}</option>
+                    ))}
                   </select>
                 </div>
 

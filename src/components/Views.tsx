@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdmin } from '@/context/AdminContext';
+import { TAMILNADU_DISTRICTS } from '@/data/kudoData';
 import {
   Award,
   Calendar,
@@ -228,8 +229,6 @@ export const DistrictsView: React.FC = () => {
   const [selectedDistrict, setSelectedDistrict] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const districtList = ['All', 'Chennai', 'Coimbatore', 'Madurai', 'Tiruchirappalli', 'Salem', 'Tirunelveli'];
-
   const filteredAcademies = academies.filter(ac => {
     const matchesDistrict = selectedDistrict === 'All' || ac.districtEn === selectedDistrict;
     const matchesSearch = !searchQuery || 
@@ -258,22 +257,23 @@ export const DistrictsView: React.FC = () => {
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-zinc-900 p-4 rounded-2xl border border-amber-500/20 shadow-xl">
-          {/* District Buttons */}
-          <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-            {districtList.map(dist => (
-              <button
-                key={dist}
-                onClick={() => setSelectedDistrict(dist)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                  selectedDistrict === dist
-                    ? 'gold-gradient-bg text-zinc-950 shadow-md'
-                    : 'bg-zinc-950 text-zinc-300 hover:bg-zinc-800'
-                }`}
-              >
-                {dist === 'All' ? t.allDistricts : dist}
-              </button>
-            ))}
+        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-zinc-900 p-4 sm:p-5 rounded-2xl border border-amber-500/20 shadow-xl">
+          
+          {/* District Dropdown Selector */}
+          <div className="flex items-center space-x-2 w-full sm:w-auto">
+            <span className="text-xs text-amber-400 font-bold whitespace-nowrap hidden md:inline">
+              {language === 'en' ? 'Filter District:' : 'மாவட்டம்:'}
+            </span>
+            <select
+              value={selectedDistrict}
+              onChange={(e) => setSelectedDistrict(e.target.value)}
+              className="w-full sm:w-64 bg-zinc-950 border border-amber-500/30 rounded-xl px-3.5 py-2.5 text-xs font-bold text-amber-200 focus:outline-none focus:border-amber-400"
+            >
+              <option value="All">{t.allDistricts} (38 {language === 'en' ? 'Districts' : 'மாவட்டங்கள்'})</option>
+              {TAMILNADU_DISTRICTS.map(dist => (
+                <option key={dist} value={dist}>{dist}</option>
+              ))}
+            </select>
           </div>
 
           {/* Search Input */}
