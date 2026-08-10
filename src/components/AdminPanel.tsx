@@ -48,6 +48,7 @@ export const AdminPanel: React.FC = () => {
   const [academyDistrictEn, setAcademyDistrictEn] = useState('Chennai');
   const [academyInstructorEn, setAcademyInstructorEn] = useState('');
   const [academyAddressEn, setAcademyAddressEn] = useState('');
+  const [academyAddressTa, setAcademyAddressTa] = useState('');
   const [academyPhone, setAcademyPhone] = useState('');
 
   const [docTitleEn, setDocTitleEn] = useState('');
@@ -128,7 +129,7 @@ export const AdminPanel: React.FC = () => {
       instructorEn: academyInstructorEn,
       instructorTa: academyInstructorEn,
       addressEn: academyAddressEn || 'Main Street, Dojo Hall',
-      addressTa: academyAddressEn || 'பிரதான வீதி, டோஜோ ஹால்',
+      addressTa: academyAddressTa || academyAddressEn || 'பிரதான வீதி, டோஜோ ஹால்',
       phone: academyPhone || '+91 98400 00000',
       email: `${academyDistrictEn.toLowerCase()}@tnkudo.org`
     });
@@ -136,6 +137,7 @@ export const AdminPanel: React.FC = () => {
     setAcademyNameTa('');
     setAcademyInstructorEn('');
     setAcademyAddressEn('');
+    setAcademyAddressTa('');
     setAcademyPhone('');
     showToast('Academy added to District directory!');
   };
@@ -253,7 +255,7 @@ export const AdminPanel: React.FC = () => {
             }`}
           >
             <FileText className="w-4 h-4" />
-            <span>{t.adminTabNews} ({news.length})</span>
+            <span>News & Circulars ({news.length})</span>
           </button>
 
           <button
@@ -265,7 +267,7 @@ export const AdminPanel: React.FC = () => {
             }`}
           >
             <Calendar className="w-4 h-4" />
-            <span>{t.adminTabEvents} ({events.length})</span>
+            <span>Tournaments / Events ({events.length})</span>
           </button>
 
           <button
@@ -277,7 +279,7 @@ export const AdminPanel: React.FC = () => {
             }`}
           >
             <MapPin className="w-4 h-4" />
-            <span>{t.adminTabAcademies} ({academies.length})</span>
+            <span>District Academies ({academies.length})</span>
           </button>
 
           <button
@@ -289,17 +291,17 @@ export const AdminPanel: React.FC = () => {
             }`}
           >
             <Download className="w-4 h-4" />
-            <span>{t.adminTabDownloads} ({documents.length})</span>
+            <span>PDF Forms & Downloads ({documents.length})</span>
           </button>
         </div>
 
-        {/* Tab 1: News & Notices */}
+        {/* Tab 1: News */}
         {activeTab === 'news' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div className="lg:col-span-5 bg-zinc-900 border border-amber-500/20 rounded-2xl p-6 h-fit">
               <h3 className="text-sm font-bold text-amber-300 mb-4 flex items-center gap-2">
                 <Plus className="w-4 h-4 text-amber-400" />
-                Post News or Official Notice
+                Publish News / Circular
               </h3>
 
               <form onSubmit={handleAddNews} className="space-y-4 text-xs">
@@ -310,19 +312,19 @@ export const AdminPanel: React.FC = () => {
                     required
                     value={newsTitleEn}
                     onChange={(e) => setNewsTitleEn(e.target.value)}
-                    placeholder="e.g. State Championship Selection Announced"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:border-amber-400"
+                    placeholder="e.g. 14th State Selection Trial Regulations"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 font-semibold mb-1">Title (Tamil - தமிழ்)</label>
+                  <label className="block text-gray-300 font-semibold mb-1">Title (Tamil)</label>
                   <input
                     type="text"
                     value={newsTitleTa}
                     onChange={(e) => setNewsTitleTa(e.target.value)}
-                    placeholder="எ.கா. மாநில போட்டிக்கான அறிவிப்பு"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:border-amber-400"
+                    placeholder="e.g. 14வது மாநிலத் தேர்வுப் போட்டி விதிகள்"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
                   />
                 </div>
 
@@ -331,23 +333,24 @@ export const AdminPanel: React.FC = () => {
                   <select
                     value={newsCategory}
                     onChange={(e) => setNewsCategory(e.target.value)}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:border-amber-400"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
                   >
-                    <option value="Official Notice">Official Notice / Circular</option>
-                    <option value="Championship News">Championship News</option>
-                    <option value="Training & Seminar">Training & Seminar</option>
+                    <option value="Official Notice">Official Notice</option>
+                    <option value="Championship Result">Championship Result</option>
+                    <option value="Belt Grading">Belt Grading</option>
+                    <option value="Association News">Association News</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 font-semibold mb-1">Content Summary</label>
+                  <label className="block text-gray-300 font-semibold mb-1">Summary / Excerpt (English)</label>
                   <textarea
                     required
                     rows={3}
                     value={newsExcerptEn}
                     onChange={(e) => setNewsExcerptEn(e.target.value)}
-                    placeholder="Brief details of the announcement..."
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:border-amber-400"
+                    placeholder="Brief description of the announcement..."
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
                   />
                 </div>
 
@@ -478,13 +481,24 @@ export const AdminPanel: React.FC = () => {
 
               <form onSubmit={handleAddAcademy} className="space-y-4 text-xs">
                 <div>
-                  <label className="block text-gray-300 font-semibold mb-1">Academy Dojo Name</label>
+                  <label className="block text-gray-300 font-semibold mb-1">Academy Dojo Name (English)</label>
                   <input
                     type="text"
                     required
                     value={academyNameEn}
                     onChange={(e) => setAcademyNameEn(e.target.value)}
                     placeholder="e.g. Trichy City Kudo Dojo"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-gray-300 font-semibold mb-1">Academy Dojo Name (Tamil)</label>
+                  <input
+                    type="text"
+                    value={academyNameTa}
+                    onChange={(e) => setAcademyNameTa(e.target.value)}
+                    placeholder="e.g. திருச்சி சிட்டி குடோ டோஜோ"
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100"
                   />
                 </div>
@@ -504,7 +518,33 @@ export const AdminPanel: React.FC = () => {
                     <option value="Tirunelveli">Tirunelveli</option>
                     <option value="Erode">Erode</option>
                     <option value="Vellore">Vellore</option>
+                    <option value="Thanjavur">Thanjavur</option>
+                    <option value="Kanchipuram">Kanchipuram</option>
+                    <option value="Tiruppur">Tiruppur</option>
                   </select>
+                </div>
+
+                <div>
+                  <label className="block text-gray-300 font-semibold mb-1">Full Address / Specific Location (English)</label>
+                  <textarea
+                    required
+                    rows={2}
+                    value={academyAddressEn}
+                    onChange={(e) => setAcademyAddressEn(e.target.value)}
+                    placeholder="e.g. No. 12, Sports Complex Road, Near City Center, Trichy - 620001"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-gray-300 font-semibold mb-1">முழு முகவரி / அமைவிடம் (தமிழ்)</label>
+                  <textarea
+                    rows={2}
+                    value={academyAddressTa}
+                    onChange={(e) => setAcademyAddressTa(e.target.value)}
+                    placeholder="எ.கா. எண் 12, விளையாட்டு வளாக சாலை, திருச்சி"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
+                  />
                 </div>
 
                 <div>
@@ -548,6 +588,10 @@ export const AdminPanel: React.FC = () => {
                       {ac.districtEn}
                     </span>
                     <h4 className="text-xs font-bold text-gray-200">{ac.nameEn}</h4>
+                    <p className="text-[11px] text-amber-300/90 font-medium flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-amber-400 shrink-0" />
+                      {ac.addressEn}
+                    </p>
                     <p className="text-[11px] text-gray-400">{ac.instructorEn} • {ac.phone}</p>
                   </div>
                   <button
@@ -600,17 +644,6 @@ export const AdminPanel: React.FC = () => {
                   </select>
                 </div>
 
-                <div>
-                  <label className="block text-gray-300 font-semibold mb-1">File Size Tag</label>
-                  <input
-                    type="text"
-                    value={docSize}
-                    onChange={(e) => setDocSize(e.target.value)}
-                    placeholder="e.g. 1.5 MB"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100"
-                  />
-                </div>
-
                 <button
                   type="submit"
                   className="w-full gold-gradient-bg text-red-950 font-bold py-2.5 rounded-lg uppercase tracking-wider"
@@ -621,19 +654,20 @@ export const AdminPanel: React.FC = () => {
             </div>
 
             <div className="lg:col-span-7 space-y-3">
-              <h3 className="text-sm font-bold text-amber-300 mb-2">Live Downloads & Official Files</h3>
-              {documents.map(dc => (
-                <div key={dc.id} className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex justify-between items-start">
+              <h3 className="text-sm font-bold text-amber-300 mb-2">Available PDF Documents</h3>
+              {documents.map(doc => (
+                <div key={doc.id} className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex justify-between items-start">
                   <div className="space-y-1">
                     <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-2 py-0.5 rounded">
-                      {dc.categoryEn} • {dc.fileSize}
+                      {doc.categoryEn}
                     </span>
-                    <h4 className="text-xs font-bold text-gray-200">{dc.titleEn}</h4>
+                    <h4 className="text-xs font-bold text-gray-200">{doc.titleEn}</h4>
+                    <p className="text-[11px] text-gray-400">{doc.fileSize} • {doc.uploadDate}</p>
                   </div>
                   <button
                     onClick={() => {
-                      deleteDocument(dc.id);
-                      showToast('Document removed.');
+                      deleteDocument(doc.id);
+                      showToast('Document deleted.');
                     }}
                     className="p-1.5 rounded-lg text-rose-400 hover:bg-rose-950/50 hover:text-rose-200 shrink-0"
                   >
