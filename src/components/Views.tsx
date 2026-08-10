@@ -324,13 +324,13 @@ export const DistrictsView: React.FC = () => {
               </div>
 
               <a
-                href={`https://maps.google.com/?q=${encodeURIComponent(ac.addressEn)}`}
+                href={ac.mapUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ac.nameEn + ' ' + ac.districtEn + ' Tamil Nadu')}`}
                 target="_blank"
-                rel="noreferrer"
-                className="w-full inline-flex items-center justify-center space-x-1.5 bg-zinc-950 hover:bg-amber-500/10 text-amber-300 border border-amber-500/30 py-2.5 rounded-xl text-xs font-bold transition-all mt-2"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center space-x-2 gold-gradient-bg text-zinc-950 font-black py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all hover:brightness-110 shadow-lg mt-2"
               >
-                <ExternalLink className="w-3.5 h-3.5" />
-                <span>{t.getDirections}</span>
+                <MapPin className="w-4 h-4 shrink-0" />
+                <span>{language === 'en' ? 'Get Directions' : 'திசைகளைப் பெற'}</span>
               </a>
             </div>
           ))}

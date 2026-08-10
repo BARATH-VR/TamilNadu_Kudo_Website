@@ -22,6 +22,7 @@ export interface Academy {
   addressTa: string;
   phone: string;
   email: string;
+  mapUrl?: string;
 }
 
 export interface Achievement {

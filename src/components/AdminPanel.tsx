@@ -50,6 +50,7 @@ export const AdminPanel: React.FC = () => {
   const [academyInstructorEn, setAcademyInstructorEn] = useState('');
   const [academyAddressEn, setAcademyAddressEn] = useState('');
   const [academyAddressTa, setAcademyAddressTa] = useState('');
+  const [academyMapUrl, setAcademyMapUrl] = useState('');
   const [academyPhone, setAcademyPhone] = useState('');
 
   // Document Upload States
@@ -178,6 +179,7 @@ export const AdminPanel: React.FC = () => {
   const handleAddAcademy = (e: React.FormEvent) => {
     e.preventDefault();
     if (!academyNameEn || !academyInstructorEn) return;
+    const defaultMapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(academyNameEn + ' ' + academyDistrictEn + ' Tamil Nadu')}`;
     addAcademy({
       nameEn: academyNameEn,
       nameTa: academyNameTa || academyNameEn,
@@ -188,13 +190,15 @@ export const AdminPanel: React.FC = () => {
       addressEn: academyAddressEn || 'Main Street, Dojo Hall',
       addressTa: academyAddressTa || academyAddressEn || 'பிரதான வீதி, டோஜோ ஹால்',
       phone: academyPhone || '+91 98400 00000',
-      email: `${academyDistrictEn.toLowerCase()}@tnkudo.org`
+      email: `${academyDistrictEn.toLowerCase()}@tnkudo.org`,
+      mapUrl: academyMapUrl || defaultMapUrl
     });
     setAcademyNameEn('');
     setAcademyNameTa('');
     setAcademyInstructorEn('');
     setAcademyAddressEn('');
     setAcademyAddressTa('');
+    setAcademyMapUrl('');
     setAcademyPhone('');
     showToast('Academy added to District directory!');
   };
@@ -603,6 +607,20 @@ export const AdminPanel: React.FC = () => {
                     placeholder="எ.கா. எண் 12, விளையாட்டு வளாக சாலை, திருச்சி"
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-gray-300 font-semibold mb-1">Google Maps Location Link / Directions URL</label>
+                  <input
+                    type="url"
+                    value={academyMapUrl}
+                    onChange={(e) => setAcademyMapUrl(e.target.value)}
+                    placeholder="e.g. https://maps.app.goo.gl/xyz123 or https://maps.google.com/?q=10.79,78.70"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
+                  />
+                  <p className="text-[10px] text-amber-400/80 mt-1">
+                    💡 Paste Google Maps share link so athletes can tap "Get Directions" directly to this dojo.
+                  </p>
                 </div>
 
                 <div>
