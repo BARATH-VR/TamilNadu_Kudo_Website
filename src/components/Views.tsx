@@ -922,7 +922,7 @@ export const ContactView: React.FC = () => {
 
     if (Object.keys(errs).length > 0) {
       setFormErrors(errs);
-      showToastNotification('error', '⚠️ Please fill in all required fields marked with *');
+      showToastNotification('error', 'Please fill in all required fields marked with *');
       return;
     }
 
@@ -1145,7 +1145,7 @@ export const ContactView: React.FC = () => {
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
                   />
                   <p className="text-[10px] text-zinc-400 mt-1">
-                    💡 Provide your WhatsApp number for faster response.
+                    Provide your WhatsApp number for faster response.
                   </p>
                 </div>
               </div>

@@ -619,7 +619,7 @@ export const AdminPanel: React.FC = () => {
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-gray-100 focus:outline-none focus:border-amber-400"
                   />
                   <p className="text-[10px] text-amber-400/80 mt-1">
-                    💡 Paste Google Maps share link so athletes can tap "Get Directions" directly to this dojo.
+                    Paste Google Maps share link so athletes can tap "Get Directions" directly to this dojo.
                   </p>
                 </div>
 

@@ -647,7 +647,7 @@ export const Header: React.FC<HeaderProps> = ({ currentView, setCurrentView, onO
             </form>
 
             <div className="bg-zinc-900 p-3 rounded-xl border border-zinc-800 text-[11px] text-zinc-300 text-center">
-              💡 {language === 'en' ? 'Demo Passcode:' : 'டெமோ கடவுச்சொல்:'} <code className="text-amber-300 font-bold">kudo2026</code>
+              {language === 'en' ? 'Demo Passcode:' : 'டெமோ கடவுச்சொல்:'} <code className="text-amber-300 font-bold">kudo2026</code>
             </div>
 
           </div>
