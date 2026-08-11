@@ -1061,13 +1061,10 @@ export const ContactView: React.FC = () => {
           {/* Inquiry Form Card */}
           <div className="lg:col-span-7 bg-zinc-900 border border-amber-500/20 rounded-3xl p-8 shadow-xl">
             <form onSubmit={handleSubmit} noValidate className="space-y-4 text-xs">
-              <div className="flex justify-between items-center mb-2">
+              <div className="mb-2">
                 <h3 className="text-lg font-bold text-amber-200">
                   Send Official Inquiry / Feedback
                 </h3>
-                <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20">
-                  Direct to Secretariat
-                </span>
               </div>
 
               {/* Honeypot Field for anti-bot protection */}
