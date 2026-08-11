@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdmin } from '@/context/AdminContext';
 import { TAMILNADU_DISTRICTS } from '@/data/kudoData';
@@ -837,6 +837,10 @@ export const ContactView: React.FC = () => {
   const [message, setMessage] = useState('');
   const [websiteHp, setWebsiteHp] = useState('');
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState('');
+
+  const recaptchaContainerRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<number | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<{ type: 'success' | 'error'; msg: string } | null>(null);
@@ -845,6 +849,60 @@ export const ContactView: React.FC = () => {
     setToast({ type, msg });
     setTimeout(() => setToast(null), 5000);
   };
+
+  // Dynamically load & render official Google reCAPTCHA v2 iframe
+  useEffect(() => {
+    const renderWidget = () => {
+      if (
+        recaptchaContainerRef.current &&
+        typeof window !== 'undefined' &&
+        (window as any).grecaptcha &&
+        widgetIdRef.current === null
+      ) {
+        try {
+          const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
+          const id = (window as any).grecaptcha.render(recaptchaContainerRef.current, {
+            sitekey: sitekey,
+            theme: 'dark',
+            callback: (token: string) => {
+              setIsCaptchaVerified(true);
+              setCaptchaToken(token);
+            },
+            'expired-callback': () => {
+              setIsCaptchaVerified(false);
+              setCaptchaToken('');
+            }
+          });
+          widgetIdRef.current = id;
+        } catch (e) {
+          // Ignore if already rendered
+        }
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      if ((window as any).grecaptcha && (window as any).grecaptcha.render) {
+        renderWidget();
+      } else {
+        const existingScript = document.getElementById('google-recaptcha-v2-script');
+        if (!existingScript) {
+          const script = document.createElement('script');
+          script.id = 'google-recaptcha-v2-script';
+          script.src = 'https://www.google.com/recaptcha/api.js?onload=onGoogleRecaptchaLoad&render=explicit';
+          script.async = true;
+          script.defer = true;
+          (window as any).onGoogleRecaptchaLoad = () => {
+            renderWidget();
+          };
+          document.body.appendChild(script);
+        } else {
+          (window as any).onGoogleRecaptchaLoad = () => {
+            renderWidget();
+          };
+        }
+      }
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -1101,24 +1159,21 @@ export const ContactView: React.FC = () => {
                 />
               </div>
 
-              {/* Google reCAPTCHA v2 Checkbox Widget */}
-              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-4 flex items-center justify-between">
-                <label className="flex items-center space-x-3 cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={isCaptchaVerified}
-                    onChange={(e) => setIsCaptchaVerified(e.target.checked)}
-                    className="w-5 h-5 accent-amber-400 rounded cursor-pointer"
-                  />
-                  <div className="space-y-0.5">
-                    <span className="text-xs font-bold text-zinc-200 block">I am human</span>
-                    <span className="text-[10px] text-zinc-400 block">Protected by Google reCAPTCHA v2</span>
+              {/* Official Google reCAPTCHA v2 Iframe Widget */}
+              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 overflow-hidden">
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                    <span className="text-xs font-bold text-zinc-200">Google reCAPTCHA v2 Verification</span>
                   </div>
-                </label>
+                  <p className="text-[10px] text-zinc-400 mt-0.5">
+                    Complete the security check below to enable message submission.
+                  </p>
+                </div>
 
-                <div className="flex items-center space-x-1 text-zinc-500 text-[10px]">
-                  <ShieldCheck className="w-5 h-5 text-emerald-400" />
-                  <span className="font-semibold text-zinc-400">reCAPTCHA</span>
+                {/* Google reCAPTCHA container */}
+                <div className="shrink-0 flex justify-center">
+                  <div ref={recaptchaContainerRef}></div>
                 </div>
               </div>
 
