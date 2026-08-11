@@ -18,6 +18,7 @@ import {
   ChevronUp,
   ExternalLink,
   CheckCircle2,
+  AlertCircle,
   Send,
   HelpCircle,
   Image as ImageIcon
@@ -836,6 +837,7 @@ export const ContactView: React.FC = () => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [websiteHp, setWebsiteHp] = useState('');
+  const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({});
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
   const [captchaToken, setCaptchaToken] = useState('');
 
@@ -907,11 +909,29 @@ export const ContactView: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Theme-matched validation check
+    const errs: { name?: string; email?: string; subject?: string; message?: string } = {};
+    if (!name.trim()) errs.name = 'Please fill in this field.';
+    if (!email.trim()) {
+      errs.email = 'Please fill in this field.';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errs.email = 'Please enter a valid email address.';
+    }
+    if (!subject.trim()) errs.subject = 'Please fill in this field.';
+    if (!message.trim()) errs.message = 'Please fill in this field.';
+
+    if (Object.keys(errs).length > 0) {
+      setFormErrors(errs);
+      showToastNotification('error', '⚠️ Please fill in all required fields marked with *');
+      return;
+    }
+
     if (!isCaptchaVerified) {
       showToastNotification('error', 'Please check the reCAPTCHA security box before submitting.');
       return;
     }
 
+    setFormErrors({});
     setIsSubmitting(true);
 
     try {
@@ -1040,7 +1060,7 @@ export const ContactView: React.FC = () => {
 
           {/* Inquiry Form Card */}
           <div className="lg:col-span-7 bg-zinc-900 border border-amber-500/20 rounded-3xl p-8 shadow-xl">
-            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+            <form onSubmit={handleSubmit} noValidate className="space-y-4 text-xs">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-lg font-bold text-amber-200">
                   Send Official Inquiry / Feedback
@@ -1068,12 +1088,24 @@ export const ContactView: React.FC = () => {
                 </label>
                 <input
                   type="text"
-                  required
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (formErrors.name) setFormErrors(prev => ({ ...prev, name: undefined }));
+                  }}
                   placeholder="e.g. Barath VR"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
+                  className={`w-full bg-zinc-950 border rounded-xl px-4 py-3 text-zinc-100 focus:outline-none transition-all ${
+                    formErrors.name
+                      ? 'border-amber-500 bg-amber-950/20 ring-1 ring-amber-500/80'
+                      : 'border-zinc-800 focus:border-amber-400'
+                  }`}
                 />
+                {formErrors.name && (
+                  <p className="text-[11px] text-amber-400 font-semibold mt-1 flex items-center gap-1.5 animate-fadeIn">
+                    <AlertCircle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>{formErrors.name}</span>
+                  </p>
+                )}
               </div>
 
               {/* Email & WhatsApp Phone */}
@@ -1084,12 +1116,24 @@ export const ContactView: React.FC = () => {
                   </label>
                   <input
                     type="email"
-                    required
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (formErrors.email) setFormErrors(prev => ({ ...prev, email: undefined }));
+                    }}
                     placeholder="e.g. barathvr385@gmail.com"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
+                    className={`w-full bg-zinc-950 border rounded-xl px-4 py-3 text-zinc-100 focus:outline-none transition-all ${
+                      formErrors.email
+                        ? 'border-amber-500 bg-amber-950/20 ring-1 ring-amber-500/80'
+                        : 'border-zinc-800 focus:border-amber-400'
+                    }`}
                   />
+                  {formErrors.email && (
+                    <p className="text-[11px] text-amber-400 font-semibold mt-1 flex items-center gap-1.5 animate-fadeIn">
+                      <AlertCircle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>{formErrors.email}</span>
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -1135,12 +1179,24 @@ export const ContactView: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    required
                     value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
+                    onChange={(e) => {
+                      setSubject(e.target.value);
+                      if (formErrors.subject) setFormErrors(prev => ({ ...prev, subject: undefined }));
+                    }}
                     placeholder="e.g. Joining Dojo in Chennai"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
+                    className={`w-full bg-zinc-950 border rounded-xl px-4 py-3 text-zinc-100 focus:outline-none transition-all ${
+                      formErrors.subject
+                        ? 'border-amber-500 bg-amber-950/20 ring-1 ring-amber-500/80'
+                        : 'border-zinc-800 focus:border-amber-400'
+                    }`}
                   />
+                  {formErrors.subject && (
+                    <p className="text-[11px] text-amber-400 font-semibold mt-1 flex items-center gap-1.5 animate-fadeIn">
+                      <AlertCircle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>{formErrors.subject}</span>
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -1150,27 +1206,25 @@ export const ContactView: React.FC = () => {
                   Your Message <span className="text-amber-400">*</span>
                 </label>
                 <textarea
-                  required
                   rows={4}
                   value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                    if (formErrors.message) setFormErrors(prev => ({ ...prev, message: undefined }));
+                  }}
                   placeholder="Please describe your inquiry or question in detail..."
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
+                  className={`w-full bg-zinc-950 border rounded-xl px-4 py-3 text-zinc-100 focus:outline-none transition-all ${
+                    formErrors.message
+                      ? 'border-amber-500 bg-amber-950/20 ring-1 ring-amber-500/80'
+                      : 'border-zinc-800 focus:border-amber-400'
+                  }`}
                 />
-              </div>
-
-              {/* 100% INVISIBLE ANTI-BOT SECURITY SHIELD */}
-              <div className="bg-zinc-950/80 border border-emerald-500/30 rounded-2xl p-3 flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <ShieldCheck className="w-4.5 h-4.5 text-emerald-400 shrink-0" />
-                  <div>
-                    <span className="text-xs font-bold text-emerald-300 block">100% Frictionless Protection</span>
-                    <span className="text-[10px] text-zinc-400 block">Secured by TNSKA Invisible Anti-Spam Shield. No captcha clicks required.</span>
-                  </div>
-                </div>
-                <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded-full uppercase tracking-wider hidden sm:inline-block">
-                  Verified Active
-                </span>
+                {formErrors.message && (
+                  <p className="text-[11px] text-amber-400 font-semibold mt-1 flex items-center gap-1.5 animate-fadeIn">
+                    <AlertCircle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>{formErrors.message}</span>
+                  </p>
+                )}
               </div>
 
               {/* Submit Button */}
