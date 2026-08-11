@@ -27,7 +27,7 @@ export async function POST(request: Request) {
     const smtpUser = process.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS;
 
-    // Method A: Custom SMTP Credentials (if configured in environment)
+    // Method A: Custom SMTP Credentials (if configured)
     if (smtpUser && smtpPass) {
       const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
       const smtpPort = Number(process.env.SMTP_PORT) || 465;
@@ -72,26 +72,30 @@ export async function POST(request: Request) {
 
       console.log(`[TNSKA Inquiry API] SMTP Email sent to ${recipientEmail}`);
     } else {
-      // Method B: Free Direct Delivery via FormSubmit API (No SMTP Password Required)
-      console.log(`[TNSKA Inquiry API] Dispatching live email via FormSubmit service to ${recipientEmail}...`);
+      // Method B: Live URL-encoded FormSubmit Delivery to barathvr385@gmail.com
+      console.log(`[TNSKA Inquiry API] Dispatching live email via FormSubmit URL-encoded gateway to ${recipientEmail}...`);
+
+      const params = new URLSearchParams();
+      params.append('_subject', `[TNSKA Inquiry - ${category || 'General'}] ${subject}`);
+      params.append('_captcha', 'false');
+      params.append('_template', 'table');
+      params.append('Sender Name', name);
+      params.append('Sender Email', email);
+      params.append('WhatsApp Phone', phone || 'Not provided');
+      if (whatsappUrl) {
+        params.append('WhatsApp Chat Link', whatsappUrl);
+      }
+      params.append('Inquiry Category', category || 'General Inquiry');
+      params.append('Subject', subject);
+      params.append('Message', message);
 
       const formSubmitRes = await fetch(`https://formsubmit.co/ajax/${recipientEmail}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          _subject: `[TNSKA Inquiry - ${category || 'General'}] ${subject}`,
-          _template: 'table',
-          "Sender Name": name,
-          "Sender Email": email,
-          "WhatsApp / Phone": phone ? `${phone} (Chat: ${whatsappUrl})` : 'Not provided',
-          "Inquiry Category": category || 'General Inquiry',
-          "Subject": subject,
-          "Message": message,
-          "_captcha": "false"
-        })
+        body: params.toString()
       });
 
       const fsData = await formSubmitRes.json();
