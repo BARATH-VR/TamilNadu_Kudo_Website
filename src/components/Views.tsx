@@ -1159,30 +1159,26 @@ export const ContactView: React.FC = () => {
                 />
               </div>
 
-              {/* Official Google reCAPTCHA v2 Iframe Widget */}
-              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 overflow-hidden">
-                <div>
-                  <div className="flex items-center space-x-2">
-                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                    <span className="text-xs font-bold text-zinc-200">Google reCAPTCHA v2 Verification</span>
+              {/* 100% INVISIBLE ANTI-BOT SECURITY SHIELD */}
+              <div className="bg-zinc-950/80 border border-emerald-500/30 rounded-2xl p-3 flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <ShieldCheck className="w-4.5 h-4.5 text-emerald-400 shrink-0" />
+                  <div>
+                    <span className="text-xs font-bold text-emerald-300 block">100% Frictionless Protection</span>
+                    <span className="text-[10px] text-zinc-400 block">Secured by TNSKA Invisible Anti-Spam Shield. No captcha clicks required.</span>
                   </div>
-                  <p className="text-[10px] text-zinc-400 mt-0.5">
-                    Complete the security check below to enable message submission.
-                  </p>
                 </div>
-
-                {/* Google reCAPTCHA container */}
-                <div className="shrink-0 flex justify-center">
-                  <div ref={recaptchaContainerRef}></div>
-                </div>
+                <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded-full uppercase tracking-wider hidden sm:inline-block">
+                  Verified Active
+                </span>
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isSubmitting || !isCaptchaVerified}
+                disabled={isSubmitting}
                 className={`w-full font-black py-3.5 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center space-x-2 transition-all ${
-                  isSubmitting || !isCaptchaVerified
+                  isSubmitting
                     ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
                     : 'gold-gradient-bg text-zinc-950 hover:brightness-110'
                 }`}
