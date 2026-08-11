@@ -26,6 +26,7 @@ export async function POST(request: Request) {
 
     const smtpUser = process.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS;
+    const web3FormsKey = process.env.WEB3FORMS_ACCESS_KEY;
 
     // Method A: Custom SMTP Credentials (if configured)
     if (smtpUser && smtpPass) {
@@ -71,9 +72,25 @@ export async function POST(request: Request) {
       });
 
       console.log(`[TNSKA Inquiry API] SMTP Email sent to ${recipientEmail}`);
+    } else if (web3FormsKey) {
+      // Method B: Web3Forms API
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: web3FormsKey,
+          subject: `[TNSKA Inquiry - ${category || 'General'}] ${subject}`,
+          from_name: 'TNSKA Official Website',
+          name,
+          email,
+          phone,
+          category,
+          message
+        })
+      });
     } else {
-      // Method B: Live URL-encoded FormSubmit Delivery to barathvr385@gmail.com
-      console.log(`[TNSKA Inquiry API] Dispatching live email via FormSubmit URL-encoded gateway to ${recipientEmail}...`);
+      // Method C: FormSubmit HTTPS Gateway
+      console.log(`[TNSKA Inquiry API] Dispatching email via FormSubmit gateway to ${recipientEmail}...`);
 
       const params = new URLSearchParams();
       params.append('_subject', `[TNSKA Inquiry - ${category || 'General'}] ${subject}`);
