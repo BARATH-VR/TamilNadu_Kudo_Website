@@ -1090,7 +1090,7 @@ export const ContactView: React.FC = () => {
                     setName(e.target.value);
                     if (formErrors.name) setFormErrors(prev => ({ ...prev, name: undefined }));
                   }}
-                  placeholder="e.g. Barath VR"
+                  placeholder="Enter your full name"
                   className={`w-full bg-zinc-950 border rounded-xl px-4 py-3 text-zinc-100 focus:outline-none transition-all ${
                     formErrors.name
                       ? 'border-amber-500 bg-amber-950/20 ring-1 ring-amber-500/80'
@@ -1118,7 +1118,7 @@ export const ContactView: React.FC = () => {
                       setEmail(e.target.value);
                       if (formErrors.email) setFormErrors(prev => ({ ...prev, email: undefined }));
                     }}
-                    placeholder="e.g. barathvr385@gmail.com"
+                    placeholder="Enter your email address"
                     className={`w-full bg-zinc-950 border rounded-xl px-4 py-3 text-zinc-100 focus:outline-none transition-all ${
                       formErrors.email
                         ? 'border-amber-500 bg-amber-950/20 ring-1 ring-amber-500/80'
@@ -1141,7 +1141,7 @@ export const ContactView: React.FC = () => {
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="e.g. +91 98400 12345"
+                    placeholder="+91 98400 00000"
                     className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
                   />
                   <p className="text-[10px] text-zinc-400 mt-1">
@@ -1181,7 +1181,7 @@ export const ContactView: React.FC = () => {
                       setSubject(e.target.value);
                       if (formErrors.subject) setFormErrors(prev => ({ ...prev, subject: undefined }));
                     }}
-                    placeholder="e.g. Joining Dojo in Chennai"
+                    placeholder="Enter inquiry subject"
                     className={`w-full bg-zinc-950 border rounded-xl px-4 py-3 text-zinc-100 focus:outline-none transition-all ${
                       formErrors.subject
                         ? 'border-amber-500 bg-amber-950/20 ring-1 ring-amber-500/80'
