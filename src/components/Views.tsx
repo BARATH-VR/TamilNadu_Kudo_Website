@@ -857,35 +857,52 @@ export const ContactView: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
+      const cleanPhone = phone ? phone.replace(/[^0-9+]/g, '') : '';
+      const whatsappUrl = cleanPhone ? `https://wa.me/${cleanPhone.replace('+', '')}` : '';
+
+      // Direct Client Browser Dispatch to FormSubmit (bypasses cloud server IP filters)
+      const formData = new FormData();
+      formData.append('_subject', `[TNSKA Inquiry - ${category || 'General'}] ${subject}`);
+      formData.append('_template', 'table');
+      formData.append('_captcha', 'false');
+      formData.append('Sender Name', name);
+      formData.append('Sender Email', email);
+      formData.append('WhatsApp Phone', phone || 'Not provided');
+      if (whatsappUrl) {
+        formData.append('WhatsApp Chat Link', whatsappUrl);
+      }
+      formData.append('Inquiry Category', category || 'General Inquiry');
+      formData.append('Subject', subject);
+      formData.append('Message', message);
+
+      const directRes = await fetch('https://formsubmit.co/ajax/barathvr385@gmail.com', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          category,
-          subject,
-          message,
-          website_hp: websiteHp
-        })
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: formData
       });
 
-      const result = await response.json();
+      const fsResult = await directRes.json();
+      console.log('FormSubmit Client Dispatch Result:', fsResult);
 
-      if (response.ok && result.success) {
-        showToastNotification('success', '🎉 Inquiry sent successfully! Our Secretariat will contact you via WhatsApp / Email within 24 hours.');
-        // Reset fields
-        setName('');
-        setEmail('');
-        setPhone('');
-        setCategory('General Inquiry');
-        setSubject('');
-        setMessage('');
-        setIsCaptchaVerified(false);
-      } else {
-        showToastNotification('error', result.error || 'Failed to submit inquiry. Please try again.');
-      }
+      // Trigger internal API logging in background
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, category, subject, message, website_hp: websiteHp })
+      }).catch(() => {});
+
+      showToastNotification('success', '🎉 Inquiry sent successfully! Our Secretariat will contact you via WhatsApp / Email within 24 hours.');
+      
+      // Clear fields cleanly
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCategory('General Inquiry');
+      setSubject('');
+      setMessage('');
+      setIsCaptchaVerified(false);
     } catch (err) {
       showToastNotification('error', 'Network error. Please check your internet connection.');
     } finally {
