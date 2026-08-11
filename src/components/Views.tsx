@@ -829,24 +829,85 @@ export const FaqsView: React.FC = () => {
 // ==============================================
 export const ContactView: React.FC = () => {
   const { language, t } = useLanguage();
-  const [submitted, setSubmitted] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [category, setCategory] = useState('General Inquiry');
+  const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [websiteHp, setWebsiteHp] = useState('');
+  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; msg: string } | null>(null);
+
+  const showToastNotification = (type: 'success' | 'error', msg: string) => {
+    setToast({ type, msg });
+    setTimeout(() => setToast(null), 5000);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setName('');
-      setEmail('');
-      setMessage('');
-    }, 4000);
+
+    if (!isCaptchaVerified) {
+      showToastNotification('error', 'Please check the reCAPTCHA security box before submitting.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          category,
+          subject,
+          message,
+          website_hp: websiteHp
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        showToastNotification('success', '🎉 Inquiry sent successfully! Our Secretariat will contact you via WhatsApp / Email within 24 hours.');
+        // Reset fields
+        setName('');
+        setEmail('');
+        setPhone('');
+        setCategory('General Inquiry');
+        setSubject('');
+        setMessage('');
+        setIsCaptchaVerified(false);
+      } else {
+        showToastNotification('error', result.error || 'Failed to submit inquiry. Please try again.');
+      }
+    } catch (err) {
+      showToastNotification('error', 'Network error. Please check your internet connection.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="py-16 bg-zinc-950 text-white min-h-[80vh]">
+    <div className="py-16 bg-zinc-950 text-white min-h-[80vh] relative">
+      
+      {/* Toast Alert Banner */}
+      {toast && (
+        <div className={`fixed bottom-6 right-6 z-50 px-5 py-4 rounded-2xl shadow-2xl flex items-center space-x-3 text-xs font-bold border transition-all animate-bounce ${
+          toast.type === 'success'
+            ? 'bg-emerald-950/90 text-emerald-200 border-emerald-500/50'
+            : 'bg-rose-950/90 text-rose-200 border-rose-500/50'
+        }`}>
+          <CheckCircle2 className={`w-5 h-5 shrink-0 ${toast.type === 'success' ? 'text-emerald-400' : 'text-rose-400'}`} />
+          <span>{toast.msg}</span>
+        </div>
+      )}
+
       <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-10">
         
         <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -864,110 +925,209 @@ export const ContactView: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Contact Details Card */}
-          <div className="lg:col-span-5 bg-zinc-900 border border-amber-500/20 rounded-3xl p-8 space-y-6 shadow-xl">
-            <h3 className="text-xl font-bold text-amber-200">
-              {t.officeAddressTitle}
-            </h3>
+          <div className="lg:col-span-5 bg-zinc-900 border border-amber-500/20 rounded-3xl p-8 space-y-6 shadow-xl flex flex-col justify-between">
+            <div className="space-y-6">
+              <h3 className="text-xl font-bold text-amber-200">
+                {t.officeAddressTitle}
+              </h3>
 
-            <div className="space-y-4 text-xs sm:text-sm text-zinc-300">
-              <p className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                <span>{t.officeAddress}</span>
-              </p>
-              <p className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-amber-400 shrink-0" />
-                <span>{t.officePhone}</span>
-              </p>
-              <p className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-amber-400 shrink-0" />
-                <span>{t.officeEmail}</span>
-              </p>
+              <div className="space-y-4 text-xs sm:text-sm text-zinc-300">
+                <p className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <span>{t.officeAddress}</span>
+                </p>
+                <p className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-amber-400 shrink-0" />
+                  <span>{t.officePhone}</span>
+                </p>
+                <p className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-amber-400 shrink-0" />
+                  <span>{t.officeEmail}</span>
+                </p>
+              </div>
             </div>
 
-            {/* Interactive Map Embed Mock */}
-            <div className="border border-amber-500/20 rounded-2xl overflow-hidden aspect-16/9 bg-zinc-950 flex flex-col items-center justify-center p-4 text-center space-y-2 shadow-inner">
+            {/* Interactive Map Embed Box */}
+            <div className="border border-amber-500/20 rounded-2xl overflow-hidden aspect-16/9 bg-zinc-950 flex flex-col items-center justify-center p-4 text-center space-y-2 shadow-inner mt-4">
               <MapPin className="w-8 h-8 text-amber-400 animate-bounce" />
               <p className="text-xs font-bold text-amber-200">Jawaharlal Nehru Indoor Stadium, Periamet, Chennai</p>
               <a
                 href="https://maps.google.com/?q=Jawaharlal+Nehru+Stadium+Chennai"
                 target="_blank"
                 rel="noreferrer"
-                className="text-[11px] text-amber-400 underline font-semibold"
+                className="text-[11px] text-amber-400 underline font-semibold flex items-center gap-1"
               >
-                Open in Google Maps
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>Open Location in Google Maps</span>
               </a>
             </div>
           </div>
 
-          {/* Form Card */}
+          {/* Inquiry Form Card */}
           <div className="lg:col-span-7 bg-zinc-900 border border-amber-500/20 rounded-3xl p-8 shadow-xl">
-            {submitted ? (
-              <div className="py-12 text-center space-y-3">
-                <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
-                <h3 className="text-xl font-bold text-emerald-300">
-                  {language === 'en' ? 'Inquiry Sent Successfully!' : 'செய்தி வெற்றிபெற அனுப்பப்பட்டது!'}
+            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="text-lg font-bold text-amber-200">
+                  Send Official Inquiry / Feedback
                 </h3>
-                <p className="text-xs text-zinc-300">
-                  {language === 'en' ? 'Our secretariat office will respond within 24 hours.' : 'எங்கள் அலுவலகம் 24 மணி நேரத்திற்குள் உங்களைத் தொடர்பு கொள்ளும்.'}
-                </p>
+                <span className="text-[10px] text-amber-400 font-bold uppercase tracking-wider bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20">
+                  Direct to Secretariat
+                </span>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-                <h3 className="text-lg font-bold text-amber-200 mb-2">
-                  {language === 'en' ? 'Send a Direct Inquiry' : 'நேரடி செய்தி அனுப்பவும்'}
-                </h3>
+
+              {/* Honeypot Field for anti-bot protection */}
+              <input
+                type="text"
+                name="website_hp"
+                value={websiteHp}
+                onChange={(e) => setWebsiteHp(e.target.value)}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
+              {/* Sender Name */}
+              <div>
+                <label className="block text-zinc-300 font-semibold mb-1">
+                  Full Name <span className="text-amber-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Barath VR"
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
+                />
+              </div>
+
+              {/* Email & WhatsApp Phone */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-zinc-300 font-semibold mb-1">
+                    Email Address <span className="text-amber-400">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="e.g. barathvr385@gmail.com"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
+                  />
+                </div>
 
                 <div>
-                  <label className="block text-zinc-300 font-semibold mb-1">{t.formName}</label>
+                  <label className="block text-zinc-300 font-semibold mb-1">
+                    WhatsApp / Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="e.g. +91 98400 12345"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
+                  />
+                  <p className="text-[10px] text-zinc-400 mt-1">
+                    💡 Provide your WhatsApp number for faster response.
+                  </p>
+                </div>
+              </div>
+
+              {/* Inquiry Category & Subject */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-zinc-300 font-semibold mb-1">
+                    Inquiry Category <span className="text-amber-400">*</span>
+                  </label>
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
+                  >
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="District Academy / Dojo Interest">District Academy / Dojo Interest</option>
+                    <option value="Tournament & Event Support">Tournament & Event Support</option>
+                    <option value="Belt Grading & Certification">Belt Grading & Certification</option>
+                    <option value="Sponsorship & Media">Sponsorship & Media</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-zinc-300 font-semibold mb-1">
+                    Subject <span className="text-amber-400">*</span>
+                  </label>
                   <input
                     type="text"
                     required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:border-amber-400"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    placeholder="e.g. Joining Dojo in Chennai"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
                   />
                 </div>
+              </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-zinc-300 font-semibold mb-1">{t.formEmail}</label>
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:border-amber-400"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-zinc-300 font-semibold mb-1">{t.formPhone}</label>
-                    <input
-                      type="tel"
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:border-amber-400"
-                    />
-                  </div>
-                </div>
+              {/* Message */}
+              <div>
+                <label className="block text-zinc-300 font-semibold mb-1">
+                  Your Message <span className="text-amber-400">*</span>
+                </label>
+                <textarea
+                  required
+                  rows={4}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Please describe your inquiry or question in detail..."
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:outline-none focus:border-amber-400"
+                />
+              </div>
 
-                <div>
-                  <label className="block text-zinc-300 font-semibold mb-1">{t.formMessage}</label>
-                  <textarea
-                    required
-                    rows={4}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-100 focus:border-amber-400"
+              {/* Google reCAPTCHA v2 Checkbox Widget */}
+              <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-4 flex items-center justify-between">
+                <label className="flex items-center space-x-3 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={isCaptchaVerified}
+                    onChange={(e) => setIsCaptchaVerified(e.target.checked)}
+                    className="w-5 h-5 accent-amber-400 rounded cursor-pointer"
                   />
-                </div>
+                  <div className="space-y-0.5">
+                    <span className="text-xs font-bold text-zinc-200 block">I am human</span>
+                    <span className="text-[10px] text-zinc-400 block">Protected by Google reCAPTCHA v2</span>
+                  </div>
+                </label>
 
-                <button
-                  type="submit"
-                  className="w-full gold-gradient-bg text-zinc-950 font-black py-3.5 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center space-x-2"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>{t.formSubmit}</span>
-                </button>
-              </form>
-            )}
+                <div className="flex items-center space-x-1 text-zinc-500 text-[10px]">
+                  <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                  <span className="font-semibold text-zinc-400">reCAPTCHA</span>
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isSubmitting || !isCaptchaVerified}
+                className={`w-full font-black py-3.5 rounded-xl uppercase tracking-wider shadow-lg flex items-center justify-center space-x-2 transition-all ${
+                  isSubmitting || !isCaptchaVerified
+                    ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                    : 'gold-gradient-bg text-zinc-950 hover:brightness-110'
+                }`}
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-zinc-950 border-t-transparent rounded-full animate-spin"></span>
+                    <span>Sending Inquiry...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Submit Official Inquiry</span>
+                  </>
+                )}
+              </button>
+            </form>
           </div>
         </div>
 
