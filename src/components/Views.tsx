@@ -838,11 +838,6 @@ export const ContactView: React.FC = () => {
   const [message, setMessage] = useState('');
   const [websiteHp, setWebsiteHp] = useState('');
   const [formErrors, setFormErrors] = useState<{ name?: string; email?: string; subject?: string; message?: string }>({});
-  const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState('');
-
-  const recaptchaContainerRef = useRef<HTMLDivElement>(null);
-  const widgetIdRef = useRef<number | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<{ type: 'success' | 'error'; msg: string } | null>(null);
@@ -851,60 +846,6 @@ export const ContactView: React.FC = () => {
     setToast({ type, msg });
     setTimeout(() => setToast(null), 5000);
   };
-
-  // Dynamically load & render official Google reCAPTCHA v2 iframe
-  useEffect(() => {
-    const renderWidget = () => {
-      if (
-        recaptchaContainerRef.current &&
-        typeof window !== 'undefined' &&
-        (window as any).grecaptcha &&
-        widgetIdRef.current === null
-      ) {
-        try {
-          const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
-          const id = (window as any).grecaptcha.render(recaptchaContainerRef.current, {
-            sitekey: sitekey,
-            theme: 'dark',
-            callback: (token: string) => {
-              setIsCaptchaVerified(true);
-              setCaptchaToken(token);
-            },
-            'expired-callback': () => {
-              setIsCaptchaVerified(false);
-              setCaptchaToken('');
-            }
-          });
-          widgetIdRef.current = id;
-        } catch (e) {
-          // Ignore if already rendered
-        }
-      }
-    };
-
-    if (typeof window !== 'undefined') {
-      if ((window as any).grecaptcha && (window as any).grecaptcha.render) {
-        renderWidget();
-      } else {
-        const existingScript = document.getElementById('google-recaptcha-v2-script');
-        if (!existingScript) {
-          const script = document.createElement('script');
-          script.id = 'google-recaptcha-v2-script';
-          script.src = 'https://www.google.com/recaptcha/api.js?onload=onGoogleRecaptchaLoad&render=explicit';
-          script.async = true;
-          script.defer = true;
-          (window as any).onGoogleRecaptchaLoad = () => {
-            renderWidget();
-          };
-          document.body.appendChild(script);
-        } else {
-          (window as any).onGoogleRecaptchaLoad = () => {
-            renderWidget();
-          };
-        }
-      }
-    }
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -923,11 +864,6 @@ export const ContactView: React.FC = () => {
     if (Object.keys(errs).length > 0) {
       setFormErrors(errs);
       showToastNotification('error', 'Please fill in all required fields marked with *');
-      return;
-    }
-
-    if (!isCaptchaVerified) {
-      showToastNotification('error', 'Please check the reCAPTCHA security box before submitting.');
       return;
     }
 
@@ -971,7 +907,7 @@ export const ContactView: React.FC = () => {
         body: JSON.stringify({ name, email, phone, category, subject, message, website_hp: websiteHp })
       }).catch(() => {});
 
-      showToastNotification('success', '🎉 Inquiry sent successfully! Our Secretariat will contact you via WhatsApp / Email within 24 hours.');
+      showToastNotification('success', 'Inquiry sent successfully! Our Secretariat will contact you via WhatsApp / Email within 24 hours.');
       
       // Clear fields cleanly
       setName('');
@@ -980,7 +916,6 @@ export const ContactView: React.FC = () => {
       setCategory('General Inquiry');
       setSubject('');
       setMessage('');
-      setIsCaptchaVerified(false);
     } catch (err) {
       showToastNotification('error', 'Network error. Please check your internet connection.');
     } finally {
