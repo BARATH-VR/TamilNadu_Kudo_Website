@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🥋 Tamil Nadu State Kudo Association (TNSKA) — Official Website & CMS
 
-## Getting Started
+[![Production Status](https://img.shields.io/badge/Status-Live%20Production-success?style=for-the-badge)](https://tnska-website.onrender.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2.12-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS%204-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
-First, run the development server:
+> **Official Web Platform & Content Management System for the Governing Body of Kudo in Tamil Nadu.**  
+> *Affiliated with Kudo International Federation India (KIFI) & Kudo International Federation (KIF) Japan.*
+
+---
+
+## 🌐 Live Platform & Access
+
+- **Official Website**: **[https://tnska-website.onrender.com/](https://tnska-website.onrender.com/)**
+- **Admin Portal Passcode**: `kudo2026` *(Secondary: `admin`)*
+- **Full Architecture & Technical Manual**: See **[DOCUMENTATION.md](./DOCUMENTATION.md)**
+
+---
+
+## ✨ Key Features & Capabilities
+
+- 🌐 **Bilingual Translation Engine**: Full English and Tamil (`தமிழ்`) support across all pages, circulars, and dojo profiles.
+- 🥋 **Districts & Academies Directory**: Filterable search across Tamil Nadu districts with **Google Maps "Get Directions"** integration.
+- ⚡ **No-Code Admin CMS**: Passcode-protected portal to manage announcements, tournaments, district academies, and upload real PDF documents (up to 15MB).
+- 📬 **Official Inquiries Engine**: Theme-matched gold form validation, spam honeypot shield, WhatsApp quick chat, and multi-provider email delivery.
+- 🏆 **Events, Medals & Resources**: Interactive state tournament calendars, national medalist showcases, and downloadable official syllabi/forms.
+
+---
+
+## 🚀 Quick Start (Local Development)
 
 ```bash
+# 1. Clone repository
+git clone https://github.com/BARATH-VR/TamilNadu_Kudo_Website.git
+cd TamilNadu_Kudo_Website
+
+# 2. Install dependencies
+npm install
+
+# 3. Start local development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Build & Deploy
 
-## Learn More
+```bash
+# Production build
+npm run build
 
-To learn more about Next.js, take a look at the following resources:
+# Start production server
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📖 Comprehensive Documentation
 
-## Deploy on Vercel
+For complete technical specifications, component hierarchy, API routes, security controls, and data schemas, please refer to:
+👉 **[DOCUMENTATION.md](./DOCUMENTATION.md)**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⚖️ Governance & Affiliations
+
+- **Governing Body**: Tamil Nadu State Kudo Association (TNSKA)
+- **National Body**: Kudo International Federation India (KIFI)
+- **World Body**: Kudo International Federation (KIF) Japan
+- **School Sports Pathway**: School Games Federation of India (SGFI)
+
+---
+*Maintained by BARATH VR for Tamil Nadu State Kudo Association.*
