@@ -7,6 +7,7 @@ export const dictionary = {
     associationSub: "Affiliated with KIFI India & KIF Japan",
     navHome: "Home",
     navAbout: "About",
+    navKudoGuide: "Kudo Guide",
     navDistricts: "Districts & Academies",
     navEvents: "Events & Results",
     navAchievements: "Achievements",
@@ -16,6 +17,12 @@ export const dictionary = {
     navContact: "Contact Us",
     navAdmin: "Admin Portal",
     findAcademy: "Find an Academy",
+
+    // Kudo Guide Subnav
+    guideWhatIsKudo: "What is Kudo?",
+    guideRules: "Rules & PI Calculator",
+    guideSyllabus: "Belt Grading & Syllabus",
+    guideSafety: "Safety & Gear",
 
     // About Subnav
     aboutWhoWeAre: "Who We Are",
@@ -139,6 +146,7 @@ export const dictionary = {
     associationSub: "KIFI இந்தியா மற்றும் KIF ஜப்பான் அங்கீகாரம் பெற்றது",
     navHome: "முகப்பு",
     navAbout: "எங்களைப் பற்றி",
+    navKudoGuide: "குடோ கையேடு",
     navDistricts: "மாவட்டங்கள் & பயிற்றுவிப்பகங்கள்",
     navEvents: "நிகழ்வுகள் & முடிவுகள்",
     navAchievements: "சாதனைகள்",
@@ -148,6 +156,12 @@ export const dictionary = {
     navContact: "தொடர்பு கொள்ள",
     navAdmin: "நிர்வாகி பக்கம்",
     findAcademy: "பயிற்றுவிப்பகம் கண்டறிய",
+
+    // Kudo Guide Subnav
+    guideWhatIsKudo: "குடோ என்றால் என்ன?",
+    guideRules: "போட்டி விதிகள் & PI கணக்கீடு",
+    guideSyllabus: "பெல்ட் தரவரிசை & பாடத்திட்டம்",
+    guideSafety: "பாதுகாப்பு & கவசங்கள்",
 
     // About Subnav
     aboutWhoWeAre: "நாங்கள் யார்",

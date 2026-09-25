@@ -3,6 +3,7 @@ import { Inter, Noto_Sans_Tamil } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { AdminProvider } from "@/context/AdminContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -60,12 +61,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="antialiased bg-zinc-950 text-gray-100 min-h-screen flex flex-col">
-        <LanguageProvider>
-          <AdminProvider>
-            {children}
-          </AdminProvider>
-        </LanguageProvider>
+      <body className="antialiased min-h-screen flex flex-col transition-colors duration-300">
+        <ThemeProvider>
+          <LanguageProvider>
+            <AdminProvider>
+              {children}
+            </AdminProvider>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -21,7 +21,13 @@ import {
   AlertCircle,
   Send,
   HelpCircle,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Calculator,
+  Flame,
+  Zap,
+  BookOpen,
+  Layers,
+  Activity
 } from 'lucide-react';
 
 // ==============================================
@@ -1183,6 +1189,313 @@ export const ContactView: React.FC = () => {
               </button>
             </form>
           </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+// ==============================================
+// WHAT IS KUDO VIEW (Comprehensive Martial Art Guide)
+// ==============================================
+export const WhatIsKudoView: React.FC = () => {
+  const { language } = useLanguage();
+
+  return (
+    <div className="py-16 bg-theme-main text-theme-main min-h-[80vh] space-y-16">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-16">
+        
+        {/* Page Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs uppercase tracking-widest text-rose-400 font-extrabold block">
+            {language === 'en' ? 'The Modern Budo Martial Sport' : 'நவீன புடோ தற்காப்புக் கலை'}
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-black text-white">
+            {language === 'en' ? 'What is Kudo (空道)?' : 'குடோ (空道) என்றால் என்ன?'}
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
+            {language === 'en'
+              ? 'A safe, hybrid, full-contact Japanese martial art combining Karate striking, Judo throwing, and Jujitsu grappling under the patented SuperSafe head armor.'
+              : 'கராத்தே, ஜூடோ, மற்றும் ஜூஜிட்சு உத்திகளை இணைத்து, பிரத்யேக முகக்கவசத்துடன் பயிற்சி செய்யப்படும் முழுமையான ஜப்பானிய தற்காப்புக் கலை.'}
+          </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-rose-500 to-amber-500 rounded-full mx-auto"></div>
+        </div>
+
+        {/* 2-Column Origins & Philosophy */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="space-y-6">
+            <div className="border-l-4 border-rose-500 pl-4 space-y-2">
+              <span className="text-xs uppercase tracking-widest text-rose-400 font-bold block">
+                {language === 'en' ? 'Heritage & Lineage' : 'வரலாறு & மரபு'}
+              </span>
+              <h3 className="text-2xl font-bold text-white">
+                {language === 'en' ? 'Founded by Grandmaster Azuma Takashi (1981)' : 'கிராண்ட்மாஸ்டர் அசுமா தகாஷி (1981)'}
+              </h3>
+            </div>
+            <p className="text-sm text-zinc-300 leading-relaxed">
+              {language === 'en'
+                ? 'Kudo was established in Sendai, Japan in 1981 as Daido Juku by Grandmaster Azuma Takashi. Seeking a realistic martial art that retained traditional Japanese Budo etiquette (respect, humility, self-control), Azuma developed a hybrid combat sport where fighters can strike with punches, kicks, elbows, knees, and headbutts while seamlessly transitioning into throws, takedowns, and submissions.'
+                : '1981 ஆம் ஆண்டு ஜப்பானின் செண்டாயில் கிராண்ட்மாஸ்டர் அசுமா தகாஷியால் உருவாக்கப்பட்டது. ஜப்பானிய பாரம்பரிய ஒழுக்கத்துடன், நிஜ சண்டை உத்திகளை (குத்து, உதை, தள்ளிவிடுதல், மூட்டுப் பூட்டுகள்) பாதுகாப்பாகப் பயில இது வடிவமைக்கப்பட்டது.'}
+            </p>
+            <p className="text-sm text-zinc-300 leading-relaxed">
+              {language === 'en'
+                ? 'Today, Kudo is governed globally by the Kudo International Federation (KIF) in Tokyo, and in India by KIFI India (under Hanshi Mehul Vora), recognized by the School Games Federation of India (SGFI).'
+                : 'தற்போது இது டோக்கியோவில் உள்ள சர்வதேச கூட்டமைப்பு (KIF) மற்றும் இந்தியாவில் KIFI மூலம் இயக்கப்பட்டு SGFI பள்ளி விளையாட்டுப் போட்டிகளில் அங்கீகரிக்கப்பட்டுள்ளது.'}
+            </p>
+          </div>
+
+          <div className="bg-zinc-900 border border-white/10 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+            <h4 className="text-lg font-bold text-rose-300">
+              {language === 'en' ? 'The 4 Combat Pillars of Kudo' : 'குடோவின் 4 முக்கிய அம்சங்கள்'}
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-zinc-950 p-4 rounded-2xl border border-white/5 space-y-1">
+                <span className="text-xs font-bold text-rose-400 block">01. Striking (Atemi)</span>
+                <p className="text-xs text-zinc-300">Punches, kicks, knees, elbows, and headbutts with full realism.</p>
+              </div>
+              <div className="bg-zinc-950 p-4 rounded-2xl border border-white/5 space-y-1">
+                <span className="text-xs font-bold text-amber-400 block">02. Throwing (Nage)</span>
+                <p className="text-xs text-zinc-300">Judo hip throws, sweeps, and dynamic takedowns while gripping the dogi.</p>
+              </div>
+              <div className="bg-zinc-950 p-4 rounded-2xl border border-white/5 space-y-1">
+                <span className="text-xs font-bold text-emerald-400 block">03. Submissions (Kansetsu)</span>
+                <p className="text-xs text-zinc-300">Armbars, kimuras, and chokeholds for rapid technical tapout victories.</p>
+              </div>
+              <div className="bg-zinc-950 p-4 rounded-2xl border border-white/5 space-y-1">
+                <span className="text-xs font-bold text-rose-300 block">04. Ground Control (Ne-Waza)</span>
+                <p className="text-xs text-zinc-300">Fast-paced 30-second ground transition with ground strikes permitted.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* SuperSafe Armor Feature Card */}
+        <div className="bg-gradient-to-r from-rose-950/40 via-zinc-900 to-zinc-900 border border-rose-500/30 rounded-3xl p-8 sm:p-12 shadow-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-8 space-y-4">
+              <span className="text-xs uppercase tracking-widest text-rose-400 font-extrabold block">
+                {language === 'en' ? 'Patented Safety Armor' : 'பாதுகாப்பு முகக்கவசம்'}
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-black text-white">
+                {language === 'en' ? 'The Iconic SuperSafe (NHG) Headgear' : 'சூப்பர் சேஃப் முகக்கவச பாதுகாப்பு'}
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                {language === 'en'
+                  ? 'Kudo revolutionized combat sports safety with the patented Neo-Head Guard (SuperSafe helmet), featuring an ultra-clear, high-impact polycarbonate visor. This completely eliminates facial lacerations, broken noses, and ocular injuries, allowing athletes of all ages (from 6-year-old sub-juniors to 50+ masters) to train at full power without danger.'
+                  : 'காப்புரிமை பெற்ற பல்கார்பனேட் வெளிப்படையான முகக்கவசம் மூலம் முகத்தில் காயங்கள், மூக்கு உடைவு ஏற்படுவது தடுக்கப்படுகிறது. இதனால் பள்ளி மாணவர்கள் முதல் பெரியவர்கள் வரை அனைவரும் பாதுகாப்பாக பயிற்சி பெறலாம்.'}
+              </p>
+            </div>
+            <div className="md:col-span-4 flex justify-center">
+              <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-3xl bg-rose-600/15 border border-rose-500/40 flex items-center justify-center text-rose-400 shadow-xl">
+                <ShieldCheck className="w-12 h-12 sm:w-16 sm:h-16 stroke-[2]" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+// ==============================================
+// RULES & PI CALCULATOR VIEW (Official Regulations)
+// ==============================================
+export const RulesView: React.FC = () => {
+  const { language } = useLanguage();
+
+  const [heightCm, setHeightCm] = useState<string>('175');
+  const [weightKg, setWeightKg] = useState<string>('70');
+
+  const parsedH = parseFloat(heightCm) || 0;
+  const parsedW = parseFloat(weightKg) || 0;
+  const calculatedPI = parsedH + parsedW;
+
+  const getPICategory = (pi: number) => {
+    if (pi === 0) return 'Enter measurements above';
+    if (pi < 230) return 'Under 230 Index Division';
+    if (pi <= 240) return '230 - 240 Index Division';
+    if (pi <= 250) return '240 - 250 Index Division';
+    if (pi <= 260) return '250 - 260 Index Division';
+    if (pi <= 270) return '260 - 270 Index Division';
+    return '270+ Open Super Heavy Division';
+  };
+
+  return (
+    <div className="py-16 bg-theme-main text-theme-main min-h-[80vh] space-y-16">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-16">
+        
+        {/* Page Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs uppercase tracking-widest text-rose-400 font-extrabold block">
+            {language === 'en' ? 'Official KIF Competition Regulations' : 'அதிகாரப்பூர்வ போட்டி விதிகள்'}
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-black text-white">
+            {language === 'en' ? 'Kudo Rules & Physical Index' : 'குடோ விதிகள் & PI கணக்கீடு'}
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
+            {language === 'en'
+              ? 'Kudo uses the Physical Index (Height + Weight) system rather than weight alone, ensuring fair and safe matchmaking without dangerous dehydration cuts.'
+              : 'குடோவில் எடையுடன் உயரத்தையும் சேர்த்து (உயரம் + எடை) கணக்கிடும் முறையால் நியாயமான போட்டிப் பிரிவுகள் தீர்மானிக்கப்படுகின்றன.'}
+          </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-rose-500 to-amber-500 rounded-full mx-auto"></div>
+        </div>
+
+        {/* Interactive Physical Index Calculator Widget */}
+        <div className="bg-zinc-900 border border-rose-500/30 rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8 max-w-4xl mx-auto">
+          <div className="flex items-center space-x-3 text-rose-400">
+            <Calculator className="w-6 h-6" />
+            <h3 className="text-xl sm:text-2xl font-black text-white">
+              {language === 'en' ? 'Interactive Physical Index (PI) Calculator' : 'உடனடி PI கணக்கீட்டுக் கருவி'}
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-2">
+                {language === 'en' ? 'Your Height (in cm)' : 'உங்கள் உயரம் (செ.மீ)'}
+              </label>
+              <input
+                type="number"
+                value={heightCm}
+                onChange={(e) => setHeightCm(e.target.value)}
+                placeholder="e.g. 175"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 font-mono text-lg"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-zinc-300 uppercase tracking-wider mb-2">
+                {language === 'en' ? 'Your Weight (in kg)' : 'உங்கள் எடை (கிலோ)'}
+              </label>
+              <input
+                type="number"
+                value={weightKg}
+                onChange={(e) => setWeightKg(e.target.value)}
+                placeholder="e.g. 70"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-rose-500 font-mono text-lg"
+              />
+            </div>
+          </div>
+
+          {/* Calculator Output */}
+          <div className="bg-zinc-950 border border-white/10 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <span className="text-xs text-zinc-400 font-semibold block">
+                {language === 'en' ? 'Calculated Physical Index (PI = Height + Weight):' : 'கணக்கிடப்பட்ட குறியீடு:'}
+              </span>
+              <span className="text-3xl font-black text-rose-400 font-mono">
+                {calculatedPI > 0 ? calculatedPI : '--'}
+              </span>
+            </div>
+
+            <div className="text-center sm:text-right">
+              <span className="text-xs text-zinc-400 font-semibold block">
+                {language === 'en' ? 'Your Official Competitive Category:' : 'உங்கள் போட்டிப் பிரிவு:'}
+              </span>
+              <span className="text-sm sm:text-base font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-3 py-1.5 rounded-full inline-block mt-1">
+                {getPICategory(calculatedPI)}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Scoring System Grid */}
+        <div className="space-y-6">
+          <h3 className="text-xl sm:text-2xl font-bold text-white text-center">
+            {language === 'en' ? 'Official Match Victory & Scoring System' : 'வெற்றி மற்றும் மதிப்பெண் அளவுகோல்'}
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-zinc-900 border border-rose-500/30 rounded-2xl p-6 space-y-3">
+              <span className="text-xs font-black text-rose-400 uppercase tracking-wider block">IPPON (Full Win)</span>
+              <h4 className="text-base font-bold text-white">Knockout / Tapout</h4>
+              <p className="text-xs text-zinc-300">Clean strike knocking opponent down for 4+ seconds, or submission tapout. Match ends instantly.</p>
+            </div>
+
+            <div className="bg-zinc-900 border border-amber-500/30 rounded-2xl p-6 space-y-3">
+              <span className="text-xs font-black text-amber-400 uppercase tracking-wider block">WAZA-ARI (Half Win)</span>
+              <h4 className="text-base font-bold text-white">Heavy Stun / Throw</h4>
+              <p className="text-xs text-zinc-300">Strike causing opponent to lose balance for 2-4 seconds, or high-amplitude throw followed by clean ground punch.</p>
+            </div>
+
+            <div className="bg-zinc-900 border border-emerald-500/30 rounded-2xl p-6 space-y-3">
+              <span className="text-xs font-black text-emerald-400 uppercase tracking-wider block">YUKO & KOKA (Points)</span>
+              <h4 className="text-base font-bold text-white">Minor Points</h4>
+              <p className="text-xs text-zinc-300">Clean power strikes causing momentary stagger (Yuko), or quick technical flurry / takedown control (Koka).</p>
+            </div>
+
+            <div className="bg-zinc-900 border border-white/15 rounded-2xl p-6 space-y-3">
+              <span className="text-xs font-black text-zinc-300 uppercase tracking-wider block">HANTEI (Decision)</span>
+              <h4 className="text-base font-bold text-white">Referee Decision</h4>
+              <p className="text-xs text-zinc-300">When points are tied at the end of regular time (3 minutes), judges decide based on aggression and technique.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+// ==============================================
+// SYLLABUS & BELT GRADING VIEW
+// ==============================================
+export const SyllabusView: React.FC = () => {
+  const { language } = useLanguage();
+
+  const beltRanks = [
+    { rank: "White Belt (Mukyu)", colorBg: "bg-white text-zinc-950", minTime: "Beginner", focus: "Kihon basics, stances, safe falling (Ukemi), etiquette." },
+    { rank: "Purple Belt (8th - 7th Kyu)", colorBg: "bg-purple-600 text-white", minTime: "3-6 Months", focus: "Basic punch-kick combinations, moving basics (Ido Geiko)." },
+    { rank: "Yellow Belt (6th - 5th Kyu)", colorBg: "bg-yellow-400 text-zinc-950", minTime: "6-12 Months", focus: "Yakusoku Kumite drills, basic Judo throws, entry defense." },
+    { rank: "Green Belt (4th - 3rd Kyu)", colorBg: "bg-emerald-600 text-white", minTime: "1-2 Years", focus: "Continuous sparring (Randori), ground transitions, armbars." },
+    { rank: "Brown Belt (2nd - 1st Kyu)", colorBg: "bg-amber-800 text-white", minTime: "2-3 Years", focus: "Full-contact sparring, advanced chokes, referee fundamentals." },
+    { rank: "Black Belt (Shodan 1st Dan+)", colorBg: "bg-black text-amber-300 border border-amber-500/50", minTime: "3-4+ Years", focus: "Mastery of all 4 combat pillars, state referee certification, 10-man Kumite." },
+  ];
+
+  return (
+    <div className="py-16 bg-theme-main text-theme-main min-h-[80vh] space-y-16">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 space-y-16">
+        
+        {/* Page Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs uppercase tracking-widest text-rose-400 font-extrabold block">
+            {language === 'en' ? 'Standardized International Curriculum' : 'சர்வதேச பெல்ட் தரவரிசை முறை'}
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-black text-white">
+            {language === 'en' ? 'Belt Grading & Dan Syllabus' : 'பெல்ட் தரம் & பாடத்திட்டம்'}
+          </h2>
+          <p className="text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
+            {language === 'en'
+              ? 'TNSKA follows the official Japanese KIF syllabus, progressing from White Belt to Senior Dan Black Belt through rigorous technical and sparring evaluations.'
+              : 'ஜப்பான் சர்வதேச குடோ கூட்டமைப்பின் அங்கீகரிக்கப்பட்ட விதிகளின்படி வெள்ளை பெல்ட் முதல் பிளாக் பெல்ட் வரையிலான பயிற்சி முறை.'}
+          </p>
+          <div className="w-16 h-1 bg-gradient-to-r from-rose-500 to-amber-500 rounded-full mx-auto"></div>
+        </div>
+
+        {/* Belt Hierarchy Timeline Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {beltRanks.map((b, i) => (
+            <div key={i} className="bg-zinc-900 border border-white/10 rounded-3xl p-6 space-y-4 shadow-xl card-hover flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className={`text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider ${b.colorBg}`}>
+                    {b.rank}
+                  </span>
+                  <span className="text-[11px] text-zinc-400 font-semibold">{b.minTime}</span>
+                </div>
+                <h4 className="text-base font-bold text-white pt-1">
+                  {b.focus}
+                </h4>
+              </div>
+
+              <div className="pt-3 border-t border-zinc-800 text-[11px] text-zinc-400 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-rose-400 shrink-0" />
+                <span>KIF Japan Standard Verified</span>
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

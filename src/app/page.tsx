@@ -6,6 +6,9 @@ import { Footer } from '@/components/Footer';
 import { HomeView } from '@/components/HomeView';
 import {
   AboutView,
+  WhatIsKudoView,
+  RulesView,
+  SyllabusView,
   DistrictsView,
   EventsView,
   AchievementsView,
@@ -28,7 +31,7 @@ export default function MainPage() {
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '');
-      if (hash && ['home', 'about', 'districts', 'events', 'achievements', 'resources', 'media', 'faqs', 'contact', 'admin'].includes(hash)) {
+      if (hash && ['home', 'about', 'what-is-kudo', 'rules', 'syllabus', 'districts', 'events', 'achievements', 'resources', 'media', 'faqs', 'contact', 'admin'].includes(hash)) {
         setCurrentView(hash);
       }
     };
@@ -85,6 +88,9 @@ export default function MainPage() {
           <HomeView setCurrentView={handleSetCurrentView} onOpenLightbox={openLightbox} />
         )}
         {currentView === 'about' && <AboutView />}
+        {currentView === 'what-is-kudo' && <WhatIsKudoView />}
+        {currentView === 'rules' && <RulesView />}
+        {currentView === 'syllabus' && <SyllabusView />}
         {currentView === 'districts' && <DistrictsView />}
         {currentView === 'events' && <EventsView />}
         {currentView === 'achievements' && <AchievementsView />}
